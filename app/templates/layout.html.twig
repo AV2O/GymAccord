@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block layout %}
+	<header>
+		<!-- logo -->
+		<div class="logo">
+				<a href="{{ path('app_main') }}">Gym Accord</a>
+		</div>
+		<!-- nav -->
+		<nav class="nav" aria-label="Navigation principale">
+			<ul>
+				<li>
+					<a href="{{ path('app_main') }}">Accueil</a>
+				</li>
+				<li>
+					<a href="{{ path('app_main') }}">Cours collectifs</a>
+				</li>
+				<li>
+					<a href="{{ path('app_main') }}">Séance individuelle & perso</a>
+				</li>
+				<li>
+					<a href="{{ path('app_main') }}">Calendrier/Planning</a>
+				</li>
+				<li>
+					<a href="{{ path('app_main') }}">Tarifs</a>
+				</li>
+				<li>
+					<a href="{{ path('app_main') }}">Dashboard</a>
+				</li>
+				<li>
+					<a href="{{ path('app_main') }}">A propos</a>
+				</li>
+			</ul>
+			<!-- menu burger -->
+			<button class="burger-menu" id="burgerMenu" aria-label="Menu">
+				<span class="line-burger"></span>
+				<span class="line-burger"></span>
+				<span class="line-burger"></span>
+			</button>
+		</nav>
+	</header>
+
+	{% block body %}
+    
+    {% endblock %}
+
+	<footer>
+		<div>
+			<a href="{{ path('app_main') }}">GymAccord</a>
+			<p>L'élite du fitness à votre portée. Rejoignez le mouvement KINETIC dès aujourd'hui.</p>
+			<div></div>
+			<div>
+				<a href="{{ path('app_main') }}">Mentions Légales</a>
+                <a href="{{ path('app_main') }}">Confidentialité</a>
+                <a href="{{ path('app_main') }}">Contact</a>
+			</div>
+            <p>&copy<a href="{{ path('app_main') }}">GymAccord</a> &ndash; Tous droits réservés &ndash; AV2O</p>
+		</div>
+	</footer>
+{% endblock %}

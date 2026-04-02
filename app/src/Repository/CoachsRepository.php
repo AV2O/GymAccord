@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Workshop;
+use App\Entity\Coachs;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Workshop>
+ * @extends ServiceEntityRepository<Coachs>
  */
-class WorkshopRepository extends ServiceEntityRepository
+class CoachsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Workshop::class);
+        parent::__construct($registry, Coachs::class);
     }
 
     //    /**
-    //     * @return Workshop[] Returns an array of Workshop objects
+    //     * @return Coachs[] Returns an array of Coachs objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('w')
-    //            ->andWhere('w.exampleField = :val')
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('w.id', 'ASC')
+    //            ->orderBy('c.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Workshop
+    //    public function findOneBySomeField($value): ?Coachs
     //    {
-    //        return $this->createQueryBuilder('w')
-    //            ->andWhere('w.exampleField = :val')
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

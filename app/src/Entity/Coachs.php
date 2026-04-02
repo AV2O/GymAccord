@@ -2,14 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CoachRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\CoachsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CoachRepository::class)]
-class Coach
+#[ORM\Entity(repositoryClass: CoachsRepository::class)]
+class Coachs
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,17 +25,6 @@ class Coach
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $bio = null;
-
-    /**
-     * @var Collection<int, Workshop>
-     */
-    #[ORM\OneToMany(targetEntity: Workshop::class, mappedBy: 'coach')]
-    private Collection $workshops;
-
-    public function __construct()
-    {
-        $this->workshops = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -88,36 +75,6 @@ class Coach
     public function setBio(string $bio): static
     {
         $this->bio = $bio;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Workshop>
-     */
-    public function getWorkshops(): Collection
-    {
-        return $this->workshops;
-    }
-
-    public function addWorkshop(Workshop $workshop): static
-    {
-        if (!$this->workshops->contains($workshop)) {
-            $this->workshops->add($workshop);
-            $workshop->setCoach($this);
-        }
-
-        return $this;
-    }
-
-    public function removeWorkshop(Workshop $workshop): static
-    {
-        if ($this->workshops->removeElement($workshop)) {
-            // set the owning side to null (unless already changed)
-            if ($workshop->getCoach() === $this) {
-                $workshop->setCoach(null);
-            }
-        }
 
         return $this;
     }

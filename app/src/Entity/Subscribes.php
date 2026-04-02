@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\AbonnementRepository;
+use App\Repository\SubscribesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AbonnementRepository::class)]
-class Abonnement
+#[ORM\Entity(repositoryClass: SubscribesRepository::class)]
+class Subscribes
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,14 +17,10 @@ class Abonnement
     private ?float $amount = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $statut = null;
+    private ?string $name_subscribe = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\OneToOne(inversedBy: 'abonnement', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -43,14 +39,14 @@ class Abonnement
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getNameSubscribe(): ?string
     {
-        return $this->statut;
+        return $this->name_subscribe;
     }
 
-    public function setStatut(string $statut): static
+    public function setNameSubscribe(string $name_subscribe): static
     {
-        $this->statut = $statut;
+        $this->name_subscribe = $name_subscribe;
 
         return $this;
     }
@@ -63,18 +59,6 @@ class Abonnement
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): static
-    {
-        $this->user = $user;
 
         return $this;
     }
