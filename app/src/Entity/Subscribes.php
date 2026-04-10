@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SubscribesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SubscribesRepository::class)]
@@ -21,6 +23,24 @@ class Subscribes
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    /**
+     * @var Collection<int, Take>
+     */
+    #[ORM\OneToMany(targetEntity: Take::class, mappedBy: 'subscribe')]
+    private Collection $takes;
+
+    /**
+     * @var Collection<int, WorkshopsType>
+     */
+    #[ORM\ManyToMany(targetEntity: WorkshopsType::class)]
+    private Collection $workshops_type;
+
+    public function __construct()
+    {
+        $this->takes = new ArrayCollection();
+        $this->workshops_type = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +79,60 @@ class Subscribes
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Take>
+     */
+    public function getTakes(): Collection
+    {
+        return $this->takes;
+    }
+
+    public function addTake(Take $take): static
+    {
+        if (!$this->takes->contains($take)) {
+            $this->takes->add($take);
+            $take->setSubscribe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTake(Take $take): static
+    {
+        if ($this->takes->removeElement($take)) {
+            // set the owning side to null (unless already changed)
+            if ($take->getSubscribe() === $this) {
+                $take->setSubscribe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkshopsType>
+     */
+    public function getWorkshopsType(): Collection
+    {
+        return $this->workshops_type;
+    }
+
+    public function addWorkshopsType(WorkshopsType $workshopsType): static
+    {
+        if (!$this->workshops_type->contains($workshopsType)) {
+            $this->workshops_type->add($workshopsType);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshopsType(WorkshopsType $workshopsType): static
+    {
+        $this->workshops_type->removeElement($workshopsType);
 
         return $this;
     }

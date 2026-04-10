@@ -1,8 +1,160 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Accueil - GymAccord{% endblock %}
+{% block stylesheets %}
+    {{ parent() }} {# <--- INDISPENSABLE pour garder app.css #}
+    <link rel="stylesheet" href="{{ asset('assets/styles/app.css') }}">
+{% endblock %}
 
-{% block body %}
-    <h1>Bienvenue sur ma page d'accueil</h1>
-    <p>Ce contenu est injecté dans le bloc body du layout, qui lui-même est injecté dans le bloc layout de la base.</p>
+{% block content %}
+    
+    <main>
+      <section class="hero-banner">
+        <div class="hero-text">
+          <h1>La force dans l'accord</h1>
+          <p>
+            L'excellence physique rencontre 
+            la 
+            précision technique.
+          </p>
+        </div>
+      </section>
+
+      <!-- BIO -->
+      <section class="bio">
+        <h2>Gym Accord</h2>
+        <p>
+          Notre philosophie repose sur l'harmonie entre le corps et l'esprit.
+        </p>
+        <p>
+          Dans notre espace de 500m², nous combinons les techniques de
+          musculation traditionnelles avec les dernières innovations en matière
+          de biomécanique.
+        </p>
+        <p>
+          Chaque athlète bénéficie d'un accompagnement sur mesure pour atteindre
+          des objectifs de haut niveau.
+        </p>
+        <button class="btn-link" type="button"><a href="#">voir plus ...</a></button>
+
+        <!-- GALERIE -->
+        <article class="galery-img">
+          <div class="galery">
+            <figure class="photo-cv">
+              <img
+                src="../assets/images/photo/bancs-muscu.jpg"
+                alt=""
+                loading="lazy"
+              />
+              <figcaption>Voici l'espace bancs de musculation</figcaption>
+            </figure>
+            <figure class="photo-cv">
+              <img
+                src="../assets/images/photo/tapis-course.jpg"
+                alt=""
+                loading="lazy"
+              />
+              <figcaption>Espace cardio - Tapis de course</figcaption>
+            </figure>
+            <figure class="photo-cv">
+              <img
+                src="../assets/images/photo/velo.jpg"
+                alt=""
+                loading="lazy"
+              />
+              <figcaption>Espace cardio - Vélo</figcaption>
+            </figure>
+          </div>
+        </article>
+      </section>
+
+
+      <!-- HORAIRES -->
+      <section class="time">
+        <h3 class="studio-title">
+          <div class="text-group">
+            Horaire du
+            <span
+              >studio 
+              Gym</span
+            >
+          </div>
+        </h3>
+        <p>
+          Notre studio s'adapte à votre rythme. Des sessions matinales
+          explosives aux entraînements nocturnes, la discipline n'a pas d'heure.
+        </p>
+        <div class="card">
+          <p>Ouverture 7/7J</p>
+          <p>Accès à la salle 24/24h</p>
+          <p>Cours de 6h30 / 22h30</p>
+        </div>
+        <button class="btn-link" type="button"><a href="#">PROGRAMME</a></button>
+      </section>
+
+      <!-- COMMENTAIRE -->
+      <section class="commentary">
+        <div>
+          <h3 class="commentary-title">
+            c'est vous
+            QUI EN PARLEZ LE MIEUX...
+          </h3>
+        </div>
+        <div><p>futur commentaires</p></div>
+        <button class="commentary-button btn-link" type="button"><a href="#">voir plus ...</a></button>
+
+        
+      <!-- FORMULAIRE CONTACT -->
+      <section class="form-contact">
+        <div class="container-form">
+          <h3>N'hésitez pas à nous contacter</h3>
+        <p>
+          Des questions sur nos programmes ? 
+          Ecrivez-nous directement.
+        </p>
+        <form id="contact-form" novalidate>
+
+          <div class="form-group">
+            <label for="nom">Nom *</label>
+            <input type="text" id="nom" name="nom" required placeholder="Nom" />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="Email"
+            />
+            <span class="error"></span>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              placeholder="Message"
+            ></textarea>
+            <span class="error"></span>
+          </div>
+          <div class="form-group checkbox">
+            <input
+              type="checkbox"
+              id="consentement"
+              name="consentement"
+              required
+            />
+            <span class="error"></span>
+            <label for="consentement"
+              >J'accepte le traitement de mes données (RGPD) *</label
+            >
+          </div>
+          <button type="submit" class="btn-primary">Envoyer</button>
+        </form>
+        </div>
+      </section>
+    </main>
 {% endblock %}

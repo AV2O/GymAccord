@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -58,6 +60,24 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?\DateTime $last_login = null;
+
+    /**
+     * @var Collection<int, Reservations>
+     */
+    #[ORM\OneToMany(targetEntity: Reservations::class, mappedBy: 'user')]
+    private Collection $reservations;
+
+    /**
+     * @var Collection<int, Take>
+     */
+    #[ORM\OneToMany(targetEntity: Take::class, mappedBy: 'user')]
+    private Collection $takes;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+        $this->takes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -238,6 +258,66 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastLogin(\DateTime $last_login): static
     {
         $this->last_login = $last_login;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservations $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservations $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getUser() === $this) {
+                $reservation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Take>
+     */
+    public function getTakes(): Collection
+    {
+        return $this->takes;
+    }
+
+    public function addTake(Take $take): static
+    {
+        if (!$this->takes->contains($take)) {
+            $this->takes->add($take);
+            $take->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTake(Take $take): static
+    {
+        if ($this->takes->removeElement($take)) {
+            // set the owning side to null (unless already changed)
+            if ($take->getUser() === $this) {
+                $take->setUser(null);
+            }
+        }
 
         return $this;
     }

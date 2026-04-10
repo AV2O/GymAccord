@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CoachsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Coachs
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $bio = null;
+
+    /**
+     * @var Collection<int, Workshops>
+     */
+    #[ORM\OneToMany(targetEntity: Workshops::class, mappedBy: 'coach')]
+    private Collection $workshops;
+
+    public function __construct()
+    {
+        $this->workshops = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +88,36 @@ class Coachs
     public function setBio(string $bio): static
     {
         $this->bio = $bio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Workshops>
+     */
+    public function getWorkshops(): Collection
+    {
+        return $this->workshops;
+    }
+
+    public function addWorkshop(Workshops $workshop): static
+    {
+        if (!$this->workshops->contains($workshop)) {
+            $this->workshops->add($workshop);
+            $workshop->setCoach($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshop(Workshops $workshop): static
+    {
+        if ($this->workshops->removeElement($workshop)) {
+            // set the owning side to null (unless already changed)
+            if ($workshop->getCoach() === $this) {
+                $workshop->setCoach(null);
+            }
+        }
 
         return $this;
     }

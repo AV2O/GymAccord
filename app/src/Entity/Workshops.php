@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WorkshopsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,25 @@ class Workshops
 
     #[ORM\Column(length: 100)]
     private ?string $status = null;
+
+    #[ORM\ManyToOne(inversedBy: 'workshops')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Coachs $coach = null;
+
+    #[ORM\ManyToOne(inversedBy: 'workshops')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?WorkshopsType $workshop_type = null;
+
+    /**
+     * @var Collection<int, Reservations>
+     */
+    #[ORM\OneToMany(targetEntity: Reservations::class, mappedBy: 'workshop')]
+    private Collection $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +126,60 @@ class Workshops
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCoach(): ?Coachs
+    {
+        return $this->coach;
+    }
+
+    public function setCoach(?Coachs $coach): static
+    {
+        $this->coach = $coach;
+
+        return $this;
+    }
+
+    public function getWorkshopType(): ?WorkshopsType
+    {
+        return $this->workshop_type;
+    }
+
+    public function setWorkshopType(?WorkshopsType $workshop_type): static
+    {
+        $this->workshop_type = $workshop_type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservations $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservations $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getWorkshop() === $this) {
+                $reservation->setWorkshop(null);
+            }
+        }
 
         return $this;
     }

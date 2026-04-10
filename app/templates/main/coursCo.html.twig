@@ -1,0 +1,269 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }} {# Garde le CSS global (app.css) #}
+    <link rel="stylesheet" href="{{ asset('assets/styles/coursCo.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+        <main>
+      <h1>
+        Cours <br />
+        Collectifs
+      </h1>
+
+      <!-- SOUPLESSE ET REMISE EN FORME -->
+      <section class="workshop" aria-labelledby="workshop-title">
+        <h2 id="workshop-title">souplesse et remise en forme</h2>
+
+        <article class="card-workshop">
+          <details class="workshop-item" name="souplesse">
+            <summary>sport santé</summary>
+            <div class="content-card">
+              <p>
+                Le Sport Santé regroupe toutes les activités physiques adaptées
+                pour contribuer au bien-être du pratiquant. Il agit sur les
+                plans physique, psychologique et social, et peut être pratiqué
+                par tous, y compris les personnes avec des besoins spécifiques
+                liés à leur état de santé.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item" name="souplesse">
+            <summary>yoga</summary>
+            <div class="content-card">
+              <p>
+                Le yoga est une pratique complète qui renforce les muscles,
+                améliore la flexibilité et la posture tout en réduisant le
+                stress et l’anxiété. Grâce au contrôle de la respiration et aux
+                postures, il équilibre le corps et l’esprit pour une meilleure
+                qualité de vie.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item" name="souplesse">
+            <summary>stretching</summary>
+            <div class="content-card">
+              <p>
+                Le stretching consiste à étirer les muscles pour améliorer leur
+                souplesse, leur mobilité et prévenir les blessures. Accessible à
+                tous, il libère les tensions accumulées et favorise une profonde
+                détente physique et mentale.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item" name="souplesse">
+            <summary>pilâtes</summary>
+            <div class="content-card">
+              <p>
+                Le Pilâtes est une méthode d’entraînement qui renforce les
+                muscles profonds, améliore la posture et développe la conscience
+                corporelle. Doux mais efficace, il convient à tous les niveaux
+                et permet de sculpter le corps tout en prenant soin de son dos.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+        </article>
+      </section>
+
+      <!-- RENFORCEMENT MUSCULAIRE -->
+      <section class="workshop" aria-labelledby="workshop-title">
+        <h2 id="workshop-title">renforcement musculaire</h2>
+
+        <article class="card-workshop">
+          <details class="workshop-item black" name="renforcement">
+            <summary>bbe</summary>
+            <div class="content-card">
+              <p>
+                Le BBE est un cours de fitness dynamique qui combine cardio et
+                renforcement musculaire en circuits intenses. Sur des musiques
+                motivantes, il booste l’énergie, brûle les calories et tonifie
+                le corps entier pour des résultats rapides.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item black" name="renforcement">
+            <summary>caf</summary>
+            <div class="content-card">
+              <p>
+                Le CAF est un cours de renforcement musculaire ciblé sur le bas
+                du corps : jambes, ceinture abdominale et fessiers. Accessible à
+                tous, il utilise le poids du corps ou de petits équipements pour
+                sculpter et raffermir efficacement.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item black" name="renforcement">
+            <summary>abdos flash</summary>
+            <div class="content-card">
+              <p>
+                L’Abdo Flash est un cours express de 30 minutes entièrement
+                dédié à la sangle abdominale. Crunchs, gainages, relevés de
+                jambes… les exercices s’enchaînent pour tonifier et sculpter un
+                ventre plat en un minimum de temps.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item black" name="renforcement">
+            <summary>body barre</summary>
+            <div class="content-card">
+              <p>
+                Le Body Barre est un cours de renforcement musculaire complet
+                qui combine aérobic et musculation à l’aide d’une barre et de
+                poids, le tout sur des musiques entraînantes. Il cible chaque
+                groupe musculaire — jambes, fessiers, bras, dos et abdos — pour
+                tonifier la silhouette et brûler jusqu’à 600 calories par
+                séance.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+        </article>
+      </section>
+
+      <!-- CROSS TRAINING -->
+      <section class="workshop" aria-labelledby="workshop-title">
+        <h2 id="workshop-title">cross - training</h2>
+
+        <article class="card-workshop">
+          <details class="workshop-item white" name="training">
+            <summary>cross training</summary>
+            <div class="content-card">
+              <p>
+                Le Cross Training est une méthode d’entraînement polyvalente qui
+                combine gymnaste, haltérophilie et cardio pour développer force,
+                endurance et explosivité. Chaque séance est différente et
+                intense, idéale pour repousser ses limites physiques et mentales
+                et progresser rapidement.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item white" name="training">
+            <summary>cardio flash</summary>
+            <div class="content-card">
+              <p>
+                Le Cardio Flash est une séance de cardio express et intense
+                conçue pour brûler un maximum de calories en un minimum de
+                temps. Les exercices s’enchaînent rapidement pour faire monter
+                le rythme cardiaque et booster le métabolisme, même pour les
+                plus pressés.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item white" name="training">
+            <summary>training</summary>
+            <div class="content-card">
+              <p>
+                Le Training est un cours de renforcement musculaire global qui
+                cible l’ensemble du corps grâce à des circuits d’exercices
+                variés. Structuré en phases d’échauffement, d’entraînement et
+                d’étirements, il améliore la force, l’endurance et la condition
+                physique générale.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item white" name="training">
+            <summary>step</summary>
+            <div class="content-card">
+              <p>
+                Le Step est un cours chorégraphié sur une plateforme surélevée
+                qui combine mouvements rythmiques, cardio et renforcement
+                musculaire. Il cible particulièrement les jambes, les fessiers
+                et le cardio-respiratoire, tout en améliorant la coordination et
+                l’équilibre.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+
+          <details class="workshop-item white" name="training">
+            <summary>boxing</summary>
+            <div class="content-card">
+              <p>
+                Le Boxing fitness reprend les techniques de la boxe — jabs,
+                crochets, uppercuts — sans contact, pour un entraînement cardio
+                intense qui sculpte le corps de la tête aux pieds. Il renforce
+                les bras, les épaules, le core et les jambes tout en libérant le
+                stress et en améliorant la coordination.
+              </p>
+              <img class="workshop-img" src="" alt="" />
+              <div class="info-bar">
+                <img src="" alt="" />
+                <p></p>
+              </div>
+            </div>
+          </details>
+        </article>
+      </section>
+      <button class="btn-green" type="button"><a href="">reserver</a></button>
+    </main>
+
+{% endblock %}

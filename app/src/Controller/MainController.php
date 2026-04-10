@@ -15,4 +15,10 @@ final class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
+    #[Route('/cours', name: 'app_cours')]
+    public function cours(): Response
+    {
+        return $this->render('main/coursCo.html.twig');
+    }
 }
