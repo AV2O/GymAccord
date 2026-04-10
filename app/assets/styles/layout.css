@@ -1,0 +1,328 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 62%;
+}
+
+/*  ======== RACINE ======== */
+
+:root {
+  /* main color */
+  --black: #0e0e0e;
+  --white: #f9f9f9;
+  --green: #dfff00;
+  --grey-police: #9ea8a8;
+
+
+  /* police */
+  --mainText: "Epilogue", sans-serif;
+
+  /* épaisseur */
+  --gras5: 500;
+  --gras: 400;
+  --fin: 300;
+  --bold: bold;
+
+  --h1: clamp(4.5rem, 10vw, 8rem);
+  --h2: clamp(3.2rem, 6vw, 5rem);
+  --h3: clamp(2.4rem, 4vw, 3.2rem);  
+  --h4: clamp(1.8rem, 3vw, 2.2rem);  
+  --p: clamp(1.4rem, 2vw, 1.6rem);
+  --small: clamp(1.2rem, 1.5vw, 1.4rem);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--white);
+  font-family: var(--mainText);
+}
+
+header {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--black);
+}
+
+header a,
+footer a {
+  color: var(--green);
+  font-size: var(--p);
+  font-weight: var(--bold);
+  line-height: 2rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--mainText);
+  justify-self: center;
+  cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- BURGER --------- */
+
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  gap: 5px;
+  position: relative;
+  z-index: 1001;
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.burger-menu:hover {
+  transform: scale(1.2);
+}
+
+.line-burger {
+  width: 25px;
+  height: 2px;
+  background-color: var(--green);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+  transform-origin: left center;
+}
+
+/* Croix BURGER */
+
+.burger-menu.active .line-burger:nth-child(1) {
+  transform: rotate(45deg);
+  background-color: var(--black);
+  width: 20px;
+}
+
+.burger-menu.active .line-burger:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.active .line-burger:nth-child(3) {
+  transform: rotate(-45deg);
+  background-color: var(--black);
+  width: 20px;
+}
+
+/* Le tiroir (Drawer) */
+.menu-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 65vw;
+  height: 100vh;
+  padding: 10rem 0rem 4rem 2rem;
+
+  /* Effet Glassmorphism de ton image */
+  background-color: rgba(249, 249, 249, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+
+  /* Flexbox pour séparer le haut du bas */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  /* Animation de sortie */
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 999;
+}
+
+/* Ouverture du menu */
+.nav.menu-open .menu-drawer {
+  transform: translateX(0);
+}
+
+/* La liste UL */
+.menu-list {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 3.5rem;
+}
+
+.menu-list a {
+  font-size: var(--p);
+  color: var(--grey-police);
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: var(--colorFont);
+  padding: 1.2rem 2rem;
+  border-right: 4px solid transparent;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: right center;
+}
+
+.menu-list li a:hover {
+  color: var(--black); /* Le texte devient plus foncé */
+  border-right: 4px solid var(--green);
+  transform: scale(1.05);
+}
+
+.menu-list img,
+.btn-connect img,
+footer img {
+  width: 20px;
+  height: 20px;
+}
+
+/* La DIV de pied de menu (Bouton + Social) */
+.nav-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.btn-connect {
+  background-color: var(--black);
+  color: var(--green);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: bold;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: var(--p);
+  text-align: start;
+}
+
+.btn-connect a{
+    font-size: var(--p);
+    text-decoration: none;
+}
+
+.btn-link a{
+    font-size: var(--p);
+    text-decoration: none;
+    color: var(--black);
+}
+
+
+
+
+/* ------------ FOOTER ------------ */
+
+footer {
+  background-color: var(--black);
+  color: var(--grey-police);
+  padding: 3rem 2rem;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+footer p {
+  font-size: var(--small);
+  font-weight: var(--fin);
+  margin: 0 50px;
+}
+
+.link a {
+  font-size: var(--small);
+  color: var(--grey-police);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+footer div {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+}
+
+/* Structure pour bloquer le footer en bas */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Prend toute la hauteur de l'écran */
+}
+
+.legal-container {
+  flex: 1; /* Force le contenu à pousser le footer vers le bas */
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+/* Style des titres et textes */
+.legal-container h1 span {
+  color: var(--green);
+  font-size: var(--h1);
+  background-color: black;
+  padding: 0.3rem;
+  
+}
+
+
+.back-link{
+  text-decoration: none;
+  font-size: var(--small);
+}
+
+.legal-content h2 {
+  font-size: var(--h3);
+  margin: 3rem 0 1rem;
+  text-transform: uppercase;
+}
+
+.legal-content p {
+  font-size: var(--p);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Remplacement visuel du strong par une classe propre */
+.weight-bold {
+  font-weight: 900;
+}
+
+/* Footer sans CSS inline */
+.legal-footer {
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid #eee;
+  background-color: var(--black);
+}
+
+.legal-footer p {
+  font-size: var(--small);
+  color: var(--grey-police);
+}

@@ -1,0 +1,64 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+	<main
+		class="formulaire">
+		<!-- FORMULAIRE CONTACT -->
+		<section class="form-contact">
+			<img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
+			<h1>Reserver un workshop</h1>
+
+			<form id="contact-form" novalidate>
+				<div>
+					<label for="categorie">Catégorie</label>
+
+					<select name="categorie" id="categorie">
+						<option value="" disabled selected hidden>
+							Choisir une catégorie...
+						</option>
+						<option value="souplesse">Souplesse et remise en forme</option>
+						<option value="muscle">Renforcement musculaire</option>
+						<option value="training">Cross-Training</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="choix-sport">Cours</label>
+
+					<select name="choix-sport" id="choix-sport">
+						<option value="" disabled selected hidden>
+							Choisir une discipline...
+						</option>
+						<option value="pilates">Pilâtes</option>
+						<option value="yoga">Yoga</option>
+						<option value="stretching">Stretching</option>
+						<option value="crossfit">Crossfit</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="cours">Cours</label>
+
+					<select name="cours" id="cours">
+						<option value="" disabled selected hidden>Date et heure</option>
+						<option value="pilates">1</option>
+						<option value="yoga">2</option>
+						<option value="stretching">3</option>
+						<option value="crossfit">4</option>
+					</select>
+				</div>
+
+				<button type="submit" class="btn-primary"><a href="{{ path('app_reservation') }}">S'inscrire</a></button>
+
+				<p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}"> Cliquez ici</a> pour vous inscrire !</p>
+			</form>
+		</section>
+	</main>
+{% endblock %}

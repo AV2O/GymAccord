@@ -7,7 +7,7 @@
 
 {% block content %}
     
-    <main>
+    <main class="app">
       <section class="hero-banner">
         <div class="hero-text">
           <h1>La force dans l'accord</h1>
@@ -34,14 +34,14 @@
           Chaque athlète bénéficie d'un accompagnement sur mesure pour atteindre
           des objectifs de haut niveau.
         </p>
-        <button class="btn-link" type="button"><a href="#">voir plus ...</a></button>
+        <button class="btn-link" type="button"><a href="{{ path('app_a-propos') }}">voir plus ...</a></button>
 
         <!-- GALERIE -->
         <article class="galery-img">
           <div class="galery">
             <figure class="photo-cv">
               <img
-                src="../assets/images/photo/bancs-muscu.jpg"
+                src="{{ asset('images/photo/bancs-muscu.jpg') }}"
                 alt=""
                 loading="lazy"
               />
@@ -49,7 +49,7 @@
             </figure>
             <figure class="photo-cv">
               <img
-                src="../assets/images/photo/tapis-course.jpg"
+                src="{{ asset('images/photo/tapis-course.jpg') }}"
                 alt=""
                 loading="lazy"
               />
@@ -57,7 +57,7 @@
             </figure>
             <figure class="photo-cv">
               <img
-                src="../assets/images/photo/velo.jpg"
+                src="{{ asset('images/photo/velo.jpg') }}"
                 alt=""
                 loading="lazy"
               />
@@ -88,7 +88,7 @@
           <p>Accès à la salle 24/24h</p>
           <p>Cours de 6h30 / 22h30</p>
         </div>
-        <button class="btn-link" type="button"><a href="#">PROGRAMME</a></button>
+        <button class="btn-link" type="button"><a href="{{ path('app_coursCo') }}">PROGRAMME</a></button>
       </section>
 
       <!-- COMMENTAIRE -->

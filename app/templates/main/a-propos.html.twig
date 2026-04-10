@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+    <main class="a-propos">
+
+      <section class="portrait-container">
+        <div class="portrait">
+          <img
+            src="{{ asset('images/photo/Elite.png') }}"
+            alt="image du fondateur"
+          />
+          <h1>Marc ACCORD</h1>
+          <p>
+            Expert en biomécanique et préparation physique de haut niveau depuis
+            plus de 15 ans.
+          </p>
+        </div>
+      </section>
+
+      <article class="propos-container">
+        <section>
+          <h2>L'EXCELLENCE TECHNIQUE</h2>
+          <p>
+            Chez Gym Accord, nous ne nous contentons pas de bouger. Nous optimisons chaque levier, chaque extension. Notre approche repose sur la précision du mouvement pour garantir des résultats durables sans compromettre l'intégrité physique.
+          </p>
+        </section>
+        <section>
+          <h2>DISCIPLINE ALIMENTAIRE</h2>
+          <p>
+            La performance se construit autant dans l'assiette que sur le plateau. Nous intégrons une vision holistique où la nutrition devient le carburant de votre ambition, guidée par des protocoles scientifiquement validés.
+          </p>
+        </section>
+      </article>
+      <section class="img-container">
+        <h2>vibrance &amp; puissance</h2>
+        <p>L'immersion totale dans l'univers Accord.</p>
+        <div class="galery-info">
+            <img src="{{ asset('images/photo/tapis-course.jpg') }}" alt="">
+            <img src="{{ asset('images/photo/velo.jpg') }}" alt="">
+            <img src="{{ asset('images/photo/banc-muscu.jpg') }}" alt="">
+            <img src="{{ asset('images/photo/Elite.png') }}" alt="">
+        </div>
+      </section>
+    </main>
+{% endblock %}

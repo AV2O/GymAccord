@@ -1,0 +1,86 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+
+	<main class="prix">
+		<h1>Les abonnements</h1>
+
+		<article class="parent">
+			<article class="container-tarifs">
+				<div class="card-tarifs">
+					<h2>abonnement
+						<span>basic</span>
+					</h2>
+					<p>accès illimité</p>
+				</div>
+				<div class="avantage">
+					<p>19,90€
+						<span>/mois</span>
+					</p>
+					<p>Article &amp; avantages</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">Accès 7j/7 de 6h à 23h</p>
+				</div>
+				<button class="btn-link" type="button">
+					<a href="{{ path('app_login') }}">choisir ce forfait</a>
+				</button>
+			</article>
+
+			<article class="container-tarifs">
+				<div class="card-tarifs">
+					<h2>abonnement
+						<span>premium</span>
+					</h2>
+					<div>
+						<p>cours collectifs</p>
+					</div>
+				</div>
+				<div class="avantage">
+					<p>39,90€
+						<span>/mois</span>
+					</p>
+					<p>Article &amp; avantages</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">Accès 7j/7 de 6h à 23h</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">Bilan de forme personnalisé</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">Accès aux cours collectifs</p>
+				</div>
+				<button class="btn-link" type="button">
+					<a href="{{ path('app_login') }}">choisir ce forfait</a>
+				</button>
+			</article>
+
+			<article class="container-tarifs">
+				<div class="card-tarifs">
+					<h2>abonnement
+						<span>gold</span>
+					</h2>
+					<div>
+						<p>coaching inclus</p>
+					</div>
+				</div>
+				<div class="avantage">
+					<p>59,90€
+						<span>/mois</span>
+					</p>
+					<p>Article &amp; avantages</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">Accès 7j/7 de 6h à 23h</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">Bilan de forme personnalisé</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">Accès aux cours collectifs</p>
+					<p><img src="{{ asset('images/check-circle-svgrepo-com.svg') }}" alt="check">1 séance avec un coach par mois
+					</p>
+				</div>
+				<button class="btn-link" type="button">
+					<a href="{{ path('app_login')}}">choisir ce forfait</a>
+				</button>
+			</article>
+		</article>
+
+
+	</main>
+{% endblock %}

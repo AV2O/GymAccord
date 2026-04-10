@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+    <main class="formulaire">
+      <!-- FORMULAIRE CONTACT -->
+      <section class="form-contact">
+        <img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
+        <h1>Se connecter</h1>
+
+        <form id="contact-form" novalidate>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="exemple@mail.fr"
+            />
+            <span class="error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">mot de passe *</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="************"
+            />
+            <span class="error"></span>
+          </div>
+
+          <button type="submit" class="btn-primary">s'inscrire</button>
+
+          <p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}"> Cliquez ici </a> pour vous inscrire !</p>
+        </form>
+      </section>
+    </main>
+{% endblock %}

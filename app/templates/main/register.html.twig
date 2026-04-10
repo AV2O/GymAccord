@@ -1,0 +1,101 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+	<main
+		class="formulaire">
+		<!-- FORMULAIRE CONTACT -->
+		<section class="form-contact">
+			<img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
+			<h1>inscription</h1>
+
+			<form id="contact-form" novalidate>
+				<div class="form-group">
+					<label for="nom">Nom *</label>
+					<input type="text" id="nom" name="nom" required placeholder="Nom"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="prenom">Prénom *</label>
+					<input type="text" id="prenom" name="prenom" required placeholder="Prénom"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="telephone">Télephone</label>
+					<input type="tel" id="telephone" name="telephone" required placeholder="Télephone"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="birthday">Date de naissance *</label>
+					<input type="date" id="birthday" name="birthday" required placeholder="jj/mm/aaaa"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="address">Adresse *</label>
+					<input type="text" id="address" name="address" required placeholder="14 rue du capitole"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="city">Ville *</label>
+					<input type="text" id="city" name="city" require placeholder="Lyon"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="zipcode">Code postal *</label>
+					<input type="text" id="zipcode" name="zipcode" required placeholder="69000"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="email">Email *</label>
+					<input type="email" id="email" name="email" required placeholder="exemple@mail.fr"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="email2">confirmation Email *</label>
+					<input type="email" id="email2" name="email2" required placeholder="exemple@mail.fr"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="password">mot de passe *</label>
+					<input type="password" id="password" name="password" required placeholder="************"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="password2">comfirmation mot de passe *</label>
+					<input type="password" id="password2" name="password2" required placeholder="************"/>
+					<span class="error"></span>
+				</div>
+
+				<div class="form-group checkbox">
+					<input type="checkbox" id="consentement" name="consentement" required/>
+					<span class="error"></span>
+					<label for="consentement">
+						J'accepte que mes données soient collectées pour le traitement de mon inscription et la gestion de mon abonnement conformément à la politique de condidentialié. *</label>
+				</div>
+				<button type="submit" class="btn-primary">s'inscrire</button>
+
+				<p>Vous êtes déja incrit ?
+					<a href="{{ path('app_login') }}">Cliquez ici
+					</a>
+					pour vous connecter !</p>
+
+			</form>
+		</section>
+	</main>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+	<main class="dashboard">
+		<section class="portrait-container">
+			<div class="portrait">
+				<div>
+					<h1>Bonjour Marc,</h1>
+					<p>Prêt pour l'impact ?</p>
+				</div>
+				<img src="{{ asset('images/photo/Elite.png') }}" alt="image du fondateur"/>
+			</div>
+		</section>
+
+		<article>
+			<div class="container-status">
+				<section class="status-day">
+					<img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt=""/>
+					<div>
+						<h2>355</h2>
+						<p>jours</p>
+						<p>membre deupis</p>
+					</div>
+				</section>
+
+				<section class="status-forfait">
+					<div class="actif">
+						<h2>forfait premium</h2>
+						<p>actif</p>
+					</div>
+
+					<div class="modif">
+						<a href="#"><img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="modifier"/></a>
+						<a href="#"><img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="supprimer"/></a>
+					</div>
+				</section>
+			</div>
+		</article>
+
+		<section class="next-sessions">
+
+			<div class="session-header">
+				<h2>Mes prochaines séances</h2>
+				<a href="#" class="view-all">Voir tout</a>
+			</div>
+
+			<div class="session-list">
+				<article class="session-card">
+					<div class="session-img">
+						<img src="{{ asset('images/photo/banc-muscu.jpg') }}" alt="Crossfit">
+					</div>
+					<div class="session-info">
+						<p class="session-date">Demain • 18:30</p>
+						<h3>Power Crossfit</h3>
+					</div>
+				</article>
+
+				<article class="session-card">
+					<div class="session-img">
+						<img src="{{ asset('images/photo/tapis-course.jpg') }}" alt="Yoga">
+					</div>
+					<div class="session-info">
+						<p class="session-date">Mercredi • 07:00</p>
+						<h3>Vinyasa Flow</h3>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="promo-banner">
+			<h2 class="promo-title">Vibrance & Puissance</h2>
+
+			<div class="hero-card">
+				<div class="hero-content">
+					<h2>Dépasse tes
+						<span>limites</span>.</h2>
+					<p>Le succès n'est pas une destination, c'est une discipline. Rejoins la meute.</p>
+				</div>
+			</div>
+
+			<button class="btn-primary-large"><a href="{{ path('app_reservation') }}">Réserver une séance</a> </button>
+		</section>
+	</main>
+{% endblock %}

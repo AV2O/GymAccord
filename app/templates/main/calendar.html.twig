@@ -1,0 +1,105 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+	<main class="calendar">
+		<section class="hero-calendar">
+			<h1>calendrier
+				<span>plannification</span>
+			</h1>
+			<p>
+				Optimisez votre performance avec notre programme hebdomadaire haute
+				          intensité.
+			</p>
+		</section>
+
+		<!-- jours de la semaine -->
+		<section class="planning">
+			<h2>Planning 2026</h2>
+			<div class="container-day">
+				<div class="day">
+					<a href="#">lun</a>
+				</div>
+				<div class="day">
+					<a href="#">mar</a>
+				</div>
+				<div class="day">
+					<a href="#">mer</a>
+				</div>
+				<div class="day">
+					<a href="#">jeu</a>
+				</div>
+				<div class="day">
+					<a href="#">ven</a>
+				</div>
+				<div class="day">
+					<a href="#">sam</a>
+				</div>
+				<div class="day">
+					<a href="#">dim</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- leçons -->
+		<div class="container-lesson">
+			<article class="content" data-id="1" data-categorie="dessert" data-temps="moyen" data-difficulte="facile">
+				<div>
+					<p class="timing">08:30</p>
+				</div>
+				<div class="lesson">
+					<img src=" {{ asset('images/photo/velo.jpg') }}"  alt=""/>
+					<button class="favori-btn" aria-label="">disponible</button>
+					<h2>yoga dynamique</h2>
+					<p>Coach: Sarah J. • 60 min • Intensité ++</p>
+					<button class="btn-link">
+						<a href="{{ path('app_login') }}" title="page reservation">reserver</a>
+					</button>
+				</div>
+			</article>
+
+			<article class="content" data-id="1" data-categorie="dessert" data-temps="moyen" data-difficulte="facile">
+				<div>
+					<p class="timing">18:00</p>
+				</div>
+				<div class="lesson">
+					<img src="{{ asset('images/photo/velo.jpg') }}" alt=""/>
+					<buton class="favori-btn" aria-label="">
+						disponible
+					</buton>
+					<h2>hit explosion</h2>
+					<p>Coach: Marc K. • 45 min • Intensité +++</p>
+					<button class="btn-link">
+						<a href="{{ path('app_login') }}" title="page reservation">reserver</a>
+					</button>
+				</div>
+			</article>
+
+			<article class="content" data-id="1" data-categorie="dessert" data-temps="moyen" data-difficulte="facile">
+				<div>
+					<p class="timing">19:30</p>
+				</div>
+				<div class="lesson">
+					<img src="{{ asset('images/photo/velo.jpg') }}" alt=""/>
+					<button class="favori-btn" aria-label="">disponible</button>
+					<h2>body pump</h2>
+					<p>Coach: David L. • 55 min • Intensité ++</p>
+					<button class="btn-link">
+						<a href="{{ path('app_login') }}" title="page reservation">reserver</a>
+					</button>
+				</div>
+			</article>
+		</div>
+
+		<button class="btn-link end" type="button">
+			<a href="{{ path('app_login') }}">reserver</a>
+		</button>
+	</main>
+
+{% endblock %}

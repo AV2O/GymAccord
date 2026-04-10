@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/layout.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -19,25 +20,68 @@
 
         <div class="menu-drawer">
           <ul class="menu-list">
+
             <li>
               <a href="{{ path('app_main') }}">accueil
-                <img src="{{ asset('assets/images/home-svgrepo-com.svg') }}" alt="maison" />
+                <img src="{{ asset('images/home-svgrepo-com.svg') }}" alt="maison" />
               </a>
             </li>
 
-			<li>
-              <a href="{{ path('app_cours') }}">cours collectifs
-                <img src="{{ asset('assets/images/dumbbell-svgrepo-com.svg') }}" alt="haltere" />
+			      <li>
+              <a href="{{ path('app_coursCo') }}">cours collectifs
+                <img src="{{ asset('images/dumbbell-svgrepo-com.svg') }}" alt="haltere" />
+              </a>
+            </li>
+
+			      <li>
+              <a href="{{ path('app_solo') }}">séance individuelle
+                <img src="{{ asset('images/run-svgrepo-com.svg') }}" alt="course" />
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ path('app_calendar') }}">calendrier / planning
+                <img src="{{ asset('images/planning-svgrepo-com.svg') }}" alt="calendrier" />
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ path('app_tarifs') }}">tarifs
+                <img src="{{ asset('images/money-bag-svgrepo-com.svg') }}" alt="sac d'argent"/>
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ path('app_dashboard') }}">dashboard
+                <img src="{{ asset('images/user-svgrepo-com.svg') }}" alt="utilisateur"/>
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ path('app_a-propos') }}">À propos
+                <img src="{{ asset('images/information-data-storage-cloud-file-document-format-svgrepo-com.svg') }}" alt="information"/>
               </a>
             </li>
 
           </ul>
+
+          <div class="nav-footer">
+            <button class="btn-connect" type="button"><a href="{{ path('app_register') }}">SE CONNECTER / S'INSCRIRE</a>
+              
+              <img
+                src="{{ asset('images/login-bracket-svgrepo-com.svg') }}"
+                alt="login"
+              />
+            </button>
+          </div>
         </div>
       </nav>
     </header>
 
     {# C'est ici que le contenu de tes pages (index, cours, etc.) sera injecté #}
-    {% block content %}{% endblock %}
+    {% block content %}
+    
+    {% endblock %}
 
     <footer>
     <a href="{{ path('app_main') }}">Gym Accord</a>
@@ -48,12 +92,12 @@
     
     <div class="social-icons">
         <a href="https://www.instagram.com/" target="_blank">
-            <img src="{{ asset('assets/images/insta-svgrepo-com.svg') }}" alt="Instagram" />
+            <img src="{{ asset('images/insta-svgrepo-com.svg') }}" alt="Instagram" />
         </a>
         <a href="#">
-            <img src="{{ asset('assets/images/twitter-svgrepo-com.svg') }}" alt="Twitter" />
+            <img src="{{ asset('images/twitter-svgrepo-com.svg') }}" alt="Twitter" />
         </a>
-        <img src="{{ asset('assets/images/mail-svgrepo-com.svg') }}" alt="mail" />
+        <img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="mail" />
     </div>
 
     <div class="link">
@@ -68,5 +112,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
+    <script src="{{ asset('js/scripts.js') }}" defer></script>
 {% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{# Garde le CSS global (app.css) #}
+{% endblock %}
+
+{# 3. On met le contenu spécifique de la page #}
+{% block content %}
+	<main class="solo">
+		<section class="hero-banner">
+			<div class="hero-text">
+				<h1>Séances
+					<span>individuelle</span>
+					et personnalisée</h1>
+				<p>
+					Profiter d'un accompagnement sur-mesure avec l'un de nos coachs
+					            expert. Chaque séance est conçue réponse spécifiquement à vos
+					            besoins, qu'il s'agisse de performance athlétique, de remise en
+					            forme ou éducation.
+				</p>
+			</div>
+		</section>
+
+		<section class="obj-card">
+			<article class="black-card">
+				<h2>
+					<span><img src="{{ asset('images/target-svgrepo-com.svg') }}"/></span>
+					Objectifs cliblés
+				</h2>
+				<p>
+					Un programme adapté à votre physiologie et à vos ambitions
+					            personnelles
+				</p>
+			</article>
+			<article class="black-card">
+				<h2>
+					<span><img src="{{ asset('images/chronometer-svgrepo-com (2).svg') }}" alt="chronometre"/></span>
+					Flexibilité totale
+				</h2>
+				<p>Planifiez vos séances selon votre emploi du temps</p>
+			</article>
+		</section>
+
+		<section class="objectif">
+			<article class="white-card">
+				<h3>Prêt à dépasser vos limites?</h3>
+				<p>
+					Réservez votre première séance d'évaluation dès aujourd'hui et
+					            commencer votre transformation.
+				</p>
+				<button class="btn-link" type="button">
+					<a href="{{ path('app_login') }}">reserver</a>
+				</button>
+			</article>
+		</section>
+	</main>
+
+{% endblock %}
