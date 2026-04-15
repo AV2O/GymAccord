@@ -1,116 +1,118 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/layout.css') }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('styles/layout.css') }}">
 {% endblock %}
 
 {% block body %}
-    <header>
-      <div class="logo">
-        <a href="{{ path('app_main') }}">Gym Accord</a>
-      </div>
+	<header>
+		<div class="logo">
+			<a href="{{ path('app_main') }}">Gym Accord</a>
+		</div>
 
-      <nav class="nav" aria-label="Navigation principale">
-        <button class="burger-menu" id="burgerMenu" aria-label="Menu">
-          <span class="line-burger"></span>
-          <span class="line-burger"></span>
-          <span class="line-burger"></span>
-        </button>
+		<nav class="nav" aria-label="Navigation principale">
+			<button class="burger-menu" id="burgerMenu" aria-label="Menu">
+				<span class="line-burger"></span>
+				<span class="line-burger"></span>
+				<span class="line-burger"></span>
+			</button>
 
-        <div class="menu-drawer">
-          <ul class="menu-list">
+			<div class="menu-drawer">
+				<ul class="menu-list">
 
-            <li>
-              <a href="{{ path('app_main') }}">accueil
-                <img src="{{ asset('images/home-svgrepo-com.svg') }}" alt="maison" />
-              </a>
-            </li>
+					<li>
+						<a href="{{ path('app_main') }}">accueil
+							<img src="{{ asset('images/home-svgrepo-com.svg') }}" alt="maison"/>
+						</a>
+					</li>
 
-			      <li>
-              <a href="{{ path('app_coursCo') }}">cours collectifs
-                <img src="{{ asset('images/dumbbell-svgrepo-com.svg') }}" alt="haltere" />
-              </a>
-            </li>
+					<li>
+						<a href="{{ path('app_coursCo') }}">cours collectifs
+							<img src="{{ asset('images/dumbbell-svgrepo-com.svg') }}" alt="haltere"/>
+						</a>
+					</li>
 
-			      <li>
-              <a href="{{ path('app_solo') }}">séance individuelle
-                <img src="{{ asset('images/run-svgrepo-com.svg') }}" alt="course" />
-              </a>
-            </li>
+					<li>
+						<a href="{{ path('app_solo') }}">séance individuelle
+							<img src="{{ asset('images/run-svgrepo-com.svg') }}" alt="course"/>
+						</a>
+					</li>
 
-            <li>
-              <a href="{{ path('app_calendar') }}">calendrier / planning
-                <img src="{{ asset('images/planning-svgrepo-com.svg') }}" alt="calendrier" />
-              </a>
-            </li>
+					<li>
+						<a href="{{ path('app_calendar') }}">calendrier / planning
+							<img src="{{ asset('images/planning-svgrepo-com.svg') }}" alt="calendrier"/>
+						</a>
+					</li>
 
-            <li>
-              <a href="{{ path('app_tarifs') }}">tarifs
-                <img src="{{ asset('images/money-bag-svgrepo-com.svg') }}" alt="sac d'argent"/>
-              </a>
-            </li>
+					<li>
+						<a href="{{ path('app_tarifs') }}">tarifs
+							<img src="{{ asset('images/money-bag-svgrepo-com.svg') }}" alt="sac d'argent"/>
+						</a>
+					</li>
 
-            <li>
-              <a href="{{ path('app_dashboard') }}">dashboard
-                <img src="{{ asset('images/user-svgrepo-com.svg') }}" alt="utilisateur"/>
-              </a>
-            </li>
+					{% if app.user %}
+						<li>
+							<a href="{{ path('app_dashboard') }}">dashboard
+								<img src="{{ asset('images/user-svgrepo-com.svg') }}" alt="utilisateur"/>
+							</a>
+						</li>
+					{% endif %}
 
-            <li>
-              <a href="{{ path('app_a-propos') }}">À propos
-                <img src="{{ asset('images/information-data-storage-cloud-file-document-format-svgrepo-com.svg') }}" alt="information"/>
-              </a>
-            </li>
+					<li>
+						<a href="{{ path('app_a-propos') }}">À propos
+							<img src="{{ asset('images/information-data-storage-cloud-file-document-format-svgrepo-com.svg') }}" alt="information"/>
+						</a>
+					</li>
 
-          </ul>
+				</ul>
 
-          <div class="nav-footer">
-            <button class="btn-connect" type="button"><a href="{{ path('app_register') }}">SE CONNECTER / S'INSCRIRE</a>
-              
-              <img
-                src="{{ asset('images/login-bracket-svgrepo-com.svg') }}"
-                alt="login"
-              />
-            </button>
-          </div>
-        </div>
-      </nav>
-    </header>
+				<div class="nav-footer">
+					{% if app.user %}
+						<a href="{{ path('app_logout') }}" class="btn-connect btn-logout">
+							SE DÉCONNECTER
+							<img src="{{ asset('images/logout-white(1).svg') }}" alt="logout" class="icon-logout"/>
+						</a>
+					{% else %}
+						<a href="{{ path('app_login') }}" class="btn-connect">
+							SE CONNECTER / S'INSCRIRE
+							<img src="{{ asset('images/login-bracket-svgrepo-com.svg') }}" alt="login"/>
+						</a>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+	</header>
 
-    {# C'est ici que le contenu de tes pages (index, cours, etc.) sera injecté #}
-    {% block content %}
-    
-    {% endblock %}
+	{% block content %}{% endblock %}
 
-    <footer>
-    <a href="{{ path('app_main') }}">Gym Accord</a>
-    <p>
-        L'élite du fitness à votre portée. Rejoignez le 
-        mouvement Gym ACCORD dès aujourd'hui.
-    </p>
-    
-    <div class="social-icons">
-        <a href="https://www.instagram.com/" target="_blank">
-            <img src="{{ asset('images/insta-svgrepo-com.svg') }}" alt="Instagram" />
-        </a>
-        <a href="#">
-            <img src="{{ asset('images/twitter-svgrepo-com.svg') }}" alt="Twitter" />
-        </a>
-        <img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="mail" />
-    </div>
+	<footer>
+		<a href="{{ path('app_main') }}">Gym Accord</a>
+		<p>
+			L'élite du fitness à votre portée. Rejoignez le mouvement Gym ACCORD dès aujourd'hui.
+		</p>
 
-    <div class="link">
-        {# On utilise app_main en attendant que tu crées les pages legal.html.twig etc #}
-        <a href="{{ path('app_main') }}">Mentions légales</a>
-        <a href="{{ path('app_main') }}">Confidentialité</a>
-        <a href="#">Contact</a>
-    </div>
+		<div class="social-icons">
+			<a href="https://www.instagram.com/" target="_blank">
+				<img src="{{ asset('images/insta-svgrepo-com.svg') }}" alt="Instagram"/>
+			</a>
+			<a href="#">
+				<img src="{{ asset('images/twitter-svgrepo-com.svg') }}" alt="Twitter"/>
+			</a>
+			<img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="mail"/>
+		</div>
 
-    <p>&copy; GymAccord &mdash; Tous droits réservés &mdash; AV2O</p>
-</footer>
+		<div
+			class="link">
+			<a href="{{ path('app_main') }}">Mentions légales</a>
+			<a href="{{ path('app_main') }}">Confidentialité</a>
+			<a href="#">Contact</a>
+		</div>
+
+		<p>&copy; GymAccord &mdash; Tous droits réservés &mdash; AV2O</p>
+	</footer>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/scripts.js') }}" defer></script>
+	<script src="{{ asset('js/scripts.js') }}" defer></script>
 {% endblock %}

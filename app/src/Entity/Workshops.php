@@ -43,15 +43,17 @@ class Workshops
     private ?WorkshopsType $workshop_type = null;
 
     /**
-     * @var Collection<int, Reservations>
+     * @var Collection<int, Reservation>
      */
-    #[ORM\OneToMany(targetEntity: Reservations::class, mappedBy: 'workshop')]
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'workshop', orphanRemoval: true)]
     private Collection $reservations;
 
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -155,14 +157,14 @@ class Workshops
     }
 
     /**
-     * @return Collection<int, Reservations>
+     * @return Collection<int, Reservation>
      */
     public function getReservations(): Collection
     {
         return $this->reservations;
     }
 
-    public function addReservation(Reservations $reservation): static
+    public function addReservation(Reservation $reservation): static
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations->add($reservation);
@@ -172,7 +174,7 @@ class Workshops
         return $this;
     }
 
-    public function removeReservation(Reservations $reservation): static
+    public function removeReservation(Reservation $reservation): static
     {
         if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)

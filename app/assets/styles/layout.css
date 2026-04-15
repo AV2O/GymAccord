@@ -13,6 +13,7 @@
   --white: #f9f9f9;
   --green: #dfff00;
   --grey-police: #9ea8a8;
+  
 
 
   /* police */
@@ -97,7 +98,7 @@ footer a {
 }
 
 .line-burger {
-  width: 25px;
+  width: 20px;
   height: 2px;
   background-color: var(--green);
   transition: all 0.3s ease;
@@ -207,24 +208,26 @@ footer img {
 }
 
 .btn-connect {
-  background-color: var(--black);
-  color: var(--green);
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: bold;
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-size: var(--p);
-  text-align: start;
+    background-color: var(--black);
+    color: var(--green);
+    text-decoration: none; 
+    display: flex; 
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: bold;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: var(--p);
+    margin: 0 auto 40px; 
+
 }
 
-.btn-connect a{
-    font-size: var(--p);
-    text-decoration: none;
+/* Style spécifique pour la déconnexion */
+.btn-connect.btn-logout {
+  background-color: var(--red); 
+  color: #ffffff;           
 }
 
 .btn-link a{

@@ -12,11 +12,25 @@
 		<section class="portrait-container">
 			<div class="portrait">
 				<div>
-					<h1>Bonjour Marc,</h1>
+					<h1>Bonjour
+						{{ app.user.firstName }}
+						!</h1>
 					<p>Prêt pour l'impact ?</p>
 				</div>
-				<img src="{{ asset('images/photo/Elite.png') }}" alt="image du fondateur"/>
+
+				{% if app.user.profilePicture %}
+					<img src="{{ asset('uploads/profiles/' ~ app.user.profilePicture) }}" class="profile-img-main"/>
+				{% else %}
+					<img src="{{ asset('images/avatar-default-green.svg') }}" class="profile-img-main default-avatar"/>
+				{% endif %}
+
+				{# Garde UNIQUEMENT celui-ci #}
+				<a href="#" class="edit-profile-btn">
+					<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier la photo">
+				</a>
 			</div>
+
+			{# SUPPRIME TOUT CE QUI ÉTAIT ICI (le portrait-wrapper) #}
 		</section>
 
 		<article>
@@ -24,7 +38,7 @@
 				<section class="status-day">
 					<img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt=""/>
 					<div>
-						<h2>355</h2>
+						<h2>{{ date().diff(app.user.createdAt).days }}</h2>
 						<p>jours</p>
 						<p>membre deupis</p>
 					</div>
@@ -85,7 +99,30 @@
 				</div>
 			</div>
 
-			<button class="btn-primary-large"><a href="{{ path('app_reservation') }}">Réserver une séance</a> </button>
+			<a href="{{ path('app_reservation') }}" class="btn-primary-large">Réserver une séance</a>
 		</section>
 	</main>
+
+
+	<div id="photoModal" class="modal">
+		<div class="modal-content">
+			<span class="close-modal">&times;</span>
+			<h2>Modifier ma photo</h2>
+
+			{{ form_start(form, {'action': path('app_profile_update_photo'), 'method': 'POST'}) }}
+			{{ form_widget(form.profilePicture) }}
+
+			<div class="modal-actions">
+				<button type="submit" class="btn-gym">ENREGISTRER</button>
+				<button type="button" class="btn-gym btn-gym-outline btn-cancel">ANNULER</button>
+
+				{% if app.user.profilePicture %}
+					<a href="{{ path('app_profile_delete_photo') }}" class="btn-delete" onclick="return confirm('Supprimer ta photo de profil ?')">
+						Supprimer la photo actuelle
+					</a>
+				{% endif %}
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
 {% endblock %}

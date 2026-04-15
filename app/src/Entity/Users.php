@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
@@ -61,11 +62,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTime $last_login = null;
 
-    /**
-     * @var Collection<int, Reservations>
-     */
-    #[ORM\OneToMany(targetEntity: Reservations::class, mappedBy: 'user')]
-    private Collection $reservations;
 
     /**
      * @var Collection<int, Take>
@@ -73,11 +69,21 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Take::class, mappedBy: 'user')]
     private Collection $takes;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePicture = null;
+
+    /**
+     * @var Collection<int, Reservation>
+     */
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $reservations;
+
     public function __construct()
-    {
-        $this->reservations = new ArrayCollection();
-        $this->takes = new ArrayCollection();
-    }
+{
+    $this->takes = new ArrayCollection();
+    $this->reservations = new ArrayCollection();
+}
+
 
     public function getId(): ?int
     {
@@ -261,37 +267,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Reservations>
-     */
-    public function getReservations(): Collection
-    {
-        return $this->reservations;
-    }
-
-    public function addReservation(Reservations $reservation): static
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations->add($reservation);
-            $reservation->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReservation(Reservations $reservation): static
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getUser() === $this) {
-                $reservation->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection<int, Take>
      */
@@ -321,4 +297,46 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?string $profilePicture): static
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    /**
+ * @return Collection<int, Reservation>
+ */
+public function getReservations(): Collection // Ajoute un 's'
+{
+    return $this->reservations; // Retourne la bonne variable
+}
+
+public function addReservation(Reservation $reservation): static // On renomme l'argument pour la clarté
+{
+    if (!$this->reservations->contains($reservation)) {
+        $this->reservations->add($reservation);
+        $reservation->setUser($this);
+    }
+
+    return $this;
+}
+
+public function removeReservation(Reservation $reservation): static
+{
+    if ($this->reservations->removeElement($reservation)) {
+        // set the owning side to null (unless already changed)
+        if ($reservation->getUser() === $this) {
+            $reservation->setUser(null);
+        }
+    }
+
+    return $this;
+}
 }

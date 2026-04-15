@@ -1,0 +1,234 @@
+/*  ======== RESET ======== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 62%;
+}
+
+/*  ======== RACINE ======== */
+
+:root {
+  /* main color */
+  --black: #0e0e0e;
+  --white: #f9f9f9;
+  --green: #dfff00;
+  --grey-police: #879191af;
+
+  /* police */
+  --mainText: "Epilogue", sans-serif;
+
+  /* épaisseur */
+  --gras5: 500;
+  --gras: 400;
+  --fin: 300;
+  --bold: bold;
+
+   /* taille de police */
+  --h1: clamp(4.5rem, 10vw, 8rem);
+  --h2: clamp(3.2rem, 6vw, 5rem);
+  --h3: clamp(2.4rem, 4vw, 3.2rem);  
+  --h4: clamp(1.8rem, 3vw, 2.2rem);  
+  --p: clamp(1.4rem, 2vw, 1.6rem);
+  --small: clamp(1.2rem, 1.5vw, 1.4rem);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--white);
+
+  font-family: var(--mainText);
+}
+
+main{
+    padding-bottom: 10px;
+}
+
+img{
+  height: 50vh;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+h1{
+    font-size: var(--h1);
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 0.8;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    color: var(--black);
+    margin: 1.5rem;
+    margin-left: 4rem;
+    z-index: 2;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;   /* Ajuste la hauteur de la ligne sous le texte */
+    left: 0;
+    width: 60px;   /* C'est ICI que tu définis la longueur (3 ou 4 lettres) */
+    height: 4px;   /* Épaisseur de la ligne */
+    background-color: var(--green); /* Ta variable vert fluo */
+}
+
+/* ------------ FORMULAIRE CONTACT ------------ */
+
+.form-contact h3 {
+  font-size: var(--h1);
+  text-transform: uppercase;
+  text-align: center;
+}
+.contact {
+  max-width: 600px;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 90%;
+  max-width: 400px;
+  justify-self: center;
+  margin-top: 40px;
+  padding: 50px 20px;
+  background: #E6E4E4;
+  border-radius: 16px;
+  justify-content: center;
+}
+
+.form-group input, .form-group textarea, select {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: var(--p);
+  background: var(--white);
+  color: var(--grey-police);
+  border: 1px solid var(--grey-police);
+  font-family: var(--mainText);
+}
+
+.form-group textarea {
+  min-height: 120px;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: var(--shadow);
+}
+
+label {
+  font-size: var(--small);
+  font-weight: 500;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary)
+}
+
+.form-group label:last-child{
+  font-size: 0.9rem;
+  text-transform: none;
+  vertical-align: bottom;
+}
+
+.form-group.checkbox {
+  display: inline-flex;
+  align-items: top;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+}
+
+input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--green);
+  flex-shrink: 0;
+}
+
+input[type="checkbox"] + label {
+  white-space: nowrap;
+  font-size: var(--p);
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0;
+  align-items: center;
+}
+
+.form-group input[type="checkbox"] {
+  width: auto;
+  min-width: auto;
+  max-width: 20px;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: var(--black);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 16px;
+  font-size: var(--p);
+  font-weight: bold;
+  cursor: pointer;
+  width: 80%;
+  transition: transform 0.3s ease;
+  margin: 20px;
+  text-transform: uppercase;
+}
+
+.btn-primary:hover {
+  transform: translateY(-5px);
+}
+
+p {
+  font-size: var(--p);
+  padding: 20x;
+  margin: 0 20px;
+
+  a{
+    text-decoration: none;
+    color: blue;
+    font-size: var(--p);
+  }
+
+  a:hover{
+    color: #d32f2f;
+  }
+}
+
+.error {
+  display: block;
+  color: #d32f2f;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  min-height: 1rem;
+}
+
+.input-invalid {
+  border-color: #d32f2f !important;
+  box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
+}

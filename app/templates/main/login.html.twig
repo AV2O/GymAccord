@@ -14,36 +14,48 @@
         <img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
         <h1>Se connecter</h1>
 
-        <form id="contact-form" novalidate>
+        {# 1. L'action doit pointer vers la route app_login et la méthode doit être POST #}
+<form id="contact-form" action="{{ path('app_login') }}" method="post" novalidate>
 
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="exemple@mail.fr"
-            />
-            <span class="error"></span>
-          </div>
+    {# 2. Affichage de l'erreur si les identifiants sont faux #}
+    {% if error %}
+        <div style="color: red; margin-bottom: 10px;">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
 
-          <div class="form-group">
-            <label for="password">mot de passe *</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              placeholder="************"
-            />
-            <span class="error"></span>
-          </div>
+    <div class="form-group">
+        <label for="username" class="is-required">Email</label>
+        <input
+            type="email"
+            id="username"
+            name="_username"
+            value="{{ last_username }}"
+            required
+            placeholder="exemple@mail.fr"
+        />
+        <span class="error">{% if error %} Identifiants invalides {% endif %}</span>
+    </div>
 
-          <button type="submit" class="btn-primary">s'inscrire</button>
+    <div class="form-group">
+        <label for="password" class="is-required">Mot de passe</label>
+        <input
+            type="password"
+            id="password"
+            name="_password"
+            required
+            placeholder="************"
+        />
+        <span class="error"></span>
+    </div>
 
-          <p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}"> Cliquez ici </a> pour vous inscrire !</p>
-        </form>
+    {# 3. LE JETON DE SÉCURITÉ (Indispensable pour que Symfony accepte le formulaire) #}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <button type="submit" class="btn-primary">Se connecter</button>
+
+    <p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}"> Cliquez ici </a> pour vous inscrire !</p>
+</form>
       </section>
     </main>
 {% endblock %}

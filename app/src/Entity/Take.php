@@ -24,6 +24,9 @@ class Take
     #[ORM\JoinColumn(nullable: false)]
     private ?Subscribes $subscribe = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $ends_at = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class Take
     public function setSubscribe(?Subscribes $subscribe): static
     {
         $this->subscribe = $subscribe;
+
+        return $this;
+    }
+
+    public function getEndsAt(): ?\DateTimeImmutable
+    {
+        return $this->ends_at;
+    }
+
+    public function setEndsAt(\DateTimeImmutable $ends_at): static
+    {
+        $this->ends_at = $ends_at;
 
         return $this;
     }
