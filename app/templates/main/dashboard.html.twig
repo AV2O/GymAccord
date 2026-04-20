@@ -1,14 +1,9 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	{# Garde le CSS global (app.css) #}
-	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
-{% endblock %}
-
-{# 3. On met le contenu spécifique de la page #}
 {% block content %}
-	<main class="dashboard">
+	<main
+		class="dashboard">
+		{# 1. SECTION PROFIL #}
 		<section class="portrait-container">
 			<div class="portrait">
 				<div>
@@ -24,70 +19,92 @@
 					<img src="{{ asset('images/avatar-default-green.svg') }}" class="profile-img-main default-avatar"/>
 				{% endif %}
 
-				{# Garde UNIQUEMENT celui-ci #}
-				<a href="#" class="edit-profile-btn">
+				<a href="#" class="edit-profile-btn" id="openModal">
 					<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier la photo">
 				</a>
 			</div>
-
-			{# SUPPRIME TOUT CE QUI ÉTAIT ICI (le portrait-wrapper) #}
 		</section>
 
+		{# 2. SECTION STATUTS (TEMPS + FORFAIT) #}
 		<article>
 			<div class="container-status">
 				<section class="status-day">
 					<img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt=""/>
 					<div>
-						<h2>{{ date().diff(app.user.createdAt).days }}</h2>
-						<p>jours</p>
-						<p>membre deupis</p>
+						<p>membre depuis</p>
+						<h2>{{ date().diff(app.user.createdAt).days }}
+							jours</h2>
 					</div>
 				</section>
 
 				<section class="status-forfait">
-					<div class="actif">
-						<h2>forfait premium</h2>
-						<p>actif</p>
-					</div>
+					<div class="card-forfait">
+						{% if activeSubscription %}
+							<div>
+								<h3>{{ activeSubscription.subscribe.nameSubscribe|upper }}</h3>
+								<p>ACTIF</p>
+							</div>
+							<p>Fin le :
+								{{ activeSubscription.endsAt|date('d/m/Y') }}</p>
 
-					<div class="modif">
-						<a href="#"><img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="modifier"/></a>
-						<a href="#"><img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="supprimer"/></a>
+							<div class="crud-actions">
+								<a href="{{ path('app_tarifs') }}" title="Modifier mon forfait">
+									<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier">
+								</a>
+
+								<a href="{{ path('app_subscribe_cancel') }}" class="delete-subscription-btn" title="Supprimer mon forfait">
+									<img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="Supprimer">
+								</a>
+							</div>
+						{% else %}
+							<h3>AUCUN FORFAIT</h3>
+							<p>INACTIF</p>
+							<a href="{{ path('app_tarifs') }}" class="btn-link">Choisir un forfait</a>
+						{% endif %}
 					</div>
 				</section>
 			</div>
 		</article>
 
+		{# 3. SECTION SÉANCES #}
 		<section class="next-sessions">
-
 			<div class="session-header">
 				<h2>Mes prochaines séances</h2>
-				<a href="#" class="view-all">Voir tout</a>
 			</div>
 
 			<div class="session-list">
-				<article class="session-card">
-					<div class="session-img">
-						<img src="{{ asset('images/photo/banc-muscu.jpg') }}" alt="Crossfit">
+				{% if app.user.reservations|length > 0 %}
+					{# On boucle sur les réservations de l'utilisateur #}
+					{% for reservation in app.user.reservations %}
+						<article class="session-card">
+							<div class="session-img">
+								<img src="{{ asset('image/' ~ reservation.workshop.image) }}" alt="{{ reservation.workshop.nameClass }}">
+							</div>
+							<div class="session-info">
+								<p class="session-date">{{ reservation.workshop.dayClass }}
+									•
+									{{ reservation.workshop.startTime|date('H:i') }}</p>
+								<h3>{{ reservation.workshop.nameClass }}</h3>
+							</div>
+							{# BOUTON ANNULER #}
+							<a
+								href="{{ path('app_reservation_delete', {'id': reservation.id}) }}" class="btn-cancel-session">
+								{# C'est cette classe que le JS surveille #}
+								ANNULER
+							</a>
+						</article>
+					{% endfor %}
+				{% else %}
+					{# Si aucune réservation n'est trouvée #}
+					<div class="no-session">
+						<p>Vous n'avez pas encore de séance prévue.</p>
+						<a href="{{ path('app_reservation') }}" class="btn-link">Réserver une séance</a>
 					</div>
-					<div class="session-info">
-						<p class="session-date">Demain • 18:30</p>
-						<h3>Power Crossfit</h3>
-					</div>
-				</article>
-
-				<article class="session-card">
-					<div class="session-img">
-						<img src="{{ asset('images/photo/tapis-course.jpg') }}" alt="Yoga">
-					</div>
-					<div class="session-info">
-						<p class="session-date">Mercredi • 07:00</p>
-						<h3>Vinyasa Flow</h3>
-					</div>
-				</article>
+				{% endif %}
 			</div>
 		</section>
 
+		{# 4. SECTION PROMO #}
 		<section class="promo-banner">
 			<h2 class="promo-title">Vibrance & Puissance</h2>
 
@@ -103,7 +120,7 @@
 		</section>
 	</main>
 
-
+	{# 5. MODAL POUR LA PHOTO #}
 	<div id="photoModal" class="modal">
 		<div class="modal-content">
 			<span class="close-modal">&times;</span>
@@ -117,7 +134,7 @@
 				<button type="button" class="btn-gym btn-gym-outline btn-cancel">ANNULER</button>
 
 				{% if app.user.profilePicture %}
-					<a href="{{ path('app_profile_delete_photo') }}" class="btn-delete" onclick="return confirm('Supprimer ta photo de profil ?')">
+					<a href="{{ path('app_profile_delete_photo') }}" class="btn-delete" ">
 						Supprimer la photo actuelle
 					</a>
 				{% endif %}

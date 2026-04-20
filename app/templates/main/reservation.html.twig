@@ -1,64 +1,57 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	{# Garde le CSS global (app.css) #}
-	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
-{% endblock %}
-
-{# 3. On met le contenu spécifique de la page #}
 {% block content %}
-	<main
-		class="formulaire">
-		<!-- FORMULAIRE CONTACT -->
+	<main class="formulaire">
 		<section class="form-contact">
 			<img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
-			<h1>Reserver un workshop</h1>
+			<h1>Réserver un workshop</h1>
 
-			<form id="contact-form" novalidate>
+			<form
+				id="contact-form" action="{{ path('app_reservation_submit') }}" method="POST">
+				{# 1. SELECT CATÉGORIE #}
 				<div>
 					<label for="categorie">Catégorie</label>
-
-					<select name="categorie" id="categorie">
-						<option value="" disabled selected hidden>
-							Choisir une catégorie...
-						</option>
-						<option value="souplesse">Souplesse et remise en forme</option>
-						<option value="muscle">Renforcement musculaire</option>
-						<option value="training">Cross-Training</option>
+					<select id="categorie" name="categorie" class="form-control">
+						<option value="" selected disabled>Choisir une catégorie...</option>
+						{% for type in types %}
+							<option value="{{ type.id }}">{{ type.name }}</option>
+						{% endfor %}
 					</select>
 				</div>
 
+				{# 2. SELECT DISCIPLINE (Cours) #}
 				<div>
 					<label for="choix-sport">Cours</label>
-
-					<select name="choix-sport" id="choix-sport">
-						<option value="" disabled selected hidden>
-							Choisir une discipline...
-						</option>
-						<option value="pilates">Pilâtes</option>
-						<option value="yoga">Yoga</option>
-						<option value="stretching">Stretching</option>
-						<option value="crossfit">Crossfit</option>
+					<select id="choix-sport" name="nom_cours" disabled>
+						<option value="">Choisir une discipline...</option>
 					</select>
 				</div>
 
+				{# 3. SELECT DATE ET HEURE #}
 				<div>
-					<label for="cours">Cours</label>
-
-					<select name="cours" id="cours">
-						<option value="" disabled selected hidden>Date et heure</option>
-						<option value="pilates">1</option>
-						<option value="yoga">2</option>
-						<option value="stretching">3</option>
-						<option value="crossfit">4</option>
+					<label for="cours">Date et heure</label>
+					<select id="cours" name="workshop_id" disabled>
+						<option value="">Date et heure</option>
 					</select>
 				</div>
 
-				<button type="submit" class="btn-primary"><a href="{{ path('app_reservation') }}">S'inscrire</a></button>
-
-				<p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}"> Cliquez ici</a> pour vous inscrire !</p>
+				<button type="submit" class="btn-primary" id="submit-btn" disabled>S'inscrire</button>
 			</form>
 		</section>
 	</main>
+
+	{# PASSAGE DES DONNÉES AU JS #}
+	<script>
+    // On prépare les données proprement en PHP avant de les envoyer
+    const allWorkshops = [
+        {% for workshop in workshops %}
+            {
+                "id": {{ workshop.id }},
+                "typeId": {{ workshop.workshopType.id }},
+                "name": {{ workshop.nameClass|json_encode|raw }},
+                "label": "{% if workshop.dayClass == 'Sur RDV' %}Sur RDV{% else %}{{ workshop.dayClass }} à {{ workshop.startTime|date('H:i') }}{% endif %} ({{ workshop.maxCapacity - workshop.reservations|length }} places)"
+            },
+        {% endfor %}
+    ];
+</script>
 {% endblock %}

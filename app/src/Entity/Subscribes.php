@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SubscribesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SubscribesRepository::class)]
@@ -36,10 +37,19 @@ class Subscribes
     #[ORM\ManyToMany(targetEntity: WorkshopsType::class)]
     private Collection $workshops_type;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'subscribe', orphanRemoval: true)]    private Collection $users;
+
     public function __construct()
     {
         $this->takes = new ArrayCollection();
         $this->workshops_type = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,6 +143,48 @@ class Subscribes
     public function removeWorkshopsType(WorkshopsType $workshopsType): static
     {
         $this->workshops_type->removeElement($workshopsType);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setSubscribe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getSubscribe() === $this) {
+                $user->setSubscribe(null);
+            }
+        }
 
         return $this;
     }

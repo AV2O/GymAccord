@@ -1,11 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('styles/layout.css') }}">
-{% endblock %}
-
 {% block body %}
+
 	<header>
 		<div class="logo">
 			<a href="{{ path('app_main') }}">Gym Accord</a>
@@ -46,7 +42,7 @@
 					</li>
 
 					<li>
-						<a href="{{ path('app_tarifs') }}">tarifs
+						<a href="{{ path('app_tarifs') }}">abonnements
 							<img src="{{ asset('images/money-bag-svgrepo-com.svg') }}" alt="sac d'argent"/>
 						</a>
 					</li>
@@ -70,7 +66,7 @@
 				<div class="nav-footer">
 					{% if app.user %}
 						<a href="{{ path('app_logout') }}" class="btn-connect btn-logout">
-							SE DÉCONNECTER
+							DÉCONNEXION
 							<img src="{{ asset('images/logout-white(1).svg') }}" alt="logout" class="icon-logout"/>
 						</a>
 					{% else %}
@@ -102,8 +98,7 @@
 			<img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="mail"/>
 		</div>
 
-		<div
-			class="link">
+		<div class="link">
 			<a href="{{ path('app_main') }}">Mentions légales</a>
 			<a href="{{ path('app_main') }}">Confidentialité</a>
 			<a href="#">Contact</a>
@@ -111,8 +106,31 @@
 
 		<p>&copy; GymAccord &mdash; Tous droits réservés &mdash; AV2O</p>
 	</footer>
-{% endblock %}
 
-{% block javascripts %}
-	<script src="{{ asset('js/scripts.js') }}" defer></script>
+
+	<div id="confirmModal" class="modal">
+		<div class="modal-content">
+			<h2>CONFIRMATION</h2>
+			<p id="modalText">Voulez-vous vraiment résilier votre forfait ?</p>
+			<div class="modal-actions">
+				<a id="confirmBtn" href="#" class="btn-gym">OUI</a>
+				<button type="button" class="btn-gym btn-gym-outline close-confirm">ANNULER</button>
+			</div>
+		</div>
+	</div>
+
+
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div id="flashModal" class="modal">
+				<div class="modal-content border-{{ label }}">
+					<span class="close-modal">&times;</span>
+					<p>{{ message }}</p>
+					<button class="btn-primary btn-gym">OK</button>
+				</div>
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+
 {% endblock %}

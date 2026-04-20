@@ -1,10 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }} {# <--- INDISPENSABLE pour garder app.css #}
-    <link rel="stylesheet" href="{{ asset('assets/styles/app.css') }}">
-{% endblock %}
-
 {% block content %}
     
     <main class="app">

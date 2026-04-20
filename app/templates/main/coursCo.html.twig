@@ -1,17 +1,9 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	{# Garde le CSS global (app.css) #}
-{% endblock %}
-
-{# 3. On met le contenu spécifique de la page #}
 {% block content %}
 	<main class="coursCo">
 		<h1>
-			Cours
-			<br/>
-			Collectifs
+			Cours Collectifs
 		</h1>
 
 		<!-- SOUPLESSE ET REMISE EN FORME -->
@@ -22,6 +14,7 @@
 				<details class="workshop-item" name="souplesse">
 					<summary>sport santé</summary>
 					<div class="content-card">
+						<img class="workshop-img" src="{{ asset('images/photo/sportSante.png') }}" alt="image de sport santé"/>
 						<p>
 							Le Sport Santé regroupe toutes les activités physiques adaptées
 							                pour contribuer au bien-être du pratiquant. Il agit sur les
@@ -29,7 +22,6 @@
 							                par tous, y compris les personnes avec des besoins spécifiques
 							                liés à leur état de santé.
 						</p>
-						<img class="workshop-img" src="" alt=""/>
 						<div class="info-bar">
 							<img src="" alt=""/>
 							<p></p>

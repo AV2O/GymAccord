@@ -22,8 +22,8 @@ class Workshops
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description_class = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $day_class = null;
+    #[ORM\Column(length: 20)]
+    private ?string $day_class = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTime $start_time = null;
@@ -47,6 +47,12 @@ class Workshops
      */
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'workshop', orphanRemoval: true)]
     private Collection $reservations;
+
+    #[ORM\Column]
+    private ?int $max_capacity = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -84,15 +90,14 @@ class Workshops
         return $this;
     }
 
-    public function getDayClass(): ?\DateTime
+    public function getDayClass(): ?string
     {
         return $this->day_class;
     }
 
-    public function setDayClass(\DateTime $day_class): static
+    public function setDayClass(string $day_class): static 
     {
         $this->day_class = $day_class;
-
         return $this;
     }
 
@@ -182,6 +187,30 @@ class Workshops
                 $reservation->setWorkshop(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMaxCapacity(): ?int
+    {
+        return $this->max_capacity;
+    }
+
+    public function setMaxCapacity(int $max_capacity): static
+    {
+        $this->max_capacity = $max_capacity;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

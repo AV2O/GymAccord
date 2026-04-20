@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Users;
+use App\Entity\Take;
 use App\Form\RegistrationType;
 use App\Form\UserProfileType;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,25 +42,28 @@ final class MainController extends AbstractController
         return $this->render('main/calendar.html.twig');
     }
 
-    #[Route('/tarifs', name: 'app_tarifs')]
-    public function tarifs(): Response
-    {
-        return $this->render('main/tarifs.html.twig');
-    }
-
     #[Route('/dashboard', name: 'app_dashboard')]
     #[IsGranted('ROLE_USER')]
-    public function dashboard(): Response
+    public function dashboard(EntityManagerInterface $em): Response
     {
+        $user = $this->getUser();
 
-        $form = $this->createForm(UserProfileType::class, $this->getUser(), [
-            // On définit l'action vers la route du ProfileController !
+        // On cherche dans la table 'Take'
+        // Attention : ton entité Take utilise 'user' (sans s) pour lier à Users
+        $activeSubscription = $em->getRepository(Take::class)->findOneBy([
+            'user' => $user,     // Vérifie bien dans Take.php si c'est 'user' ou 'users'
+            'is_active' => true   // Et si c'est 'isActive' ou 'is_active'
+        ]);
+
+        $form = $this->createForm(UserProfileType::class, $user, [
             'action' => $this->generateUrl('app_profile_update_photo'),
             'method' => 'POST',
         ]);
 
         return $this->render('main/dashboard.html.twig', [
-            'form' => $form->createView(), 
+            'form' => $form->createView(),
+            'user' => $user,
+            'activeSubscription' => $activeSubscription,
         ]);
     }
 
@@ -133,7 +137,7 @@ final class MainController extends AbstractController
 
             // On redirige vers l'accueil avec un petit message de succès
             $this->addFlash('success', 'Inscription réussie ! Bienvenue chez Gym Accord !');
-            return $this->redirectToRoute('app_main');
+            return $this->redirectToRoute('app_login');
         }
 
         // 6. On envoie la VUE du formulaire au fichier Twig
@@ -142,9 +146,4 @@ final class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation', name: 'app_reservation')]
-    public function reservation(): Response
-    {
-        return $this->render('main/reservation.html.twig');
-    }
 }
