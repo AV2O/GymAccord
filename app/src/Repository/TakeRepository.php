@@ -6,9 +6,6 @@ use App\Entity\Take;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Take>
- */
 class TakeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +13,19 @@ class TakeRepository extends ServiceEntityRepository
         parent::__construct($registry, Take::class);
     }
 
-    //    /**
-    //     * @return Take[] Returns an array of Take objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Take
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Récupère l'abonnement actif avec les détails du forfait joint
+     */
+    public function findActiveSubscriptionFull($user): ?Take
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.subscribe', 's') // Jointure avec l'entité Subscribe
+            ->addSelect('s')               // On sélectionne les données de Subscribe
+            ->where('t.user = :user')
+            ->andWhere('t.is_active = :active')
+            ->setParameter('user', $user)
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

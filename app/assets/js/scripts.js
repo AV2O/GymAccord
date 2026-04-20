@@ -94,8 +94,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if(boutonSubmit) boutonSubmit.disabled = true;
 
             // "allWorkshops" doit être défini dans ton Twig via JSON
-            const workshopsFiltrésParType = allWorkshops.filter(w => w.typeId == typeIdChoisi);
-            const nomsUniques = [...new Set(workshopsFiltrésParType.map(w => w.name))];
+            const workshopsFiltresParType = allWorkshops.filter(w => w.typeId == typeIdChoisi);
+            const nomsUniques = [...new Set(workshopsFiltresParType.map(w => w.name))];
 
             nomsUniques.forEach((nom) => {
                 const option = document.createElement("option");
@@ -114,8 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
             selectDate.innerHTML = '<option value="" selected disabled>Date et heure</option>';
             if(boutonSubmit) boutonSubmit.disabled = true;
 
-            const créneauxDisponibles = allWorkshops.filter(w => w.name == nomSportChoisi);
-            créneauxDisponibles.forEach((w) => {
+            const creneauxDisponibles = allWorkshops.filter(w => w.name == nomSportChoisi);
+            creneauxDisponibles.forEach((w) => {
                 const option = document.createElement("option");
                 option.value = w.id;
                 option.textContent = w.label;

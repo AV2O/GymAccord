@@ -1,145 +1,153 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-	<main
-		class="dashboard">
-		{# 1. SECTION PROFIL #}
-		<section class="portrait-container">
-			<div class="portrait">
-				<div>
-					<h1>Bonjour
-						{{ app.user.firstName }}
-						!</h1>
-					<p>Prêt pour l'impact ?</p>
-				</div>
+    <main class="dashboard">
+        
+        {# 1. SECTION PROFIL #}
+        <section class="portrait-container">
+            <div class="portrait">
+                <div>
+                    <h1>Bonjour {{ app.user.firstName }} !</h1>
+                    <p>Prêt pour l'impact ?</p>
+                </div>
 
-				{% if app.user.profilePicture %}
-					<img src="{{ asset('uploads/profiles/' ~ app.user.profilePicture) }}" class="profile-img-main"/>
-				{% else %}
-					<img src="{{ asset('images/avatar-default-green.svg') }}" class="profile-img-main default-avatar"/>
-				{% endif %}
+                {% if app.user.profilePicture %}
+                    <img src="{{ asset('uploads/profiles/' ~ app.user.profilePicture) }}" class="profile-img-main" alt="Photo de profil"/>
+                {% else %}
+                    <img src="{{ asset('images/avatar-default-green.svg') }}" class="profile-img-main default-avatar" alt="Avatar par défaut"/>
+                {% endif %}
 
-				<a href="#" class="edit-profile-btn" id="openModal">
-					<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier la photo">
-				</a>
-			</div>
-		</section>
+                {# Ton JS surveille cette classe pour ouvrir la modal photo #}
+                <a href="#" class="edit-profile-btn" id="openModal">
+                    <img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier la photo">
+                </a>
+            </div>
+        </section>
 
-		{# 2. SECTION STATUTS (TEMPS + FORFAIT) #}
-		<article>
-			<div class="container-status">
-				<section class="status-day">
-					<img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt=""/>
-					<div>
-						<p>membre depuis</p>
-						<h2>{{ date().diff(app.user.createdAt).days }}
-							jours</h2>
-					</div>
-				</section>
+        {# 2. SECTION STATUTS (TEMPS + FORFAIT) #}
+        <article>
+            <div class="container-status">
+                <section class="status-day">
+                    <img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt="Calendrier"/>
+                    <div>
+                        <p>membre depuis</p>
+                        {# Variable préparée dans le DashboardController #}
+                        <h2>{{ membershipDays }} jours</h2>
+                    </div>
+                </section>
 
-				<section class="status-forfait">
-					<div class="card-forfait">
-						{% if activeSubscription %}
-							<div>
-								<h3>{{ activeSubscription.subscribe.nameSubscribe|upper }}</h3>
-								<p>ACTIF</p>
-							</div>
-							<p>Fin le :
-								{{ activeSubscription.endsAt|date('d/m/Y') }}</p>
+                <section class="status-forfait">
+                    <div class="card-forfait">
+                        {% if activeSubscription %}
+                            <div>
+                                <h3>{{ activeSubscription.subscribe.nameSubscribe|upper }}</h3>
+                                <p>ACTIF</p>
+                            </div>
+                            <p>Fin le : {{ activeSubscription.endsAt|date('d/m/Y') }}</p>
 
-							<div class="crud-actions">
-								<a href="{{ path('app_tarifs') }}" title="Modifier mon forfait">
-									<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier">
-								</a>
+                            <div class="crud-actions">
+                                <a href="{{ path('app_tarifs') }}" title="Modifier mon forfait">
+                                    <img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier">
+                                </a>
+                                {# Ton JS surveille cette classe pour la modal de confirmation #}
+                                <a href="{{ path('app_subscribe_cancel') }}" class="delete-subscription-btn" title="Supprimer mon forfait">
+                                    <img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="Supprimer">
+                                </a>
+                            </div>
+                        {% else %}
+                            <h3>AUCUN FORFAIT</h3>
+                            <p>INACTIF</p>
+                            <a href="{{ path('app_tarifs') }}" class="btn-link">Choisir un forfait</a>
+                        {% endif %}
+                    </div>
+                </section>
+            </div>
+        </article>
 
-								<a href="{{ path('app_subscribe_cancel') }}" class="delete-subscription-btn" title="Supprimer mon forfait">
-									<img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="Supprimer">
-								</a>
-							</div>
-						{% else %}
-							<h3>AUCUN FORFAIT</h3>
-							<p>INACTIF</p>
-							<a href="{{ path('app_tarifs') }}" class="btn-link">Choisir un forfait</a>
-						{% endif %}
-					</div>
-				</section>
-			</div>
-		</article>
+        {# 3. SECTION SÉANCES #}
+        <section class="next-sessions">
+            <div class="session-header">
+                <h2>Mes prochaines séances</h2>
+            </div>
 
-		{# 3. SECTION SÉANCES #}
-		<section class="next-sessions">
-			<div class="session-header">
-				<h2>Mes prochaines séances</h2>
-			</div>
+            <div class="session-list">
+                {% if userReservations|length > 0 %}
+                    {% for reservation in userReservations %}
+                        <article class="session-card">
+                            <div class="session-img">
+                                {# Ajout du slash / pour le chemin des images #}
+                                <img src="{{ asset('images/photo/' ~ reservation.workshop.image) }}" alt="{{ reservation.workshop.nameClass }}">
+                            </div>
+                            <div class="session-info">
+                                <p class="session-date">
+                                    {{ reservation.workshop.dayClass }} • {{ reservation.workshop.startTime|date('H:i') }}
+                                </p>
+                                <h3>{{ reservation.workshop.nameClass }}</h3>
+                            </div>
+                            {# Ton JS surveille cette classe pour la modal de confirmation #}
+                            <a href="{{ path('app_reservation_delete', {'id': reservation.id}) }}" class="btn-cancel-session">
+                                ANNULER
+                            </a>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-session">
+                        <p>Vous n'avez pas encore de séance prévue.</p>
+                        <a href="{{ path('app_reservation') }}" class="btn-link">Réserver une séance</a>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
 
-			<div class="session-list">
-				{% if app.user.reservations|length > 0 %}
-					{# On boucle sur les réservations de l'utilisateur #}
-					{% for reservation in app.user.reservations %}
-						<article class="session-card">
-							<div class="session-img">
-								<img src="{{ asset('image/' ~ reservation.workshop.image) }}" alt="{{ reservation.workshop.nameClass }}">
-							</div>
-							<div class="session-info">
-								<p class="session-date">{{ reservation.workshop.dayClass }}
-									•
-									{{ reservation.workshop.startTime|date('H:i') }}</p>
-								<h3>{{ reservation.workshop.nameClass }}</h3>
-							</div>
-							{# BOUTON ANNULER #}
-							<a
-								href="{{ path('app_reservation_delete', {'id': reservation.id}) }}" class="btn-cancel-session">
-								{# C'est cette classe que le JS surveille #}
-								ANNULER
-							</a>
-						</article>
-					{% endfor %}
-				{% else %}
-					{# Si aucune réservation n'est trouvée #}
-					<div class="no-session">
-						<p>Vous n'avez pas encore de séance prévue.</p>
-						<a href="{{ path('app_reservation') }}" class="btn-link">Réserver une séance</a>
-					</div>
-				{% endif %}
-			</div>
-		</section>
+		<a href="{{ path('app_reservation') }}" class="btn-primary-large">Réserver une séance</a>
 
-		{# 4. SECTION PROMO #}
-		<section class="promo-banner">
-			<h2 class="promo-title">Vibrance & Puissance</h2>
+        {# 4. SECTION PROMO #}
+        <section class="promo-banner">
+            <h2 class="promo-title">Vibrance & Puissance</h2>
+            <div class="hero-card">
+                <div class="hero-content">
+                    <h2>Dépasse tes <span>limites</span>.</h2>
+                    <p>Le succès n'est pas une destination, c'est une discipline. Rejoins la meute.</p>
+                </div>
+            </div>
+            
+        </section>
+    </main>
 
-			<div class="hero-card">
-				<div class="hero-content">
-					<h2>Dépasse tes
-						<span>limites</span>.</h2>
-					<p>Le succès n'est pas une destination, c'est une discipline. Rejoins la meute.</p>
-				</div>
-			</div>
+    {# 5. MODAL POUR LA PHOTO (Surveillée par ton fichier JS externe) #}
+    <div id="photoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Modifier ma photo</h2>
 
-			<a href="{{ path('app_reservation') }}" class="btn-primary-large">Réserver une séance</a>
-		</section>
-	</main>
+            {{ form_start(form) }}
+                {{ form_widget(form.profilePicture) }}
 
-	{# 5. MODAL POUR LA PHOTO #}
-	<div id="photoModal" class="modal">
-		<div class="modal-content">
-			<span class="close-modal">&times;</span>
-			<h2>Modifier ma photo</h2>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-gym">ENREGISTRER</button>
+                    <button type="button" class="btn-gym btn-gym-outline btn-cancel">ANNULER</button>
 
-			{{ form_start(form, {'action': path('app_profile_update_photo'), 'method': 'POST'}) }}
-			{{ form_widget(form.profilePicture) }}
+                    {% if app.user.profilePicture %}
+                        <a href="{{ path('app_profile_delete_photo') }}" class="btn-delete">
+                            Supprimer la photo actuelle
+                        </a>
+                    {% endif %}
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
 
-			<div class="modal-actions">
-				<button type="submit" class="btn-gym">ENREGISTRER</button>
-				<button type="button" class="btn-gym btn-gym-outline btn-cancel">ANNULER</button>
+    {# 6. MODAL DE CONFIRMATION (Gérée par ton JS pour annuler/résilier) #}
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal close-confirm">&times;</span>
+            <h2>Confirmation</h2>
+            <p id="modalText">Voulez-vous vraiment effectuer cette action ?</p>
+            <div class="modal-actions">
+                <a href="#" id="confirmBtn" class="btn-gym">CONFIRMER</a>
+                <button type="button" class="btn-gym btn-gym-outline close-confirm">ANNULER</button>
+            </div>
+        </div>
+    </div>
 
-				{% if app.user.profilePicture %}
-					<a href="{{ path('app_profile_delete_photo') }}" class="btn-delete" ">
-						Supprimer la photo actuelle
-					</a>
-				{% endif %}
-			</div>
-			{{ form_end(form) }}
-		</div>
-	</div>
 {% endblock %}

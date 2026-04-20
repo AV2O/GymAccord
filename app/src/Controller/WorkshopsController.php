@@ -21,13 +21,16 @@ class WorkshopsController extends AbstractController
     #[Route('/reservation', name: 'app_reservation')]
     public function index(WorkshopsRepository $workshopsRepo, WorkshopsTypeRepository $typesRepo): Response
     {
-        // On récupère TOUTES les catégories triées par ID
+        // 1. On récupère les catégories triées
         $types = $typesRepo->findBy([], ['id' => 'ASC']);
-        $workshops = $workshopsRepo->findAll();
+
+        // 2. On récupère les données formatées par le Repository
+        $workshopsArray = $workshopsRepo->findAllForJs();
 
         return $this->render('main/reservation.html.twig', [
-            'workshops' => $workshops,
             'types' => $types,
+            // On transforme le tableau en JSON ici même
+            'workshopsJson' => json_encode($workshopsArray),
         ]);
     }
 

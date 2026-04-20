@@ -15,9 +15,9 @@ class AppFixtures extends Fixture
     {
         // --- 1. LES ABONNEMENTS (Seule table avec createdAt) ---
         $abos = [
-            ['titre' => 'ABONNEMENT BASIC', 'prix' => 19.90, 'desc' => 'ACCÈS ILLIMITÉ - Accès 7j/7 de 6h à 23h'],
-            ['titre' => 'ABONNEMENT PREMIUM', 'prix' => 39.90, 'desc' => 'COURS COLLECTIFS - Accès 7j/7;Bilan de forme personnalisé;Accès aux cours collectifs'],
-            ['titre' => 'ABONNEMENT GOLD', 'prix' => 59.90, 'desc' => 'COACHING INCLUS - Accès 7j/7;Bilan de forme personnalisé;Accès aux cours collectifs;1 séance avec un coach par mois'],
+            ['titre' => 'ABONNEMENT BASIC', 'prix' => 19.90, 'desc' => 'SALLE - Accès 7j/7 de 6h à 23h'],
+            ['titre' => 'ABONNEMENT PREMIUM', 'prix' => 39.90, 'desc' => 'SALLE - Accès 7j/7 de 6h à 23h;COURS COLLECTIFS - Accès 6j/7;'],
+            ['titre' => 'ABONNEMENT GOLD', 'prix' => 59.90, 'desc' => 'SALLE - Accès 7j/7 de 6h à 23h;COURS COLLECTIFS - Accès 6j/7;COACHING INCLUS - séances avec un coach'],
         ];
 
         foreach ($abos as $data) {

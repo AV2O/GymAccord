@@ -42,16 +42,10 @@
 
 	{# PASSAGE DES DONNÉES AU JS #}
 	<script>
-    // On prépare les données proprement en PHP avant de les envoyer
-    const allWorkshops = [
-        {% for workshop in workshops %}
-            {
-                "id": {{ workshop.id }},
-                "typeId": {{ workshop.workshopType.id }},
-                "name": {{ workshop.nameClass|json_encode|raw }},
-                "label": "{% if workshop.dayClass == 'Sur RDV' %}Sur RDV{% else %}{{ workshop.dayClass }} à {{ workshop.startTime|date('H:i') }}{% endif %} ({{ workshop.maxCapacity - workshop.reservations|length }} places)"
-            },
-        {% endfor %}
-    ];
+    // On récupère le JSON brut. 
+    // Le filtre |raw est vital pour éviter que Twig ne transforme les guillemets.
+    const allWorkshops = {{ workshopsJson|raw }};
+    
+    console.log("Données chargées avec succès :", allWorkshops);
 </script>
 {% endblock %}

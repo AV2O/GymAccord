@@ -43,7 +43,8 @@ class Subscribes
     /**
      * @var Collection<int, User>
      */
-    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'subscribe', orphanRemoval: true)]    private Collection $users;
+    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'subscribe', orphanRemoval: true)]    
+    private Collection $users;
 
     public function __construct()
     {
