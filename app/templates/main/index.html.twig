@@ -1,155 +1,195 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    
-    <main class="app">
-      <section class="hero-banner">
-        <div class="hero-text">
-          <h1>La force dans l'accord</h1>
-          <p>
-            L'excellence physique rencontre 
-            la 
-            précision technique.
-          </p>
-        </div>
-      </section>
 
-      <!-- BIO -->
-      <section class="bio">
-        <h2>Gym Accord</h2>
-        <p>
-          Notre philosophie repose sur l'harmonie entre le corps et l'esprit.
-        </p>
-        <p>
-          Dans notre espace de 500m², nous combinons les techniques de
-          musculation traditionnelles avec les dernières innovations en matière
-          de biomécanique.
-        </p>
-        <p>
-          Chaque athlète bénéficie d'un accompagnement sur mesure pour atteindre
-          des objectifs de haut niveau.
-        </p>
-        <button class="btn-link" type="button"><a href="{{ path('app_a-propos') }}">voir plus ...</a></button>
+	<main class="app">
+		<section class="hero-banner">
+			<div class="hero-text">
+				<h1>La force dans l'accord</h1>
+				<p>
+					L'excellence physique rencontre la précision technique.
+				</p>
+			</div>
+		</section>
 
-        <!-- GALERIE -->
-        <article class="galery-img">
-          <div class="galery">
-            <figure class="photo-cv">
-              <img
-                src="{{ asset('images/photo/bancs-muscu.jpg') }}"
-                alt=""
-                loading="lazy"
-              />
-              <figcaption>Voici l'espace bancs de musculation</figcaption>
-            </figure>
-            <figure class="photo-cv">
-              <img
-                src="{{ asset('images/photo/tapis-course.jpg') }}"
-                alt=""
-                loading="lazy"
-              />
-              <figcaption>Espace cardio - Tapis de course</figcaption>
-            </figure>
-            <figure class="photo-cv">
-              <img
-                src="{{ asset('images/photo/velo.jpg') }}"
-                alt=""
-                loading="lazy"
-              />
-              <figcaption>Espace cardio - Vélo</figcaption>
-            </figure>
-          </div>
-        </article>
-      </section>
+		<!-- BIO -->
+		<section class="bio">
+			<h2>Gym Accord</h2>
+			<p>
+				Notre philosophie repose sur l'harmonie entre le corps et l'esprit.
+			</p>
+			<p>
+				Dans notre espace de 500m², nous combinons les techniques de musculation traditionnelles avec les dernières innovations en matière de biomécanique.
+			</p>
+			<p>
+				Chaque athlète bénéficie d'un accompagnement sur mesure pour atteindre des objectifs de haut niveau.
+			</p>
+
+			<a class="btn-green" href="{{ path('app_a-propos') }}">voir plus ...</a>
+			
+
+			<!-- GALERIE -->
+			<article class="galery-img">
+				<div class="galery">
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/abdosFlash.png') }}" alt="abdos flash" loading="lazy"/>
+						<figcaption>Nos séances Abdos</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/BBE.png') }}" alt="BBE" loading="lazy"/>
+						<figcaption>Nos séances BBE</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/bodyPump.png') }}" alt="body pump" loading="lazy"/>
+						<figcaption>Nos séances Body Pump</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/boxing.png') }}" alt="boxing" loading="lazy"/>
+						<figcaption>Nos séances Boxing</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/CAF.png') }}" alt="CAF" loading="lazy"/>
+						<figcaption>Nos séances CAF</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/cadioFlash.png') }}" alt="cardio flash" loading="lazy"/>
+						<figcaption>Nos séances Cardio Flash</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/crossTraining.png') }}" alt="cross - training" loading="lazy"/>
+						<figcaption>Nos séances Cross - Training</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/pilates.png') }}" alt="pilâtes" loading="lazy"/>
+						<figcaption>Nos séances abdos de Pilâtes</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/sportSante.png') }}" alt="sport santé" loading="lazy"/>
+						<figcaption>Nos séances Sport Santé</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/step.png') }}" alt="step" loading="lazy"/>
+						<figcaption>Nos séances se Step</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/stretching.png') }}" alt="stretching" loading="lazy"/>
+						<figcaption>Nos séances Stretching</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/training.png') }}" alt="training" loading="lazy"/>
+						<figcaption>Nos séances Training</figcaption>
+					</figure>
+					<figure class="photo-cv">
+						<img src="{{ asset('images/photo/yoga.png') }}" alt="yoga" loading="lazy"/>
+						<figcaption>Nos séances Yogas</figcaption>
+					</figure>
+				</div>
+			</article>
+		</section>
 
 
-      <!-- HORAIRES -->
-      <section class="time">
-        <h3 class="studio-title">
-          <div class="text-group">
-            Horaire du
-            <span
-              >studio 
-              Gym</span
-            >
-          </div>
-        </h3>
-        <p>
-          Notre studio s'adapte à votre rythme. Des sessions matinales
-          explosives aux entraînements nocturnes, la discipline n'a pas d'heure.
-        </p>
-        <div class="card">
-          <p>Ouverture 7/7J</p>
-          <p>Accès à la salle 24/24h</p>
-          <p>Cours de 6h30 / 22h30</p>
-        </div>
-        <button class="btn-link" type="button"><a href="{{ path('app_coursCo') }}">PROGRAMME</a></button>
-      </section>
+		<!-- HORAIRES -->
+		<section class="time">
+			<h3 class="studio-title">
+				<div class="text-group">
+					Horaire du
+					<span>studio Gym</span>
+				</div>
+			</h3>
+			<p>
+				Notre studio s'adapte à votre rythme. Des sessions matinales explosives aux entraînements nocturnes, la discipline n'a pas d'heure.
+			</p>
+			<div class="card">
+				<p>Ouverture 7/7J</p>
+				<p>Accès à la salle 24/24h</p>
+				<p>Cours de 6h30 / 22h30</p>
+			</div>
+			<a class="btn-green" href="{{ path('app_coursCo') }}">PROGRAMME</a>
+		</section>
 
-      <!-- COMMENTAIRE -->
-      <section class="commentary">
-        <div>
-          <h3 class="commentary-title">
-            c'est vous
-            QUI EN PARLEZ LE MIEUX...
-          </h3>
-        </div>
-        <div><p>futur commentaires</p></div>
-        <button class="commentary-button btn-link" type="button"><a href="#">voir plus ...</a></button>
+		<!-- COMMENTAIRE -->
+		<section class="commentary" id="commentaires">
+			<div>
+				<h3 class="commentary-title">
+					C'EST VOUS QUI EN PARLEZ LE MIEUX...
+				</h3>
+			</div>
 
-        
-      <!-- FORMULAIRE CONTACT -->
-      <section class="form-contact">
-        <div class="container-form">
-          <h3>N'hésitez pas à nous contacter</h3>
-        <p>
-          Des questions sur nos programmes ? 
-          Ecrivez-nous directement.
-        </p>
-        <form id="contact-form" novalidate>
+			<div class="commentary-list">
+				{% for comment in comments %}
+					<div class="commentary-item">
+						<h3 class="commentary-author">{{ comment.authorName }}</h3>
+						<p class="commentary-text">{{ comment.contenu }}</p>
+						<div class="commentary-info">
+							<p class="commentary-author">{{ comment.authorName }}</p>
+							<p class="commentary-date">{{ comment.createdAt|date('d/m/Y') }}</p>
+						</div>
+					</div>
+				{% else %}
+					<p class="no-comment">Soyez le premier à donner votre avis !</p>
+				{% endfor %}
+			</div>
+			<article class="commentary-form-container">
+				<h3>Laissez votre commentaire ...</h3>
+				{% if app.user %}
+					<form action="{{ path('app_comment_add') }}" method="POST" class="form-group">
+						<textarea name="contenu" id="contenu" placeholder="Votre message ... (max 150 caractères)" maxlength="150" required></textarea>
+						<button type="submit" class="btn-primary">Publier mon avis</button>
+					</form>
+				{% else %}
+					<p class="login-msg">
+						<a href="{{ path('app_login') }}">Connectez-vous</a>
+						pour laisser un commentaire.
+					</p>
+				{% endif %}
+			</article>
 
-          <div class="form-group">
-            <label for="nom">Nom *</label>
-            <input type="text" id="nom" name="nom" required placeholder="Nom" />
-            <span class="error"></span>
-          </div>
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="Email"
-            />
-            <span class="error"></span>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea
-              id="message"
-              name="message"
-              required
-              placeholder="Message"
-            ></textarea>
-            <span class="error"></span>
-          </div>
-          <div class="form-group checkbox">
-            <input
-              type="checkbox"
-              id="consentement"
-              name="consentement"
-              required
-            />
-            <span class="error"></span>
-            <label for="consentement"
-              >J'accepte le traitement de mes données (RGPD) *</label
-            >
-          </div>
-          <button type="submit" class="btn-primary">Envoyer</button>
-        </form>
-        </div>
-      </section>
-    </main>
+			{# <div class="commentary-footer">
+					<a href="#" class="btn-green">VOIR PLUS...</a>
+			</div> #}
+		</section>
+
+
+		<!-- FORMULAIRE CONTACT -->
+		<section id="contact" class="form-contact">
+			<div class="container-form">
+				<h3>N'hésitez pas à nous contacter</h3>
+				<p>
+					Des questions sur nos programmes ? Ecrivez-nous directement.
+				</p>
+				<form id="contact-form" action="{{ path('app_contact_send') }}" method="POST" novalidate>
+
+					<div class="form-group">
+						<label for="nom">Prenom</label>
+						<input type="text" id="nom" name="nom" placeholder="Nom">
+						<span class="error-message" id="error-nom"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="email">Email *</label>
+						<input type="email" id="email" name="email" placeholder="Email">
+						<span class="error-message" id="error-email"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="message">Message *</label>
+						<textarea id="message" name="message" placeholder="Message"></textarea>
+						<span class="error-message" id="error-message"></span>
+					</div>
+
+					<p class="obligatoire-txt">Tous les champs suivis d'une * sont obligatoires</p>
+
+					<div class="checkbox-container">
+						<div class="form-checkbox-group">
+							<input type="checkbox" id="consentement" name="consentement">
+							<label for="consentement">J'accepte la politique de confidentialité. *</label>
+						</div>
+						<span class="error-message" id="error-consentement"></span>
+					</div>
+
+					<button type="submit" class="btn-primary">Envoyer</button>
+				</form>
+			</div>
+		</section>
+	</main>
 {% endblock %}

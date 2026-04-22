@@ -29,11 +29,11 @@
 					</div>
 
 					{% if app.user %}
-						<a href="{{ path('app_subscribe_confirm', {'id': abo.id}) }}" class="btn-link">
+						<a href="{{ path('app_subscribe_confirm', {'id': abo.id}) }}" class="btn-green">
 							Choisir
 						</a>
 					{% else %}
-						<a href="{{ path('app_login') }}" class="btn-link">
+						<a href="{{ path('app_login') }}" class="btn-green">
 							Se connecter
 						</a>
 					{% endif %}

@@ -35,17 +35,16 @@
 					</select>
 				</div>
 
-				<button type="submit" class="btn-primary" id="submit-btn" disabled>S'inscrire</button>
+				<button type="submit" class="btn-primary" id="submit-btn" disabled>M'inscrire</button>
 			</form>
 		</section>
 	</main>
 
 	{# PASSAGE DES DONNÉES AU JS #}
 	<script>
-    // On récupère le JSON brut. 
-    // Le filtre |raw est vital pour éviter que Twig ne transforme les guillemets.
-    const allWorkshops = {{ workshopsJson|raw }};
-    
-    console.log("Données chargées avec succès :", allWorkshops);
-</script>
+		// On transforme le tableau PHP en objet JavaScript proprement
+const allWorkshops = {{ workshopsArray|json_encode|raw }};
+
+console.log("Données chargées avec succès :", allWorkshops);
+	</script>
 {% endblock %}

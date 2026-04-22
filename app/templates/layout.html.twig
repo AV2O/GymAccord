@@ -95,13 +95,15 @@
 			<a href="#">
 				<img src="{{ asset('images/twitter-svgrepo-com.svg') }}" alt="Twitter"/>
 			</a>
-			<img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="mail"/>
+			<a href="{{ path('app_main') }}#contact">
+				<img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="Contactez-nous">
+			</a>
 		</div>
 
 		<div class="link">
 			<a href="{{ path('app_main') }}">Mentions légales</a>
 			<a href="{{ path('app_main') }}">Confidentialité</a>
-			<a href="#">Contact</a>
+			<a href="{{ path('app_main') }}#contact">Contact</a>
 		</div>
 
 		<p>&copy; GymAccord &mdash; Tous droits réservés &mdash; AV2O</p>
@@ -126,11 +128,27 @@
 				<div class="modal-content border-{{ label }}">
 					<span class="close-modal">&times;</span>
 					<p>{{ message }}</p>
-					<button class="btn-primary btn-gym">OK</button>
+					<button class="btn-primary btn-gym btn-cancel">OK</button>
 				</div>
 			</div>
 		{% endfor %}
 	{% endfor %}
+
+	{# MODALE DE CONNEXION REQUISE (CENTRALISÉE) #}
+	<div id="loginRequiredModal" class="modal">
+		<div class="modal-content">
+			<span class="close-modal">&times;</span>
+			<h2>Action requise</h2>
+			<p>Vous devez être connecté pour accéder à la réservation.</p>
+			<div class="modal-actions">
+				<a href="{{ path('app_login') }}" class="btn-gym">SE CONNECTER</a>
+				<button type="button" class="btn-gym btn-gym-outline btn-cancel">ANNULER</button>
+			</div>
+		</div>
+	</div>
+
+	{# Tes scripts JS #}
+	<script src="{{ asset('js/script.js') }}"></script>
 
 
 {% endblock %}

@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 62%;
+}
+
+/*  ======== RACINE ======== */
+
+:root {
+    /* main color */
+    --black: #0e0e0e;
+    --white: #f9f9f9;
+    --green: #dfff00;
+    --grey-police: #9ea8a8;
+
+    /* police */
+    --mainText: "Epilogue", sans-serif;
+
+    /* épaisseur */
+    --gras5: 500;
+    --gras: 400;
+    --fin: 300;
+    --bold: bold;
+
+    --h1: clamp(4.5rem, 10vw, 8rem);
+    --h2: clamp(3.2rem, 6vw, 5rem);
+    --h3: clamp(2.4rem, 4vw, 3.2rem);
+    --h4: clamp(1.8rem, 3vw, 2.2rem);
+    --p: clamp(1.4rem, 2vw, 1.6rem);
+    --small: clamp(1.2rem, 1.5vw, 1.4rem);
+}
+
+.btn-green {
+    /* Indispensable pour que les liens <a> acceptent les marges et la largeur */
+    display: table;
+
+    /* Couleurs */
+    background: linear-gradient(to right, #576500 0%, #dfff00 100%);
+    color: var(--black);
+
+    /* Structure */
+    padding: 12px 25px;
+    font-size: var(--p);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 200px;
+
+    /* Bordures et coins */
+    border: none;
+    border-radius: 8px;
+
+    /* Interaction */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+
+    /* Position */
+    margin: 20px auto;
+}
+
+/* Effet au survol (Hover) */
+.btn-green:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Effet au clic */
+.btn-green:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--black);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}

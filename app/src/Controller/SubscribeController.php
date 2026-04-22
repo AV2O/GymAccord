@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
 use App\Entity\Take;
 use App\Repository\SubscribesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,28 +22,46 @@ class SubscribeController extends AbstractController
     }
 
     #[Route('/tarifs/confirm/{id}', name: 'app_subscribe_confirm')]
+    #[IsGranted('ROLE_USER')]
     public function confirm(int $id, SubscribesRepository $repo, EntityManagerInterface $em): Response
     {
+        /** @var \App\Entity\Users $user */ 
         $user = $this->getUser();
         $abo = $repo->find($id);
 
         if ($user && $abo) {
-            // 1. DEJÀ un forfait actif pour cet utilisateur ?
+            // 1. Désactivation de l'ancien forfait
             $oldSubscriptions = $em->getRepository(Take::class)->findBy([
                 'user' => $user,
                 'is_active' => true
             ]);
 
-            // 2. On les désactive (ou on les supprime) avant de mettre le nouveau
             foreach ($oldSubscriptions as $oldSub) {
-                // Option A : suppression
                 $em->remove($oldSub);
-
-                // Option B : desactive
-                // $oldSub->setIsActive(false);
             }
 
-            // 3. NOUVEAU forfait creer
+            // 2. Nettoyage des réservations
+            $reservations = $user->getReservations();
+            
+            // CORRECTION ICI : On utilise getNameSubscribe() au lieu de getName()
+            $nomNouveauForfait = $abo->getNameSubscribe(); 
+
+            foreach ($reservations as $res) {
+                $workshop = $res->getWorkshop();
+                // Vérifie aussi ici si c'est getName() ou getNameType() par exemple
+                $typeWorkshop = $workshop->getWorkshopType()->getName(); 
+
+                if ($nomNouveauForfait === 'Basic') {
+                    $em->remove($res);
+                } 
+                elseif ($nomNouveauForfait === 'Premium') {
+                    if ($typeWorkshop === 'Séance Perso') {
+                        $em->remove($res);
+                    }
+                }
+            }
+
+            // 3. Nouveau forfait (Take)
             $take = new Take();
             $take->setUser($user);
             $take->setSubscribe($abo);
@@ -50,8 +69,6 @@ class SubscribeController extends AbstractController
             $take->setEndsAt(new \DateTimeImmutable('+1 year'));
 
             $em->persist($take);
-
-            // enregistre tout en une seule fois
             $em->flush();
 
             $this->addFlash('success', 'Votre forfait a été mis à jour !');
@@ -59,6 +76,8 @@ class SubscribeController extends AbstractController
 
         return $this->redirectToRoute('app_dashboard');
     }
+
+
 
     #[Route('/tarifs/cancel', name: 'app_subscribe_cancel')]
     public function cancel(EntityManagerInterface $em): Response

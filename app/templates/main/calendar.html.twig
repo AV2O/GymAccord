@@ -1,105 +1,81 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	{# Garde le CSS global (app.css) #}
-	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
-{% endblock %}
-
-{# 3. On met le contenu spécifique de la page #}
 {% block content %}
 	<main class="calendar">
 		<section class="hero-calendar">
 			<h1>calendrier
 				<span>plannification</span>
 			</h1>
-			<p>
-				Optimisez votre performance avec notre programme hebdomadaire haute
-				          intensité.
-			</p>
+			<p>Optimisez votre performance avec notre programme hebdomadaire haute intensité.</p>
 		</section>
 
-		<!-- jours de la semaine -->
 		<section class="planning">
 			<h2>Planning 2026</h2>
-			<div class="container-day">
-				<div class="day">
-					<a href="#">lun</a>
-				</div>
-				<div class="day">
-					<a href="#">mar</a>
-				</div>
-				<div class="day">
-					<a href="#">mer</a>
-				</div>
-				<div class="day">
-					<a href="#">jeu</a>
-				</div>
-				<div class="day">
-					<a href="#">ven</a>
-				</div>
-				<div class="day">
-					<a href="#">sam</a>
-				</div>
-				<div class="day">
-					<a href="#">dim</a>
-				</div>
+			<div
+				class="container-day">
+				{# On crée une liste des jours pour le filtrage JS #}
+				{% set jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %}
+				{% for jour in jours %}
+					<div
+						class="day">
+						{# On utilise data-day pour que le JS puisse filtrer #}
+						<a href="#" class="filter-day" data-day="{{ jour }}">
+							{{ jour|slice(0, 3)|lower }}
+						</a>
+					</div>
+				{% endfor %}
 			</div>
 		</section>
 
-		<!-- leçons -->
-		<div class="container-lesson">
-			<article class="content" data-id="1" data-categorie="dessert" data-temps="moyen" data-difficulte="facile">
-				<div>
-					<p class="timing">08:30</p>
-				</div>
-				<div class="lesson">
-					<img src=" {{ asset('images/photo/velo.jpg') }}"  alt=""/>
-					<button class="favori-btn" aria-label="">disponible</button>
-					<h2>yoga dynamique</h2>
-					<p>Coach: Sarah J. • 60 min • Intensité ++</p>
-					<button class="btn-link">
-						<a href="{{ path('app_login') }}" title="page reservation">reserver</a>
-					</button>
-				</div>
-			</article>
+		<div
+			class="container-lesson" id="lesson-container">
 
-			<article class="content" data-id="1" data-categorie="dessert" data-temps="moyen" data-difficulte="facile">
-				<div>
-					<p class="timing">18:00</p>
-				</div>
-				<div class="lesson">
-					<img src="{{ asset('images/photo/velo.jpg') }}" alt=""/>
-					<buton class="favori-btn" aria-label="">
-						disponible
-					</buton>
-					<h2>hit explosion</h2>
-					<p>Coach: Marc K. • 45 min • Intensité +++</p>
-					<button class="btn-link">
-						<a href="{{ path('app_login') }}" title="page reservation">reserver</a>
-					</button>
-				</div>
-			</article>
+			{# --- BLOC MESSAGE VIDE (Caché par défaut, géré par le JS) --- #}
+			<div id="empty-day-message" class="empty-day-container">
+				<p id="dynamic-empty-text"></p>
+			</div>
 
-			<article class="content" data-id="1" data-categorie="dessert" data-temps="moyen" data-difficulte="facile">
-				<div>
-					<p class="timing">19:30</p>
-				</div>
-				<div class="lesson">
-					<img src="{{ asset('images/photo/velo.jpg') }}" alt=""/>
-					<button class="favori-btn" aria-label="">disponible</button>
-					<h2>body pump</h2>
-					<p>Coach: David L. • 55 min • Intensité ++</p>
-					<button class="btn-link">
-						<a href="{{ path('app_login') }}" title="page reservation">reserver</a>
-					</button>
-				</div>
-			</article>
+			{% for workshop in workshops %}
+				{# Calcul des places restantes basé sur ton entité #}
+				{% set placesRestantes = workshop.maxCapacity - workshop.reservations|length %}
+
+				<article class="content workshop-card" data-day="{{ workshop.dayClass }}">
+					<div>
+						<p class="timing">{{ workshop.startTime|date('H:i') }}</p>
+					</div>
+					<div class="lesson">
+						<img src="{{ asset('images/photo/' ~ workshop.image) }}" alt="{{ workshop.nameClass }}">
+
+						<button class="favori-btn {{ placesRestantes <= 0 ? 'is-full' : '' }}">
+							{{ placesRestantes > 0 ? placesRestantes ~ ' places dispo' : 'COMPLET' }}
+						</button>
+
+						<h2>{{ workshop.nameClass }}</h2>
+
+						<p>
+							Coach:
+							{{ workshop.coach.firstName }}
+							• Intensité
+							{{ workshop.status }}
+						</p>
+
+						<div class="btn-container-center">
+							{% if placesRestantes > 0 %}
+								{% if app.user %}
+									<a href="{{ path('app_reservation') }}" class="btn-green">RESERVER</a>
+								{% else %}
+									<a href="#" class="btn-green triggerLoginModal">RESERVER</a>
+								{% endif %}
+							{% else %}
+								<span class="btn-disabled">COMPLET</span>
+							{% endif %}
+						</div>
+					</div>
+				</article>
+			{% else %}
+				{# Ce message ne s'affiche QUE si la base de données est totalement vide #}
+				<p>Aucun cours n'est enregistré pour le moment.</p>
+			{% endfor %}
 		</div>
-
-		<button class="btn-link end" type="button">
-			<a href="{{ path('app_login') }}">reserver</a>
-		</button>
 	</main>
-
 {% endblock %}

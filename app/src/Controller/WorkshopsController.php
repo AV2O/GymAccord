@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity; // Pour que l'IDE reconnaisse Users
 namespace App\Controller;
 
+use App\Entity\Take;
 use App\Entity\Reservation;
-use App\Entity\Users;
+use App\Repository\SubscribesRepository;
 use App\Repository\WorkshopsRepository;
 use App\Repository\WorkshopsTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,34 +12,47 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class WorkshopsController extends AbstractController
 {
-    /**
-     * Affiche la liste des séances et les types (utilisé par ton JS de filtrage)
-     */
     #[Route('/reservation', name: 'app_reservation')]
+    #[IsGranted('ROLE_USER')]
     public function index(WorkshopsRepository $workshopsRepo, WorkshopsTypeRepository $typesRepo): Response
     {
-        // 1. On récupère les catégories triées
         $types = $typesRepo->findBy([], ['id' => 'ASC']);
+        $workshops = $workshopsRepo->findAllOptimized();
 
-        // 2. On récupère les données formatées par le Repository
-        $workshopsArray = $workshopsRepo->findAllForJs();
+        $workshopsArray = [];
+        foreach ($workshops as $workshop) {
+            $dateText = ($workshop->getDayClass() === 'Sur RDV')
+                ? 'Sur RDV'
+                : $workshop->getDayClass() . ' à ' . $workshop->getStartTime()->format('H:i');
+
+            $placesRestantes = $workshop->getMaxCapacity() - count($workshop->getReservations());
+
+            $workshopsArray[] = [
+                'id' => $workshop->getId(),
+                'typeId' => $workshop->getWorkshopType()->getId(),
+                'name' => $workshop->getNameClass(),
+                'label' => $dateText . " (" . $placesRestantes . " places)"
+            ];
+        }
 
         return $this->render('main/reservation.html.twig', [
             'types' => $types,
-            // On transforme le tableau en JSON ici même
-            'workshopsJson' => json_encode($workshopsArray),
+            'workshopsArray' => $workshopsArray,
         ]);
     }
 
     #[Route('/reservation/submit', name: 'app_reservation_submit', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function reserveSubmit(Request $request, WorkshopsRepository $repo, EntityManagerInterface $em): Response
     {
         $workshopId = $request->request->get('workshop_id');
         $workshop = $repo->find($workshopId);
-        /** @var Users $user */
+        
+        /** @var \App\Entity\Users $user */
         $user = $this->getUser();
 
         if (!$user || !$workshop) {
@@ -47,7 +60,6 @@ class WorkshopsController extends AbstractController
             return $this->redirectToRoute('app_reservation');
         }
 
-        // 1. RÉCUPÉRATION DE L'ABONNEMENT ACTIF
         $activeSubscribe = null;
         foreach ($user->getTakes() as $take) {
             if ($take->isActive()) {
@@ -61,30 +73,17 @@ class WorkshopsController extends AbstractController
             return $this->redirectToRoute('app_reservation');
         }
 
-        $nomAbo = strtoupper($activeSubscribe->getNameSubscribe()); 
-        // D'après ton image, le type ID 16 s'appelle "Séance perso"
+        $nomAbo = strtoupper($activeSubscribe->getNameSubscribe());
         $nomTypeCours = strtoupper($workshop->getWorkshopType()->getName());
 
-        // 2. BLOCAGE FORFAIT BASIC
         if (str_contains($nomAbo, 'BASIC')) {
-            $this->addFlash('danger', 'Désolé, l\'abonnement BASIC ne permet pas de réserver des séances.');
+            $this->addFlash('danger', 'L\'abonnement BASIC ne permet pas de réserver.');
             return $this->redirectToRoute('app_reservation');
         }
 
-        // 3. SÉCURITÉ GOLD POUR LES "SÉANCE PERSO" (ID 16)
-        if (str_contains($nomTypeCours, 'PERSO') || $workshop->getWorkshopType()->getId() === 16) {
-            if (!str_contains($nomAbo, 'GOLD')) {
-                $this->addFlash('danger', 'Les coachings personnels sont réservés exclusivement aux membres GOLD.');
-                return $this->redirectToRoute('app_reservation');
-            }
-        }
-
-        // 4. VÉRIFICATION DOUBLON
-        foreach ($workshop->getReservations() as $res) {
-            if ($res->getUser() === $user) {
-                $this->addFlash('warning', 'Vous êtes déjà inscrit à ce cours.');
-                return $this->redirectToRoute('app_reservation');
-            }
+        if (str_contains($nomTypeCours, 'PERSO') && !str_contains($nomAbo, 'GOLD')) {
+            $this->addFlash('danger', 'Les coachings personnels sont réservés aux membres GOLD.');
+            return $this->redirectToRoute('app_reservation');
         }
 
         $reservation = new Reservation();
@@ -93,25 +92,64 @@ class WorkshopsController extends AbstractController
         $em->persist($reservation);
         $em->flush();
 
-        $this->addFlash('success', 'Félicitations ! Ta place est réservée.');
+        $this->addFlash('success', 'Ta place est réservée !');
         return $this->redirectToRoute('app_dashboard');
     }
 
     /**
-     * Annulation d'une réservation (Accepte GET et POST pour éviter l'erreur de route)
+     * C'EST CETTE ROUTE QUE TON DASHBOARD CHERCHE
      */
     #[Route('/reservation/annuler/{id}', name: 'app_reservation_delete', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Reservation $reservation, EntityManagerInterface $entityManager): Response
     {
-        // Sécurité : on vérifie que la réservation appartient bien à l'utilisateur connecté
         if ($reservation->getUser() !== $this->getUser()) {
-            throw $this->createAccessDeniedException("Ce n'est pas votre réservation !");
+            throw $this->createAccessDeniedException("Action non autorisée.");
         }
 
         $entityManager->remove($reservation);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Séance annulée avec succès.');
+        $this->addFlash('success', 'Séance annulée.');
+        return $this->redirectToRoute('app_dashboard');
+    }
+
+    #[Route('/tarifs/confirm/{id}', name: 'app_subscribe_confirm')]
+    #[IsGranted('ROLE_USER')]
+    public function confirm(int $id, SubscribesRepository $repo, EntityManagerInterface $em): Response
+    {
+        /** @var \App\Entity\Users $user */ 
+        $user = $this->getUser();
+        $abo = $repo->find($id);
+
+        if ($user && $abo) {
+            $oldTakes = $em->getRepository(Take::class)->findBy(['user' => $user, 'is_active' => true]);
+            foreach ($oldTakes as $old) { $em->remove($old); }
+
+            $nomNouveauForfait = strtoupper($abo->getNameSubscribe());
+
+            foreach ($user->getReservations() as $res) {
+                $typeWorkshop = strtoupper($res->getWorkshop()->getWorkshopType()->getName());
+
+                if (str_contains($nomNouveauForfait, 'BASIC')) {
+                    $em->remove($res);
+                } elseif (str_contains($nomNouveauForfait, 'PREMIUM') && str_contains($typeWorkshop, 'PERSO')) {
+                    $em->remove($res);
+                }
+            }
+
+            $take = new Take();
+            $take->setUser($user);
+            $take->setSubscribe($abo);
+            $take->setIsActive(true);
+            $take->setEndsAt(new \DateTimeImmutable('+1 year'));
+
+            $em->persist($take);
+            $em->flush();
+
+            $this->addFlash('success', 'Forfait mis à jour !');
+        }
+
         return $this->redirectToRoute('app_dashboard');
     }
 }
