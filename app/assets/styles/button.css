@@ -84,6 +84,7 @@
     width: fit-content;
     align-self: center;
     transition: transform 0.3s ease;
+    text-decoration: none;
 }
 
 .btn-primary:hover {

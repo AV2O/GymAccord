@@ -62,7 +62,7 @@
 						{% else %}
 							<h3>AUCUN FORFAIT</h3>
 							<p>INACTIF</p>
-							<a href="{{ path('app_tarifs') }}" class="btn-link">Choisir un forfait</a>
+							<a href="{{ path('app_tarifs') }}" class="btn-primary">Choisir un forfait</a>
 						{% endif %}
 					</div>
 				</section>
@@ -101,13 +101,12 @@
 				{% else %}
 					<div class="no-session">
 						<p>Vous n'avez pas encore de séance prévue.</p>
-						<a href="{{ path('app_reservation') }}" class="btn-link">Réserver une séance</a>
 					</div>
 				{% endif %}
 			</div>
 		</section>
 
-		<a href="{{ path('app_reservation') }}" class="btn-primary-large">Réserver une séance</a>
+		<a href="{{ path('app_reservation') }}" class="btn-green">Réserver une séance</a>
 
 		{# 4. SECTION PROMO #}
 		<section class="promo-banner">
