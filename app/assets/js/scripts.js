@@ -21,7 +21,6 @@ function initMenuBurger() {
 
 // --- 3. INITIALISATION GÉNÉRALE ---
 document.addEventListener("DOMContentLoaded", function () {
-    
     // Lancement du menu burger
     initMenuBurger();
 
@@ -35,7 +34,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- GESTION DES CLICS DÉLÉGUÉS (Modales et Suppressions) ---
     document.addEventListener("click", function (e) {
-        const btnCancel = e.target.closest(".btn-cancel-session, .delete-subscription-btn");
+        const btnReserveLogin = e.target.closest("#triggerLoginModal");
+        if (btnReserveLogin && loginRequiredModal) {
+            e.preventDefault();
+            loginRequiredModal.style.display = "block";
+        }
+
+        const btnCancel = e.target.closest(
+            ".btn-cancel-session, .delete-subscription-btn",
+        );
         if (btnCancel) {
             e.preventDefault();
             const url = btnCancel.getAttribute("href");
@@ -43,35 +50,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (modalText) {
                 if (btnCancel.classList.contains("btn-cancel-session")) {
-                    modalText.textContent = "Voulez-vous vraiment annuler votre réservation ?";
+                    modalText.textContent =
+                        "Voulez-vous vraiment annuler votre réservation ?";
                 } else {
-                    modalText.textContent = "Voulez-vous vraiment résilier votre forfait ?";
+                    modalText.textContent =
+                        "Voulez-vous vraiment résilier votre forfait ?";
                 }
             }
             if (confirmModal) confirmModal.style.display = "block";
         }
-
-        const btnReserveLogin = e.target.closest("#triggerLoginModal");
-        if (btnReserveLogin && loginRequiredModal) {
-            e.preventDefault();
-            loginRequiredModal.style.display = "block";
-        }
     });
 
     // --- FERMETURE DE TOUTES LES MODALES ---
-    const closeSelectors = ".close-modal, .btn-cancel, .close-flash-modal, .close-confirm, .btn-gym-outline";
+    const closeSelectors =
+        ".close-modal, .btn-cancel, .close-flash-modal, .close-confirm, .btn-gym-outline";
     document.querySelectorAll(closeSelectors).forEach((btn) => {
         btn.onclick = function () {
-            [photoModal, flashModal, confirmModal, loginRequiredModal].forEach((m) => {
-                if (m) m.style.display = "none";
-            });
+            [photoModal, flashModal, confirmModal, loginRequiredModal].forEach(
+                (m) => {
+                    if (m) m.style.display = "none";
+                },
+            );
         };
     });
 
     window.onclick = function (event) {
-        [photoModal, flashModal, confirmModal, loginRequiredModal].forEach((m) => {
-            if (event.target == m) m.style.display = "none";
-        });
+        [photoModal, flashModal, confirmModal, loginRequiredModal].forEach(
+            (m) => {
+                if (event.target == m) m.style.display = "none";
+            },
+        );
     };
 
     // --- FILTRAGE DYNAMIQUE DU CALENDRIER ---
@@ -84,7 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
         dayFilters.forEach((filter) => {
             filter.addEventListener("click", function (e) {
                 e.preventDefault();
-                dayFilters.forEach((f) => f.parentElement.classList.remove("active"));
+                dayFilters.forEach((f) =>
+                    f.parentElement.classList.remove("active"),
+                );
                 this.parentElement.classList.add("active");
 
                 const selectedDay = this.getAttribute("data-day");
@@ -101,9 +111,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (!hasWorkshops) {
                     if (emptyText) {
-                        emptyText.textContent = (selectedDay === "Dimanche") 
-                            ? "C'est le repos du guerrier pour nos profs, mais la salle reste à votre disposition !"
-                            : "Aucun cours prévu pour ce jour-là.";
+                        emptyText.textContent =
+                            selectedDay === "Dimanche"
+                                ? "C'est le repos du guerrier pour nos profs, mais la salle reste à votre disposition !"
+                                : "Aucun cours prévu pour ce jour-là.";
                     }
                     if (emptyMessage) emptyMessage.style.display = "block";
                 } else {
@@ -123,12 +134,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (selectCategorie && typeof allWorkshops !== "undefined") {
         selectCategorie.addEventListener("change", function () {
             const typeIdChoisi = this.value;
-            selectSport.innerHTML = '<option value="" selected disabled>Choisir une discipline...</option>';
-            selectDate.innerHTML = '<option value="" selected disabled>Date et heure</option>';
+            selectSport.innerHTML =
+                '<option value="" selected disabled>Choisir une discipline...</option>';
+            selectDate.innerHTML =
+                '<option value="" selected disabled>Date et heure</option>';
             selectDate.disabled = true;
             if (boutonSubmit) boutonSubmit.disabled = true;
 
-            const filtered = allWorkshops.filter((w) => w.typeId == typeIdChoisi);
+            const filtered = allWorkshops.filter(
+                (w) => w.typeId == typeIdChoisi,
+            );
             const nomsUniques = [...new Set(filtered.map((w) => w.name))];
 
             nomsUniques.forEach((nom) => {
@@ -144,9 +159,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (selectSport && typeof allWorkshops !== "undefined") {
         selectSport.addEventListener("change", function () {
             const nomSportChoisi = this.value;
-            selectDate.innerHTML = '<option value="" selected disabled>Date et heure</option>';
+            selectDate.innerHTML =
+                '<option value="" selected disabled>Date et heure</option>';
 
-            const creneaux = allWorkshops.filter((w) => w.name == nomSportChoisi);
+            const creneaux = allWorkshops.filter(
+                (w) => w.name == nomSportChoisi,
+            );
             creneaux.forEach((w) => {
                 const opt = document.createElement("option");
                 opt.value = w.id;
@@ -164,37 +182,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // --- NOUVEAU : VALIDATION FORMULAIRE CONTACT ---
-    const contactForm = document.getElementById('contact-form');
+    const contactForm = document.getElementById("contact-form");
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener("submit", function (e) {
             let isValid = true;
-            
+
             // On récupère les champs et zones d'erreurs
-    
-            const email = document.getElementById('email');
-            const message = document.getElementById('message');
-            const consentement = document.getElementById('consentement');
+
+            const email = document.getElementById("email");
+            const message = document.getElementById("message");
+            const consentement = document.getElementById("consentement");
 
             // Reset des messages d'erreurs
-            document.querySelectorAll('.error-message').forEach(el => el.textContent = "");
-
+            document
+                .querySelectorAll(".error-message")
+                .forEach((el) => (el.textContent = ""));
 
             // Validation Email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (email && !emailRegex.test(email.value)) {
-                document.getElementById('error-email').textContent = "Veuillez entrer un email valide.";
+                document.getElementById("error-email").textContent =
+                    "Veuillez entrer un email valide.";
                 isValid = false;
             }
 
             // Validation Message
             if (message && message.value.trim().length < 10) {
-                document.getElementById('error-message').textContent = "Votre message doit faire au moins 10 caractères.";
+                document.getElementById("error-message").textContent =
+                    "Votre message doit faire au moins 10 caractères.";
                 isValid = false;
             }
 
             // Validation Consentement
             if (consentement && !consentement.checked) {
-                document.getElementById('error-consentement').textContent = "Vous devez accepter la politique de confidentialité.";
+                document.getElementById("error-consentement").textContent =
+                    "Vous devez accepter la politique de confidentialité.";
                 isValid = false;
             }
 
