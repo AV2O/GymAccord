@@ -619,7 +619,7 @@ footer div {
     }
 
     .form-contact p {
-        text-align: center;
+        text-align: start;
         margin-bottom: 1rem;
     }
 
@@ -659,9 +659,10 @@ footer div {
     }
 
     .obligatoire-txt {
-        font-size: 0.8rem;
+        font-size: var(--small);
         margin: 0;
         font-style: italic;
+        text-align: left;
     }
 
     /* ------------ LA CHECKBOX (Alignement Horizontal) ------------ */
@@ -2126,7 +2127,6 @@ input[type="file"] {
     label {
         font-size: var(--small);
         font-weight: 500;
-        text-transform: uppercase;
         display: block;
         margin-bottom: 0.5rem;
         color: var(--text-primary);
@@ -2155,8 +2155,6 @@ input[type="file"] {
     }
 
     input[type="checkbox"] + label {
-        white-space: nowrap;
-        font-size: var(--p);
         font-weight: 500;
         cursor: pointer;
         margin: 0;
@@ -2192,9 +2190,9 @@ input[type="file"] {
     }
 
     p {
-        font-size: var(--p);
+        font-size: var(--small);
         padding: 20x;
-        margin: 0 20px;
+        text-align: start;
 
         a {
             text-decoration: none;
@@ -2209,10 +2207,9 @@ input[type="file"] {
 
     .error {
         display: block;
-        color: #d32f2f;
-        font-size: 0.9rem;
+        color: var(--red);
+        font-size: 20px;
         margin-top: 0.5rem;
-        min-height: 1rem;
     }
 
     .input-invalid {

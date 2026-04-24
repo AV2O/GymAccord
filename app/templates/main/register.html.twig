@@ -1,100 +1,97 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	{# Garde le CSS global (app.css) #}
-	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
-{% endblock %}
-
-{# 3. On met le contenu spécifique de la page #}
 {% block content %}
-	<main
-		class="formulaire">
-		<!-- FORMULAIRE CONTACT -->
+	<main class="formulaire">
 		<section class="form-contact">
 			<img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
 			<h1>inscription</h1>
 
-			{{ form_start(registrationForm, {'attr': {'id': 'contact-form'}}
-			) }}
+			{{ form_start(registrationForm, {'attr': {'id': 'contact-form', 'novalidate': 'novalidate'}}) }}
+
+			{# --- NOM & PRENOM --- #}
 			<div class="form-group">
-				{{ form_label(registrationForm.last_name, 'Nom *') }}
+				{{ form_label(registrationForm.last_name, 'Nom', { 'label_attr': {'class': 'is-required'} }) }}
 				{{ form_widget(registrationForm.last_name, {'attr': {'placeholder': 'Nom'}}) }}
 				<span class="error">{{ form_errors(registrationForm.last_name) }}</span>
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.first_name, 'Prénom *') }}
+				{{ form_label(registrationForm.first_name, 'Prénom' , { 'label_attr': {'class': 'is-required'} }) }}
 				{{ form_widget(registrationForm.first_name, {'attr': {'placeholder': 'Prénom'}}) }}
 				<span class="error">{{ form_errors(registrationForm.first_name) }}</span>
 			</div>
 
+			{# --- INFOS COMPLEMENTAIRES --- #}
 			<div class="form-group">
-				{{ form_label(registrationForm.telephone, 'Téléphone *') }}
+				{{ form_label(registrationForm.telephone, 'Téléphone') }}
 				{{ form_widget(registrationForm.telephone, {'attr': {'placeholder': 'Téléphone'}}) }}
 				<span class="error">{{ form_errors(registrationForm.telephone) }}</span>
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.birthday, 'Date de naissance *') }}
+				{{ form_label(registrationForm.birthday, 'Date de naissance') }}
 				{{ form_widget(registrationForm.birthday) }}
 				<span class="error">{{ form_errors(registrationForm.birthday) }}</span>
 			</div>
 
+			{# --- ADRESSE --- #}
 			<div class="form-group">
-				{{ form_label(registrationForm.address, 'Adresse *') }}
+				{{ form_label(registrationForm.address, 'Adresse', { 'label_attr': {'class': 'is-required'} }) }}
 				{{ form_widget(registrationForm.address, {'attr': {'placeholder': '14 rue du capitole'}}) }}
 				<span class="error">{{ form_errors(registrationForm.address) }}</span>
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.city, 'Ville *') }}
+				{{ form_label(registrationForm.city, 'Ville', { 'label_attr': {'class': 'is-required'} }) }}
 				{{ form_widget(registrationForm.city, {'attr': {'placeholder': 'Lyon'}}) }}
 				<span class="error">{{ form_errors(registrationForm.city) }}</span>
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.zip_code, 'Code Postal *') }}
+				{{ form_label(registrationForm.zip_code, 'Code Postal', { 'label_attr': {'class': 'is-required'} }) }}
 				{{ form_widget(registrationForm.zip_code, {'attr': {'placeholder': '69000'}}) }}
 				<span class="error">{{ form_errors(registrationForm.zip_code) }}</span>
 			</div>
 
+			{# --- EMAIL --- #}
 			<div class="form-group">
-				{{ form_label(registrationForm.email, 'Email *') }}
-				{{ form_widget(registrationForm.email, {'attr': {'placeholder': 'exemple@mail.com'}}) }}
-				<span class="error">{{ form_errors(registrationForm.email) }}</span>
+				{{ form_label(registrationForm.email.first, 'Email', { 'label_attr': {'class': 'is-required'} }) }}
+				{{ form_widget(registrationForm.email.first, {'attr': {'class': 'form-control'}}) }}
+				<span class="error">{{ form_errors(registrationForm.email.first) }}</span>
 			</div>
 
 			<div class="form-group">
-				<label for="email2">confirmation Email *</label>
-				<input type="email" id="email2" name="email2" required placeholder="exemple@mail.fr"/>
-				<span class="error"></span>
+				{{ form_label(registrationForm.email.second, 'Confirmez votre Email', { 'label_attr': {'class': 'is-required'} }) }}
+				{{ form_widget(registrationForm.email.second, {'attr': {'class': 'form-control'}}) }}
+				<span class="error">{{ form_errors(registrationForm.email.second) }}</span>
+			</div>
+
+			{# --- MOT DE PASSE --- #}
+			<div class="form-group">
+				{{ form_label(registrationForm.plainPassword.first, 'Mot de passe', { 'label_attr': {'class': 'is-required'} }) }}
+				{{ form_widget(registrationForm.plainPassword.first, {'attr': {'placeholder': '********', 'class': 'form-control'}}) }}
+				<span class="error">{{ form_errors(registrationForm.plainPassword.first) }}</span>
 			</div>
 
 			<div class="form-group">
-				{{ form_label(registrationForm.password, 'Mot de passe *') }}
-				{{ form_widget(registrationForm.password, {'attr': {'placeholder': '********'}}) }}
-				<span class="error">{{ form_errors(registrationForm.password) }}</span>
-			</div>
-
-			<div class="form-group">
-				<label for="password2">comfirmation mot de passe *</label>
-				<input type="password" id="password2" name="password2" required placeholder="************"/>
-				<span class="error"></span>
+				{{ form_label(registrationForm.plainPassword.second, 'Confirmez le mot de passe', { 'label_attr': {'class': 'is-required'} }) }}
+				{{ form_widget(registrationForm.plainPassword.second, {'attr': {'placeholder': '********', 'class': 'form-control'}}) }}
+				<span class="error">{{ form_errors(registrationForm.plainPassword.second) }}</span>
 			</div>
 
 			<div class="form-group checkbox">
-				<input type="checkbox" id="consentement" name="consentement" required/>
-				<span class="error"></span>
-				<label for="consentement">
-					J'accepte que mes données soient collectées pour le traitement de mon inscription et la gestion de mon abonnement conformément à la politique de condidentialié. *</label>
+				{{ form_widget(registrationForm.agreeTerms) }}
+				{{ form_label(registrationForm.agreeTerms, "J'accepte que mes données soient collectées pour le traitement de mon inscription et la gestion de mon abonnement conformément à la politique de confidentialité. *") }}		
 			</div>
+			<span class="error">{{ form_errors(registrationForm.agreeTerms) }}</span>
+
 			<button type="submit" class="btn-primary">s'inscrire</button>
 
-			<p>Vous êtes déja incrit ?
-				<a href="{{ path('app_login') }}">Cliquez ici
-				</a>
-				pour vous connecter !</p>
+			<p>Vous êtes déjà inscrit ?
+				<a href="{{ path('app_login') }}">Cliquez ici</a>
+				pour vous connecter !
+			</p>
+
 
 			{{ form_end(registrationForm) }}
 		</section>

@@ -129,6 +129,8 @@
 					<p class="no-comment">Soyez le premier à donner votre avis !</p>
 				{% endfor %}
 			</div>
+
+			
 			<article class="commentary-form-container">
 				<h3>Laissez votre commentaire ...</h3>
 				{% if app.user %}
@@ -138,15 +140,12 @@
 					</form>
 				{% else %}
 					<p class="login-msg">
-						<a href="{{ path('app_login') }}">Connectez-vous</a>
+						<a class="btn-green" href="{{ path('app_login') }}">Connectez-vous</a>
 						pour laisser un commentaire.
 					</p>
 				{% endif %}
 			</article>
 
-			{# <div class="commentary-footer">
-					<a href="#" class="btn-green">VOIR PLUS...</a>
-			</div> #}
 		</section>
 
 
