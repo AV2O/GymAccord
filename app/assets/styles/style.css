@@ -2199,6 +2199,10 @@ input[type="file"] {
     }
 }
 
+.is-required::after {
+    content: " *";
+    color: var(--red)
+}
 
 .error {
     display: block;
