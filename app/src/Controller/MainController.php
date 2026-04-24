@@ -38,4 +38,10 @@ final class MainController extends AbstractController
     {
         return $this->render('main/a-propos.html.twig');
     }
+
+    #[Route('/mention-legal', name: 'app_mention-legal')]
+    public function mentionLegal(): Response
+    {
+        return $this->render('main/mention-legal.html.twig');
+    }
 }
