@@ -69,13 +69,13 @@
 			{# --- MOT DE PASSE --- #}
 			<div class="form-group">
 				{{ form_label(registrationForm.plainPassword.first, 'Mot de passe', { 'label_attr': {'class': 'is-required'} }) }}
-				{{ form_widget(registrationForm.plainPassword.first, {'attr': {'placeholder': '********', 'class': 'form-control'}}) }}
+				{{ form_widget(registrationForm.plainPassword.first, {'attr': {'placeholder': 'Entrez votre mot de passe', 'class': 'form-control'}}) }}
 				<span class="error">{{ form_errors(registrationForm.plainPassword.first) }}</span>
 			</div>
 
 			<div class="form-group">
 				{{ form_label(registrationForm.plainPassword.second, 'Confirmez le mot de passe', { 'label_attr': {'class': 'is-required'} }) }}
-				{{ form_widget(registrationForm.plainPassword.second, {'attr': {'placeholder': '********', 'class': 'form-control'}}) }}
+				{{ form_widget(registrationForm.plainPassword.second, {'attr': {'placeholder': 'Entrez votre mot de passe', 'class': 'form-control'}}) }}
 				<span class="error">{{ form_errors(registrationForm.plainPassword.second) }}</span>
 			</div>
 
