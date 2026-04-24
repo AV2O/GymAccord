@@ -1,0 +1,100 @@
+/* --- LE CONTENEUR PRINCIPAL --- */
+.galery-img {
+    width: 100vw; /* Utilise 100% de la largeur de l'écran */
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    overflow: hidden; /* CRITIQUE : Empêche l'apparition de barres de défilement blanches */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- LA BANDE QUI CONTIENT LES IMAGES --- */
+.galery {
+    position: relative;
+    width: 75vw;  /* On augmente un peu la taille pour réduire les espaces vides sur les côtés */
+    height: 50vh;
+    transform-style: preserve-3d;
+    touch-action: pan-y;
+}
+
+/* --- CHAQUE CARTE PHOTO (figure) --- */
+.photo-cv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    
+    /* Animation douce pour le changement d'état */
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, z-index 0.5s;
+    
+    /* Par défaut, toutes les images sont opaques à 100% et en focus (état de base) */
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    z-index: 10;
+    backface-visibility: hidden; /* Empêche de voir l'envers des images */
+}
+
+/* Le style des images à l'intérieur */
+.photo-cv img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Le style de la légende */
+.photo-cv figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* =========================================================================
+   L'astuce CSS pour positionner tes images comme sur ta maquette :
+   ========================================================================= */
+
+/* L'image centrale est TOUJOURS la dernière figure ajoutée dans le HTML par défaut.
+   (ou celle que tu décideras d'animer avec JS) */
+.photo-cv:last-child {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    z-index: 10;
+}
+
+/* L'image de GAUCHE (celle juste avant la dernière) */
+.photo-cv:nth-last-child(2) {
+    /* On augmente le décalage (translate3d) pour qu'elle touche presque le bord de l'écran */
+    transform: translate3d(-65%, 0, -250px) rotateY(30deg);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+/* L'image de DROITE (celle encore avant) */
+.photo-cv:nth-last-child(3) {
+    /* Idem ici pour le côté droit */
+    transform: translate3d(65%, 0, -250px) rotateY(-30deg);
+    opacity: 0.7;
+    z-index: 5;
+}
+
+/* Les autres images encore plus en arrière-plan */
+.photo-cv:nth-last-child(n+4) {
+    transform: translate3d(0, 0, -600px);
+    opacity: 0; /* On les cache pour le moment */
+}

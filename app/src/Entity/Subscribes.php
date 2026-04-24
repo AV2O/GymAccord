@@ -115,7 +115,7 @@ class Subscribes
     public function removeTake(Take $take): static
     {
         if ($this->takes->removeElement($take)) {
-            // set the owning side to null (unless already changed)
+            
             if ($take->getSubscribe() === $this) {
                 $take->setSubscribe(null);
             }
@@ -181,7 +181,7 @@ class Subscribes
     public function removeUser(User $user): static
     {
         if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
+            
             if ($user->getSubscribe() === $this) {
                 $user->setSubscribe(null);
             }

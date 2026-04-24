@@ -422,7 +422,7 @@ footer div {
 
     /*----------- galery image ------*/
 
-    .galery-img {
+    /* .galery-img {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -482,7 +482,7 @@ footer div {
 
     .photo-cv:hover figcaption {
         transform: translateY(0);
-    }
+    } */
 
     .studio-title {
         font-size: var(--h3);
