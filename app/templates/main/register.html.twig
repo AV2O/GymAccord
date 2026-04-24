@@ -79,13 +79,15 @@
 				<span class="error">{{ form_errors(registrationForm.plainPassword.second) }}</span>
 			</div>
 
+			<p class="obligatoire-txt">Tous les champs suivis d'une * sont obligatoires</p>
+
 			<div class="form-group checkbox">
 				{{ form_widget(registrationForm.agreeTerms) }}
 				{{ form_label(registrationForm.agreeTerms, "J'accepte que mes données soient collectées pour le traitement de mon inscription et la gestion de mon abonnement conformément à la politique de confidentialité. *") }}		
 			</div>
 			<span class="error">{{ form_errors(registrationForm.agreeTerms) }}</span>
 
-			<button type="submit" class="btn-primary">s'inscrire</button>
+			<button type="submit" class="btn-primary">M'inscrire</button>
 
 			<p>Vous êtes déjà inscrit ?
 				<a href="{{ path('app_login') }}">Cliquez ici</a>

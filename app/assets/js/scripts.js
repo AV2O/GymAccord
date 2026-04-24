@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (confirmModal) confirmModal.style.display = "block";
         }
 
-        const btnReserveLogin = e.target.closest(".triggerLoginModal");
+        const btnReserveLogin = e.target.closest("#triggerLoginModal");
         if (btnReserveLogin && loginRequiredModal) {
             e.preventDefault();
             loginRequiredModal.style.display = "block";

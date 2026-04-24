@@ -40,7 +40,7 @@
     {# 3. LE JETON DE SÉCURITÉ (Indispensable pour que Symfony accepte le formulaire) #}
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <button type="submit" class="btn-primary">Se connecter</button>
+    <button type="submit" class="btn-primary">Me connecter</button>
 
     <p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}"> Cliquez ici </a> pour vous inscrire !</p>
 </form>

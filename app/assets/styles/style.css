@@ -31,7 +31,7 @@
     --h3: clamp(2.4rem, 4vw, 3.2rem);
     --h4: clamp(1.8rem, 3vw, 2.2rem);
     --p: clamp(1.7rem, 2vw, 2rem);
-    --small: clamp(1.2rem, 1.5vw, 1.4rem);
+    --small: clamp(1rem, 1.5vw, 1.4rem);
 }
 
 html,
@@ -772,13 +772,6 @@ footer div {
     }
 
     /* ------------ ERREURS ------------ */
-    .error-message {
-        color: #d32f2f;
-        font-size: 0.8rem;
-        margin-top: 5px;
-        display: block;
-        min-height: 1rem; /* Garde l'espace même si vide pour éviter que ça saute */
-    }
 
     /* Optionnel : encadrer l'input en rouge quand il y a une erreur */
     input.invalid,
@@ -2204,21 +2197,27 @@ input[type="file"] {
             color: #d32f2f;
         }
     }
-
-    .error {
-        display: block;
-        color: var(--red);
-        font-size: 20px;
-        margin-top: 0.5rem;
-    }
-
-    .input-invalid {
-        border-color: #d32f2f !important;
-        box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
-    }
 }
 
-.is-required::after {
-    content: " *";
-    color: #ff0000; /* Un beau rouge */
+
+.error {
+    display: block;
+    color: var(--red);
+    font-size: 10px;
+    margin-top: 0.5rem;
+}
+
+.error,
+.error ul,
+.error li {
+    color: var(--red);
+    list-style: none;
+    padding: 0;
+    font-size: 10px;
+    display: block;
+}
+
+.input-invalid {
+    border-color: #d32f2f !important;
+    box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
 }
