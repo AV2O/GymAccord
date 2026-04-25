@@ -1,50 +1,41 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-	<main class="formulaire">
-		<section class="form-contact">
-			<img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
-			<h1>Réserver un workshop</h1>
+    <main class="formulaire">
+        <section class="form-contact" 
+         data-workshops="{{ workshopsArray|json_encode }}" 
+         data-selected-id="{{ selectedId }}">
+            <img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
+            <h1>Réserver un workshop</h1>
 
-			<form
-				id="contact-form" action="{{ path('app_reservation_submit') }}" method="POST">
-				{# 1. SELECT CATÉGORIE #}
-				<div>
-					<label for="categorie">Catégorie</label>
-					<select id="categorie" name="categorie" class="form-control">
-						<option value="" selected disabled>Choisir une catégorie...</option>
-						{% for type in types %}
-							<option value="{{ type.id }}">{{ type.name }}</option>
-						{% endfor %}
-					</select>
-				</div>
+            <form id="contact-form" action="{{ path('app_reservation_submit') }}" method="POST">
+                {# TON FORMULAIRE TEL QUEL #}
+                <div>
+                    <label for="categorie">Catégorie</label>
+                    <select id="categorie" name="categorie" class="form-control">
+                        <option value="" selected disabled>Choisir une catégorie...</option>
+                        {% for type in types %}
+                            <option value="{{ type.id }}">{{ type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-				{# 2. SELECT DISCIPLINE (Cours) #}
-				<div>
-					<label for="choix-sport">Cours</label>
-					<select id="choix-sport" name="nom_cours" disabled>
-						<option value="">Choisir une discipline...</option>
-					</select>
-				</div>
+                <div>
+                    <label for="choix-sport">Cours</label>
+                    <select id="choix-sport" name="nom_cours" disabled>
+                        <option value="">Choisir une discipline...</option>
+                    </select>
+                </div>
 
-				{# 3. SELECT DATE ET HEURE #}
-				<div>
-					<label for="cours">Date et heure</label>
-					<select id="cours" name="workshop_id" disabled>
-						<option value="">Date et heure</option>
-					</select>
-				</div>
+                <div>
+                    <label for="cours">Date et heure</label>
+                    <select id="cours" name="workshop_id" disabled>
+                        <option value="">Date et heure</option>
+                    </select>
+                </div>
 
-				<button type="submit" class="btn-primary" id="submit-btn" disabled>M'inscrire</button>
-			</form>
-		</section>
-	</main>
-
-	{# PASSAGE DES DONNÉES AU JS #}
-	<script>
-		// On transforme le tableau PHP en objet JavaScript proprement
-const allWorkshops = {{ workshopsArray|json_encode|raw }};
-
-console.log("Données chargées avec succès :", allWorkshops);
-	</script>
+                <button type="submit" class="btn-primary" id="submit-btn" disabled>M'inscrire</button>
+            </form>
+        </section>
+    </main>
 {% endblock %}

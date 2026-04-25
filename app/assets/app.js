@@ -13,4 +13,5 @@ import './styles/galery.css';
 import './js/scripts.js';
 import './js/galery.js';
 
+
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

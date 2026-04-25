@@ -18,7 +18,7 @@ class WorkshopsController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
     #[IsGranted('ROLE_USER')]
-    public function index(WorkshopsRepository $workshopsRepo, WorkshopsTypeRepository $typesRepo): Response
+    public function index(?int $id, WorkshopsRepository $workshopsRepo, WorkshopsTypeRepository $typesRepo): Response
     {
         $types = $typesRepo->findBy([], ['id' => 'ASC']);
         $workshops = $workshopsRepo->findAllOptimized();
@@ -42,8 +42,13 @@ class WorkshopsController extends AbstractController
         return $this->render('main/reservation.html.twig', [
             'types' => $types,
             'workshopsArray' => $workshopsArray,
+            // ÉTAPE C : On envoie l'ID au template Twig
+            'selectedId' => $id, 
         ]);
     }
+
+
+    
 
     #[Route('/reservation/submit', name: 'app_reservation_submit', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
@@ -96,9 +101,12 @@ class WorkshopsController extends AbstractController
         return $this->redirectToRoute('app_dashboard');
     }
 
-    /**
-     * C'EST CETTE ROUTE QUE TON DASHBOARD CHERCHE
-     */
+    
+
+
+
+
+
     #[Route('/reservation/annuler/{id}', name: 'app_reservation_delete', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function delete(Reservation $reservation, EntityManagerInterface $entityManager): Response
@@ -113,6 +121,11 @@ class WorkshopsController extends AbstractController
         $this->addFlash('success', 'Séance annulée.');
         return $this->redirectToRoute('app_dashboard');
     }
+
+
+
+
+
 
     #[Route('/tarifs/confirm/{id}', name: 'app_subscribe_confirm')]
     #[IsGranted('ROLE_USER')]

@@ -1,8 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-	<main
-		class="dashboard">
+	<main class="dashboard">
 
 		{# 1. SECTION PROFIL #}
 		<section class="portrait-container">
@@ -19,7 +18,6 @@
 						<img src="{{ asset('images/avatar-default-green.svg') }}" class="profile-img-main default-avatar" alt="Avatar par défaut"/>
 					{% endif %}
 
-					{# Ton JS surveille cette classe pour ouvrir la modal photo #}
 					<a href="#" class="edit-profile-btn" id="openModal">
 						<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier la photo">
 					</a>
@@ -30,13 +28,12 @@
 		{# 2. SECTION STATUTS (TEMPS + FORFAIT) #}
 		<article>
 			<div class="container-status">
+
 				<section class="status-day">
 					<img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt="Calendrier"/>
 					<div>
 						<p>membre depuis</p>
-						{# Variable préparée dans le DashboardController #}
-						<h2>{{ membershipDays }}
-							jours</h2>
+						<h2>{{ membershipDays }} jours</h2>
 					</div>
 				</section>
 
@@ -47,15 +44,19 @@
 								<h3>{{ activeSubscription.subscribe.nameSubscribe|upper }}</h3>
 								<p>ACTIF</p>
 							</div>
-							<p>Fin le :
-								{{ activeSubscription.endsAt|date('d/m/Y') }}</p>
+							<p>Fin le : {{ activeSubscription.endsAt|date('d/m/Y') }}</p>
 
 							<div class="crud-actions">
 								<a href="{{ path('app_tarifs') }}" title="Modifier mon forfait">
 									<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier">
 								</a>
-								{# Ton JS surveille cette classe pour la modal de confirmation #}
-								<a href="{{ path('app_subscribe_cancel') }}" class="delete-subscription-btn" title="Supprimer mon forfait">
+
+								{# ✅ CONFIRMATION AVANT RÉSILIATION #}
+								<a href="#"
+								   class="delete-subscription-btn btn-confirm-action"
+								   data-confirm-url="{{ path('app_subscribe_cancel') }}"
+								   data-confirm-message="Voulez-vous vraiment résilier votre forfait ?"
+								   title="Supprimer mon forfait">
 									<img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="Supprimer">
 								</a>
 							</div>
@@ -66,6 +67,7 @@
 						{% endif %}
 					</div>
 				</section>
+
 			</div>
 		</article>
 
@@ -79,11 +81,11 @@
 				{% if userReservations|length > 0 %}
 					{% for reservation in userReservations %}
 						<article class="session-card">
-							<div
-								class="session-img">
-								{# Ajout du slash / pour le chemin des images #}
-								<img src="{{ asset('images/photo/' ~ reservation.workshop.image) }}" alt="{{ reservation.workshop.nameClass }}">
+							<div class="session-img">
+								<img src="{{ asset('images/photo/' ~ reservation.workshop.image) }}"
+								     alt="{{ reservation.workshop.nameClass }}">
 							</div>
+
 							<div class="session-info">
 								<p class="session-date">
 									{{ reservation.workshop.dayClass }}
@@ -92,8 +94,12 @@
 								</p>
 								<h3>{{ reservation.workshop.nameClass }}</h3>
 							</div>
-							{# Ton JS surveille cette classe pour la modal de confirmation #}
-							<a href="{{ path('app_reservation_delete', {'id': reservation.id}) }}" class="btn-cancel-session">
+
+							{# ✅ CONFIRMATION AVANT ANNULATION SÉANCE #}
+							<a href="#"
+							   class="btn-cancel-session btn-confirm-action"
+							   data-confirm-url="{{ path('app_reservation_delete', {'id': reservation.id}) }}"
+							   data-confirm-message="Voulez-vous vraiment annuler la séance {{ reservation.workshop.nameClass }} du {{ reservation.workshop.dayClass }} à {{ reservation.workshop.startTime|date('H:i') }} ?">
 								ANNULER
 							</a>
 						</article>
@@ -113,16 +119,15 @@
 			<h2 class="promo-title">Vibrance & Puissance</h2>
 			<div class="hero-card">
 				<div class="hero-content">
-					<h2>Dépasse tes
-						<span>limites</span>.</h2>
+					<h2>Dépasse tes <span>limites</span>.</h2>
 					<p>Le succès n'est pas une destination, c'est une discipline. Rejoins la meute.</p>
 				</div>
 			</div>
-
 		</section>
+
 	</main>
 
-	{# 5. MODAL POUR LA PHOTO (Surveillée par ton fichier JS externe) #}
+	{# 5. MODALE PHOTO DE PROFIL #}
 	<div id="photoModal" class="modal">
 		<div class="modal-content">
 			<span class="close-modal">&times;</span>

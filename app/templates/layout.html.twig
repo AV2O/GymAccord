@@ -110,6 +110,7 @@
 	</footer>
 
 
+	{# MODALE DE CONFIRMATION (résiliation forfait) #}
 	<div id="confirmModal" class="modal">
 		<div class="modal-content">
 			<h2>CONFIRMATION</h2>
@@ -122,19 +123,21 @@
 	</div>
 
 
-	{% for label, messages in app.flashes %}
-		{% for message in messages %}
-			<div id="flashModal" class="modal">
+	{# ✅ MODALE FLASH — toujours dans le DOM, vide si pas de message #}
+	<div id="flashModal" class="modal" style="display:none">
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
 				<div class="modal-content border-{{ label }}">
 					<span class="close-modal">&times;</span>
 					<p>{{ message }}</p>
 					<button class="btn-primary btn-gym btn-cancel">OK</button>
 				</div>
-			</div>
+			{% endfor %}
 		{% endfor %}
-	{% endfor %}
+	</div>
 
-	{# MODALE DE CONNEXION REQUISE (CENTRALISÉE) #}
+
+	{# MODALE DE CONNEXION REQUISE #}
 	<div id="loginRequiredModal" class="modal">
 		<div class="modal-content">
 			<span class="close-modal">&times;</span>
@@ -146,5 +149,5 @@
 			</div>
 		</div>
 	</div>
-	
+
 {% endblock %}

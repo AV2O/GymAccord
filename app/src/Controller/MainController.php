@@ -20,11 +20,11 @@ final class MainController extends AbstractController
         ]);
     }
 
-    #[Route('/coursCo', name: 'app_coursCo')]
-    public function coursCo(): Response
-    {
-        return $this->render('main/coursCo.html.twig');
-    }
+    // #[Route('/coursCo', name: 'app_coursCo')]
+    // public function coursCo(): Response
+    // {
+    //     return $this->render('main/coursCo.html.twig');
+    // }
 
     #[Route('/solo', name: 'app_solo')]
     public function solo(): Response

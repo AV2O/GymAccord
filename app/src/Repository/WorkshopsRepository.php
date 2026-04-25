@@ -40,4 +40,13 @@ class WorkshopsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllForDynamicPage(): array
+    {
+        return $this->createQueryBuilder('w')
+            ->leftJoin('w.workshop_type', 't')
+            ->addSelect('t')
+            ->getQuery()
+            ->getResult();
+    }
 }
