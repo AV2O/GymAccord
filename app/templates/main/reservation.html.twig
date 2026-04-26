@@ -4,7 +4,8 @@
     <main class="formulaire">
         <section class="form-contact" 
          data-workshops="{{ workshopsArray|json_encode }}" 
-         data-selected-id="{{ selectedId }}">
+         data-selected-id="{{ selectedId }}"
+         data-selected-type-id="{{ selectedTypeId ?? '' }}">
             <img src="{{ asset('images/photo/Elite.png') }}" alt="photo de couverture"/>
             <h1>Réserver un workshop</h1>
 

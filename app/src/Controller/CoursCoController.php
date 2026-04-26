@@ -72,4 +72,35 @@ class CoursCoController extends AbstractController
             'types'          => $repoType->findAll(),
         ]);
     }
+
+    // ✅ Route pour pré-sélectionner UNE CATÉGORIE (sans workshop spécifique)
+    #[Route('/reservation/type/{typeId}', name: 'app_reservation_with_type', requirements: ['typeId' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function reservationByType(int $typeId, WorkshopsRepository $repo, WorkshopsTypeRepository $repoType): Response
+    {
+        $workshops      = $repo->findAll();
+        $workshopsArray = [];
+
+        foreach ($workshops as $w) {
+            $dateText = ($w->getDayClass() === 'Sur RDV')
+                ? 'Sur RDV'
+                : $w->getDayClass() . ' à ' . $w->getStartTime()->format('H:i');
+
+            $placesRestantes = $w->getMaxCapacity() - count($w->getReservations());
+
+            $workshopsArray[] = [
+                'id'     => $w->getId(),
+                'name'   => $w->getNameClass(),
+                'typeId' => $w->getWorkshopType()->getId(),
+                'label'  => $dateText . ' (' . $placesRestantes . ' places)',
+            ];
+        }
+
+        return $this->render('main/reservation.html.twig', [
+            'workshopsArray'   => $workshopsArray,
+            'selectedId'       => null,       // pas de workshop spécifique
+            'selectedTypeId'   => $typeId,    // ✅ on pré-sélectionne la catégorie
+            'types'            => $repoType->findAll(),
+        ]);
+    }
 }

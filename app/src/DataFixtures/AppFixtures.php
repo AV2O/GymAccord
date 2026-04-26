@@ -66,18 +66,18 @@ class AppFixtures extends Fixture
 
         // --- 4. LES ACTIVITÉS COLLECTIVES ---
         $activitesCollectives = [
-            ['nom' => 'Sport Santé', 'type' => 'Souplesse et remise en forme', 'desc' => 'Séance adaptée pour reprendre une activité physique en douceur et sécurisée.', 'image' => 'sportSante.png'],
-            ['nom' => 'Yoga', 'type' => 'Souplesse et remise en forme', 'desc' => 'Harmonie du corps et de l’esprit à travers des postures et la respiration.', 'image' => 'yoga.png'],
-            ['nom' => 'Stretching', 'type' => 'Souplesse et remise en forme', 'desc' => 'Exercices d’étirements pour gagner en souplesse et relâcher les tensions.', 'image' => 'stretching.png'],
-            ['nom' => 'Pilates', 'type' => 'Souplesse et remise en forme', 'desc' => 'Renforcement des muscles profonds pour améliorer la posture et l’équilibre.', 'image' => 'pilates.png'],
-            ['nom' => 'Body Pump', 'type' => 'Renforcement musculaire', 'desc' => 'Cours de fitness avec haltères pour sculpter l’ensemble de votre corps.', 'image' => 'bodyPump.png'],
-            ['nom' => 'CAF', 'type' => 'Renforcement musculaire', 'desc' => 'Ciblage intensif : Cuisses, Abdos et Fessiers pour une silhouette tonique.', 'image' => 'CAF.png'],
-            ['nom' => 'Abdos Flash', 'type' => 'Renforcement musculaire', 'desc' => '30 minutes intensives dédiées au gainage et à la sangle abdominale.', 'image' => 'abdosFlash.png'],
-            ['nom' => 'BBE', 'type' => 'Renforcement musculaire', 'desc' => 'Bras, Buste et Épaules : un focus sur le haut du corps.', 'image' => 'BBE.png'],
-            ['nom' => 'Cross-Training', 'type' => 'Cross-Training', 'desc' => 'Entraînement fonctionnel combinant force, cardio et agilité.', 'image' => 'crossTraining.png'],
-            ['nom' => 'Cardio Flash', 'type' => 'Cross-Training', 'desc' => 'Boostez votre rythme cardiaque et brûlez un maximum de calories.', 'image' => 'cardioFlash.png'],
-            ['nom' => 'Step', 'type' => 'Cross-Training', 'desc' => 'Chorégraphie dynamique sur marche pour travailler le cardio et la coordination.', 'image' => 'step.png'],
-            ['nom' => 'Boxing', 'type' => 'Cross-Training', 'desc' => 'Défoulement garanti avec des techniques de boxe sans contact.', 'image' => 'boxing.png'],
+            ['nom' => 'Sport Santé', 'type' => 'Souplesse et remise en forme', 'desc' => 'Séance adaptée pour reprendre une activité physique en douceur et sécurisée.', 'image' => 'sportSante.jpg'],
+            ['nom' => 'Yoga', 'type' => 'Souplesse et remise en forme', 'desc' => 'Harmonie du corps et de l’esprit à travers des postures et la respiration.', 'image' => 'yoga.jpg'],
+            ['nom' => 'Stretching', 'type' => 'Souplesse et remise en forme', 'desc' => 'Exercices d’étirements pour gagner en souplesse et relâcher les tensions.', 'image' => 'stretching.jpg'],
+            ['nom' => 'Pilates', 'type' => 'Souplesse et remise en forme', 'desc' => 'Renforcement des muscles profonds pour améliorer la posture et l’équilibre.', 'image' => 'pilates.jpg'],
+            ['nom' => 'Body Pump', 'type' => 'Renforcement musculaire', 'desc' => 'Cours de fitness avec haltères pour sculpter l’ensemble de votre corps.', 'image' => 'bodyPump.jpg'],
+            ['nom' => 'CAF', 'type' => 'Renforcement musculaire', 'desc' => 'Ciblage intensif : Cuisses, Abdos et Fessiers pour une silhouette tonique.', 'image' => 'CAF.jpg'],
+            ['nom' => 'Abdos Flash', 'type' => 'Renforcement musculaire', 'desc' => '30 minutes intensives dédiées au gainage et à la sangle abdominale.', 'image' => 'abdosFlash.jpg'],
+            ['nom' => 'BBE', 'type' => 'Renforcement musculaire', 'desc' => 'Bras, Buste et Épaules : un focus sur le haut du corps.', 'image' => 'BBE.jpg'],
+            ['nom' => 'Cross-Training', 'type' => 'Cross-Training', 'desc' => 'Entraînement fonctionnel combinant force, cardio et agilité.', 'image' => 'crossTraining.jpg'],
+            ['nom' => 'Cardio Flash', 'type' => 'Cross-Training', 'desc' => 'Boostez votre rythme cardiaque et brûlez un maximum de calories.', 'image' => 'cardioFlash.jpg'],
+            ['nom' => 'Step', 'type' => 'Cross-Training', 'desc' => 'Chorégraphie dynamique sur marche pour travailler le cardio et la coordination.', 'image' => 'step.jpg'],
+            ['nom' => 'Boxing', 'type' => 'Cross-Training', 'desc' => 'Défoulement garanti avec des techniques de boxe sans contact.', 'image' => 'boxing.jpg'],
         ];
 
         // --- 5. LOGIQUE PLANNING (24 cours) ---
@@ -113,10 +113,10 @@ class AppFixtures extends Fixture
 
         // --- 6. SÉANCES PERSO ---
         $activitesPerso = [
-            ['nom' => 'Musculation', 'type' => 'Séance perso', 'desc' => 'Coaching privé pour apprendre les bons mouvements.', 'image' => 'bodyPump.png'],
-            ['nom' => 'Coaching Yoga', 'type' => 'Séance perso', 'desc' => 'Séance individuelle approfondie.', 'image' => 'yoga.png'],
-            ['nom' => 'Coaching Pilates', 'type' => 'Séance perso', 'desc' => 'Travail personnalisé sur le centre du corps.', 'image' => 'pilates.png'],
-            ['nom' => 'Coaching Cardio', 'type' => 'Séance perso', 'desc' => 'Programme sur mesure pour l’endurance.', 'image' => 'cardioFlash.png'],
+            ['nom' => 'Musculation', 'type' => 'Séance perso', 'desc' => 'Coaching privé pour apprendre les bons mouvements.', 'image' => 'bodyPump.jpg'],
+            ['nom' => 'Coaching Yoga', 'type' => 'Séance perso', 'desc' => 'Séance individuelle approfondie.', 'image' => 'yoga.jpg'],
+            ['nom' => 'Coaching Pilates', 'type' => 'Séance perso', 'desc' => 'Travail personnalisé sur le centre du corps.', 'image' => 'pilates.jpg'],
+            ['nom' => 'Coaching Cardio', 'type' => 'Séance perso', 'desc' => 'Programme sur mesure pour l’endurance.', 'image' => 'cardioFlash.jpg'],
         ];
 
         foreach ($activitesPerso as $info) {

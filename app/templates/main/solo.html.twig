@@ -1,15 +1,17 @@
 {% extends 'layout.html.twig' %}
 
-{# 3. On met le contenu spécifique de la page #}
 {% block content %}
 	<main class="solo">
+
 		<section class="hero-banner">
 			<div class="hero-text">
 				<h1>Séances
 					<span>individuelle</span>
 					et personnalisée</h1>
 				<p>
-					Profiter d'un accompagnement sur-mesure avec l'un de nos coachs besoins, qu'il s'agisse de performance athlétique, de remise en forme ou éducation.
+					Profiter d'un accompagnement sur-mesure avec l'un de nos coachs selon vos
+										besoins, qu'il s'agisse de performance athlétique, de remise en forme ou
+										d'éducation.
 				</p>
 			</div>
 		</section>
@@ -17,35 +19,43 @@
 		<section class="obj-card">
 			<article class="black-card">
 				<h2>
-					<span><img src="{{ asset('images/target-svgrepo-com.svg') }}"/></span>
-					Objectifs cliblés
+					<span><img src="{{ asset('images/target-svgrepo-com.svg') }}" alt="cible"/></span>
+					Objectifs ciblés
 				</h2>
 				<p>
-					Un programme adapté à votre physiologie et à vos ambitions personnelles
+					Un programme adapté à votre physiologie et à vos ambitions personnelles.
 				</p>
 			</article>
+
 			<article class="black-card">
 				<h2>
-					<span><img src="{{ asset('images/chronometer-svgrepo-com (2).svg') }}" alt="chronometre"/></span>
+					<span><img src="{{ asset('images/chronometer-svgrepo-com (2).svg') }}" alt="chronomètre"/></span>
 					Flexibilité totale
 				</h2>
-				<p>Planifiez vos séances selon votre emploi du temps</p>
+				<p>Planifiez vos séances selon votre emploi du temps.</p>
 			</article>
 		</section>
 
 		<section class="objectif">
 			<article class="white-card">
-				<h3>Prêt à dépasser vos limites?</h3>
+				<h3>Prêt à dépasser vos limites ?</h3>
 				<p>
-					Réservez votre première séance d'évaluation dès aujourd'hui et commencer votre transformation.
+					Réservez votre première séance d'évaluation dès aujourd'hui
+										et commencez votre transformation.
 				</p>
+
 				{% if app.user %}
-					<a href="{{ path('app_reservation') }}" class="btn-green">RESERVER</a>
+					<a href="{{ path('app_reservation_with_type', {'typeId': typePersoId}) }}" class="btn-green">
+						RESERVER
+					</a>
 				{% else %}
-					<a href="#" class="btn-green" id="triggerLoginModal">RESERVER</a>
+					<a href="#" class="btn-green btn-trigger-login">
+						RESERVER
+					</a>
 				{% endif %}
+
 			</article>
 		</section>
-	</main>
 
+	</main>
 {% endblock %}

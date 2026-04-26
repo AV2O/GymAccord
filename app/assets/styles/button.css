@@ -87,6 +87,10 @@
     text-decoration: none;
 }
 
+.btn-container-center {
+    margin: 2rem 0;
+}
+
 .btn-primary:hover {
     transform: scale(1.05);
 }

@@ -11,14 +11,10 @@
 
 		<section class="planning">
 			<h2>Planning 2026</h2>
-			<div
-				class="container-day">
-				{# On crée une liste des jours pour le filtrage JS #}
+			<div class="container-day">
 				{% set jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %}
 				{% for jour in jours %}
-					<div
-						class="day">
-						{# On utilise data-day pour que le JS puisse filtrer #}
+					<div class="day">
 						<a href="#" class="filter-day" data-day="{{ jour }}">
 							{{ jour|slice(0, 3)|lower }}
 						</a>
@@ -27,55 +23,60 @@
 			</div>
 		</section>
 
-		<div
-			class="container-lesson" id="lesson-container">
+		<div class="container-lesson" id="lesson-container">
 
-			{# --- BLOC MESSAGE VIDE (Caché par défaut, géré par le JS) --- #}
 			<div id="empty-day-message" class="empty-day-container">
 				<p id="dynamic-empty-text"></p>
 			</div>
 
 			{% for workshop in workshops %}
-				{# Calcul des places restantes basé sur ton entité #}
 				{% set placesRestantes = workshop.maxCapacity - workshop.reservations|length %}
 
 				<article class="content workshop-card" data-day="{{ workshop.dayClass }}">
 					<div>
 						<p class="timing">{{ workshop.startTime|date('H:i') }}</p>
 					</div>
+
 					<div class="lesson">
 						<img src="{{ asset('images/photo/' ~ workshop.image) }}" alt="{{ workshop.nameClass }}">
 
 						<button class="favori-btn {{ placesRestantes <= 0 ? 'is-full' : '' }}">
-							{{ placesRestantes > 0 ? placesRestantes ~ ' places dispo' : 'COMPLET' }}
+							{{ placesRestantes > 0 ? placesRestantes ~ ' place' ~ (placesRestantes > 1 ? 's' : '') : 'COMPLET' }}
 						</button>
 
 						<h2>{{ workshop.nameClass }}</h2>
 
 						<p>
-							Coach:
-							{{ workshop.coach.firstName }}
-							• Intensité
-							{{ workshop.status }}
+							Coach : {{ workshop.coach.firstName }}
+							&bull; {{ workshop.status }}
 						</p>
 
 						<div class="btn-container-center">
 							{% if placesRestantes > 0 %}
 								{% if app.user %}
-									<a href="{{ path('app_reservation') }}" class="btn-green">RESERVER</a>
+									{# ✅ Connecté + places dispo → réservation directe #}
+									<a href="{{ path('app_reservation_with_id', {'id': workshop.id}) }}"
+									   class="btn-primary">
+										Réserver ce cours
+									</a>
 								{% else %}
-									<a href="#" class="btn-green triggerLoginModal">RESERVER</a>
+									{# ✅ Non connecté → modale login #}
+									<a href="{{ path('app_login') }}" class="btn-primary btn-trigger-login">
+										Réserver ce cours
+									</a>
 								{% endif %}
 							{% else %}
-								<span class="btn-disabled">COMPLET</span>
+								{# ✅ Complet → bouton désactivé #}
+								<span class="btn-primary btn-disabled">Complet</span>
 							{% endif %}
 						</div>
 					</div>
 				</article>
+
 			{% else %}
-				{# Ce message ne s'affiche QUE si la base de données est totalement vide #}
 				<p>Aucun cours n'est enregistré pour le moment.</p>
 			{% endfor %}
+
 		</div>
 	</main>
 {% endblock %}
