@@ -10,7 +10,7 @@
 
 			{# 1. L'action doit pointer vers la route app_login et la méthode doit être POST #}
 			<form id="contact-form" action="{{ path('app_login') }}" method="post" novalidate>
-
+				{{ dump(error)}}
 				<div class="form-group">
 					<label for="username" class="is-required">Email</label>
 					<input type="email" id="username" name="_username" value="{{ last_username }}" required placeholder="exemple@mail.fr"/>
@@ -33,15 +33,12 @@
 
 				<p class="obligatoire-txt">Tous les champs suivis d'une * sont obligatoires</p>
 
-				{# 3. LE JETON DE SÉCURITÉ (Indispensable pour que Symfony accepte le formulaire) #}
+				
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 				<button type="submit" class="btn-primary">Me connecter</button>
 
-				<p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}">
-						Cliquez ici
-					</a>
-					pour vous inscrire !</p>
+				<p>Vous n'avez pas de compte ?<a href="{{ path('app_register') }}"> Cliquez ici </a> pour vous inscrire !</p>
 			</form>
 		</section>
 	</main>

@@ -14,36 +14,23 @@
 
 		<!-- BIO -->
 		<section class="bio">
-			<h2>Gym Accord</h2>
-			<p>
-				Notre philosophie repose sur l'harmonie entre le corps et l'esprit.
-			</p>
-			<p>
-				Dans notre espace de 500m², nous combinons les techniques de musculation traditionnelles avec les dernières innovations en matière de biomécanique.
-			</p>
-			<p>
-				Chaque athlète bénéficie d'un accompagnement sur mesure pour atteindre des objectifs de haut niveau.
-			</p>
-
-			<a class="btn-green" href="{{ path('app_a-propos') }}">voir plus ...</a>
-		</section>
-
-
-		<!-- HORAIRES -->
-		<section class="time">
-			<h3 class="studio-title">
-				<div class="text-group">
-					Horaire du <span>studio Gym</span>
+			<div class="hero-bio">
+				<h2>Gym Accord</h2>
+				<div class="bio-text">
+					<p>
+						Notre philosophie repose sur l'harmonie entre le corps et l'esprit.
+					</p>
+					<p>
+						Dans notre espace de 500m², nous combinons les techniques de musculation traditionnelles avec les dernières innovations en matière de biomécanique.
+					</p>
+					<p>
+						Chaque athlète bénéficie d'un accompagnement sur mesure pour atteindre des objectifs de haut niveau.
+					</p>
 				</div>
-			</h3>
-			<p>
-				Notre studio s'adapte à votre rythme. Des sessions matinales explosives aux entraînements nocturnes, la discipline n'a pas d'heure.
-			</p>
-			<div class="card">
-				<p>Ouverture 7/7J</p>
-				<p>Accès à la salle 24/24h</p>
-				<p>Cours de 6h30 / 22h30</p>
+
+				<a class="btn-green" href="{{ path('app_a-propos') }}">voir plus ...</a>
 			</div>
+
 			<!-- GALERIE -->
 			<article class="galery-img">
 				<div class="galery">
@@ -101,6 +88,26 @@
 					</figure>
 				</div>
 			</article>
+		</section>
+
+
+		<!-- HORAIRES -->
+		<section class="time">
+			<h3 class="studio-title">
+				<div class="text-group">
+					Horaire du
+					<span>studio Gym</span>
+				</div>
+			</h3>
+			<p>
+				Notre studio s'adapte à votre rythme. Des sessions matinales explosives aux entraînements nocturnes, la discipline n'a pas d'heure.
+			</p>
+			<div class="card">
+				<p>Ouverture 7/7J</p>
+				<p>Accès à la salle 24/24h</p>
+				<p>Cours de 6h30 / 22h30</p>
+			</div>
+
 			<a class="btn-green" href="{{ path('app_coursCo') }}">PROGRAMME</a>
 		</section>
 
@@ -149,10 +156,23 @@
 		<!-- FORMULAIRE CONTACT -->
 		<section id="contact" class="form-contact">
 			<div class="container-form">
-				<h3>N'hésitez pas à nous contacter</h3>
-				<p>
-					Des questions sur nos programmes ? Ecrivez-nous directement.
-				</p>
+				<div class="hero-form-contact">
+					<h3>N'hésitez pas à nous contacter</h3>
+					<p>
+						Des questions sur nos programmes ? Ecrivez-nous directement.
+					</p>
+					<div class="hero-contact">
+						<div>
+							<p>Téléphone :
+							</p>
+							<a href="#">0123456789</a>
+						</div>
+						<div>
+							<p>Adresse :</p>
+							<a href="#">1 rue du capiole 14790 Verson</a>
+						</div>
+					</div>
+				</div>
 				<form id="contact-form" action="{{ path('app_contact_send') }}" method="POST" novalidate>
 
 					<div class="form-group">
@@ -178,7 +198,7 @@
 					<div class="checkbox-container">
 						<div class="form-checkbox-group">
 							<input type="checkbox" id="consentement" name="consentement">
-							<label for="consentement">J'accepte la politique de confidentialité. *</label>
+							<label for="consentement">J'accepte que mes données soient collectées pour le traitement de mon inscription et la gestion de mon abonnement conformément à la politique de confidentialité. *</label>
 						</div>
 						<span class="error-message" id="error-consentement"></span>
 					</div>

@@ -1,12 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	{# Garde le CSS global (app.css) #}
-	<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
-{% endblock %}
-
-{# 3. On met le contenu spécifique de la page #}
 {% block content %}
     <main class="a-propos">
 
@@ -31,6 +24,7 @@
             Chez Gym Accord, nous ne nous contentons pas de bouger. Nous optimisons chaque levier, chaque extension. Notre approche repose sur la précision du mouvement pour garantir des résultats durables sans compromettre l'intégrité physique.
           </p>
         </section>
+        
         <section>
           <h2>DISCIPLINE ALIMENTAIRE</h2>
           <p>

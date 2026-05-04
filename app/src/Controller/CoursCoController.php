@@ -43,7 +43,6 @@ class CoursCoController extends AbstractController
         ]);
     }
 
-    // ✅ requirements: ['id' => '\d+'] — LA CORRECTION CLÉ
     #[Route('/reservation/{id}', name: 'app_reservation_with_id', defaults: ['id' => null], requirements: ['id' => '\d+'])]
     #[IsGranted('ROLE_USER')]
     public function reservation($id, WorkshopsRepository $repo, WorkshopsTypeRepository $repoType): Response

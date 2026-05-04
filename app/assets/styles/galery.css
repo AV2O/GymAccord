@@ -1,12 +1,12 @@
 /* --- LE CONTENEUR PRINCIPAL --- */
 .galery-img {
-    width: 100vw; /* Utilise 100% de la largeur de l'écran */
-    height: 60vh;
+    /* width: 100vw;  */
+    /* height: 60vh; */
     display: flex;
     justify-content: center;
     align-items: center;
     perspective: 1200px;
-    overflow: hidden; /* CRITIQUE : Empêche l'apparition de barres de défilement blanches */
+    overflow: hidden; /* Empêche l'apparition de barres de défilement blanches */
     margin: 0;
     padding: 0;
 }
@@ -14,7 +14,7 @@
 /* --- LA BANDE QUI CONTIENT LES IMAGES --- */
 .galery {
     position: relative;
-    width: 75vw;  /* On augmente un peu la taille pour réduire les espaces vides sur les côtés */
+    width: 75vw;  
     height: 50vh;
     transform-style: preserve-3d;
     touch-action: pan-y;
@@ -66,7 +66,7 @@
 }
 
 /* =========================================================================
-   L'astuce CSS pour positionner tes images comme sur ta maquette :
+   CSS pour positionner les images :
    ========================================================================= */
 
 /* L'image centrale est TOUJOURS la dernière figure ajoutée dans le HTML par défaut.
@@ -97,4 +97,8 @@
 .photo-cv:nth-last-child(n+4) {
     transform: translate3d(0, 0, -600px);
     opacity: 0; /* On les cache pour le moment */
+}
+
+@media (min-width: 1024){
+    
 }

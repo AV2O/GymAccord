@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Attribute\Route;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-
     public function register(
         Request $request, 
         UserPasswordHasherInterface $passwordHasher, 
@@ -23,13 +22,13 @@ class RegistrationController extends AbstractController
         if ($this->getUser()) {
             return $this->redirectToRoute('app_dashboard');
         }
-        $user = new Users();
 
+        $user = new Users();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            // Hachage du mot de passe
+            // Hachage du mot de passe (on récupère plainPassword du formulaire)
             $user->setPassword(
                 $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData())
             );

@@ -1,36 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 62%;
-}
-
-/*  ======== RACINE ======== */
-
-:root {
-    /* main color */
-    --black: #0e0e0e;
-    --white: #f9f9f9;
-    --green: #dfff00;
-    --grey-police: #9ea8a8;
-
-    /* police */
-    --mainText: "Epilogue", sans-serif;
-
-    /* épaisseur */
-    --gras5: 500;
-    --gras: 400;
-    --fin: 300;
-    --bold: bold;
-
-    --h1: clamp(4.5rem, 10vw, 8rem);
-    --h2: clamp(3.2rem, 6vw, 5rem);
-    --h3: clamp(2.4rem, 4vw, 3.2rem);
-    --h4: clamp(1.8rem, 3vw, 2.2rem);
-    --p: clamp(1.4rem, 2vw, 1.6rem);
-    --small: clamp(1.2rem, 1.5vw, 1.4rem);
-}
-
 .btn-green {
     /* Indispensable pour que les liens <a> acceptent les marges et la largeur */
     display: table;
@@ -93,4 +60,10 @@
 
 .btn-primary:hover {
     transform: scale(1.05);
+}
+
+@media (min-width: 1024px) {
+    .btn-green{
+        width: 250px;
+    }
 }

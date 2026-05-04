@@ -3,11 +3,10 @@
 {% block body %}
 
 	<header>
-		<div class="logo">
-			<a href="{{ path('app_main') }}">Gym Accord</a>
-		</div>
-
 		<nav class="nav" aria-label="Navigation principale">
+			<div class="logo">
+				<a href="{{ path('app_main') }}">Gym Accord</a>
+			</div>
 			<button class="burger-menu" id="burgerMenu" aria-label="Menu">
 				<span class="line-burger"></span>
 				<span class="line-burger"></span>
@@ -30,13 +29,13 @@
 					</li>
 
 					<li>
-						<a href="{{ path('app_solo') }}">séance individuelle
+						<a href="{{ path('app_solo') }}">séance perso
 							<img src="{{ asset('images/run-svgrepo-com.svg') }}" alt="course"/>
 						</a>
 					</li>
 
 					<li>
-						<a href="{{ path('app_calendar') }}">calendrier / planning
+						<a href="{{ path('app_calendar') }}">planning
 							<img src="{{ asset('images/planning-svgrepo-com.svg') }}" alt="calendrier"/>
 						</a>
 					</li>
@@ -62,7 +61,6 @@
 					</li>
 
 				</ul>
-
 				<div class="nav-footer">
 					{% if app.user %}
 						<a href="{{ path('app_logout') }}" class="btn-connect btn-logout">
@@ -71,7 +69,7 @@
 						</a>
 					{% else %}
 						<a href="{{ path('app_login') }}" class="btn-connect">
-							SE CONNECTER / S'INSCRIRE
+							ME CONNECTER 
 							<img src="{{ asset('images/login-bracket-svgrepo-com.svg') }}" alt="login"/>
 						</a>
 					{% endif %}
@@ -83,27 +81,31 @@
 	{% block content %}{% endblock %}
 
 	<footer>
-		<a href="{{ path('app_main') }}">Gym Accord</a>
-		<p>
-			L'élite du fitness à votre portée. Rejoignez le mouvement Gym ACCORD dès aujourd'hui.
-		</p>
+		<div class="container-footer">
+			<div class="head-footer">
+				<a href="{{ path('app_main') }}">Gym Accord</a>
+				<p>
+					L'élite du fitness à votre portée. Rejoignez le mouvement Gym ACCORD dès aujourd'hui.
+				</p>
+			</div>
 
-		<div class="social-icons">
-			<a href="https://www.instagram.com/" target="_blank">
-				<img src="{{ asset('images/insta-svgrepo-com.svg') }}" alt="Instagram"/>
-			</a>
-			<a href="https://x.com/?lang=fr" target="_blank">
-				<img src="{{ asset('images/twitter-svgrepo-com.svg') }}" alt="Twitter"/>
-			</a>
-			<a href="{{ path('app_main') }}#contact">
-				<img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="Contactez-nous">
-			</a>
-		</div>
+			<div class="social-icons">
+				<a href="https://www.instagram.com/" target="_blank">
+					<img src="{{ asset('images/insta-svgrepo-com.svg') }}" alt="Instagram"/>
+				</a>
+				<a href="https://x.com/?lang=fr" target="_blank">
+					<img src="{{ asset('images/twitter-svgrepo-com.svg') }}" alt="Twitter"/>
+				</a>
+				<a href="{{ path('app_main') }}#contact">
+					<img src="{{ asset('images/mail-svgrepo-com.svg') }}" alt="Contactez-nous">
+				</a>
+			</div>
 
-		<div class="link">
-			<a href="{{ path('app_mention-legal') }}">Mentions légales</a>
-			<a href="{{ path('app_mention-legal') }}">Confidentialité</a>
-			<a href="{{ path('app_main') }}#contact">Contact</a>
+			<div class="link">
+				<a href="{{ path('app_mention-legal') }}">Mentions légales</a>
+				<a href="{{ path('app_mention-legal') }}">Confidentialité</a>
+				<a href="{{ path('app_main') }}#contact">Contact</a>
+			</div>
 		</div>
 
 		<p>&copy; GymAccord &mdash; Tous droits réservés &mdash; AV2O</p>
