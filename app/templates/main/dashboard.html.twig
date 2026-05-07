@@ -3,73 +3,75 @@
 {% block content %}
 	<main class="dashboard">
 
-		{# 1. SECTION PROFIL #}
-		<section class="portrait-container">
-			<div class="portrait">
-				<div>
-					<h1>Bonjour {{ app.user.firstName }} !</h1>
-					<p>Prêt pour l'impact ?</p>
-				</div>
-
-				<div class="profile-container">
-					{% if app.user.profilePicture %}
-						<img src="{{ asset('uploads/profiles/' ~ app.user.profilePicture) }}" class="profile-img-main" alt="Photo de profil"/>
-					{% else %}
-						<img src="{{ asset('images/avatar-default-green.svg') }}" class="profile-img-main default-avatar" alt="Avatar par défaut"/>
-					{% endif %}
-
-					<a href="#" class="edit-profile-btn" id="openModal">
-						<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier la photo">
-					</a>
-				</div>
-			</div>
-		</section>
-
-		{# 2. SECTION STATUTS (TEMPS + FORFAIT) #}
-		<article>
-			<div class="container-status">
-
-				<section class="status-day">
-					<img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt="Calendrier"/>
+		<div class="profil-content">
+			{# 1. SECTION PROFIL #}
+			<section class="portrait-container">
+				<div class="portrait">
 					<div>
-						<p>membre depuis</p>
-						<h2>{{ membershipDays }} jours</h2>
+						<h1>Bonjour
+							{{ app.user.firstName }}
+							!</h1>
+						<p>Prêt pour l'impact ?</p>
 					</div>
-				</section>
 
-				<section class="status-forfait">
-					<div class="card-forfait">
-						{% if activeSubscription %}
-							<div>
-								<h3>{{ activeSubscription.subscribe.nameSubscribe|upper }}</h3>
-								<p>ACTIF</p>
-							</div>
-							<p>Fin le : {{ activeSubscription.endsAt|date('d/m/Y') }}</p>
-
-							<div class="crud-actions">
-								<a href="{{ path('app_tarifs') }}" title="Modifier mon forfait">
-									<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier">
-								</a>
-
-								{# ✅ CONFIRMATION AVANT RÉSILIATION #}
-								<a href="#"
-								   class="delete-subscription-btn btn-confirm-action"
-								   data-confirm-url="{{ path('app_subscribe_cancel') }}"
-								   data-confirm-message="Voulez-vous vraiment résilier votre forfait ?"
-								   title="Supprimer mon forfait">
-									<img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="Supprimer">
-								</a>
-							</div>
+					<div class="profile-container">
+						{% if app.user.profilePicture %}
+							<img src="{{ asset('uploads/profiles/' ~ app.user.profilePicture) }}" class="profile-img-main" alt="Photo de profil"/>
 						{% else %}
-							<h3>AUCUN FORFAIT</h3>
-							<p>INACTIF</p>
-							<a href="{{ path('app_tarifs') }}" class="btn-primary">Choisir un forfait</a>
+							<img src="{{ asset('images/avatar-default-green.svg') }}" class="profile-img-main default-avatar" alt="Avatar par défaut"/>
 						{% endif %}
-					</div>
-				</section>
 
-			</div>
-		</article>
+						<a href="#" class="edit-profile-btn" id="openModal">
+							<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier la photo">
+						</a>
+					</div>
+				</div>
+			</section>
+
+			{# 2. SECTION STATUTS (TEMPS + FORFAIT) #}
+			<article>
+				<div class="container-status">
+
+					<section class="status-day">
+						<img src="{{ asset('images/calendar-alt-svgrepo-com.svg') }}" alt="Calendrier"/>
+						<div>
+							<p>membre depuis</p>
+							<h2>{{ membershipDays }}
+								jours</h2>
+						</div>
+					</section>
+
+					<section class="status-forfait">
+						<div class="card-forfait">
+							{% if activeSubscription %}
+								<div>
+									<h3>{{ activeSubscription.subscribe.nameSubscribe|upper }}</h3>
+									<p>ACTIF</p>
+								</div>
+								<p>Fin le :
+									{{ activeSubscription.endsAt|date('d/m/Y') }}</p>
+
+								<div class="crud-actions">
+									<a href="{{ path('app_tarifs') }}" title="Modifier mon forfait">
+										<img src="{{ asset('images/pen-svgrepo-com.svg') }}" alt="Modifier">
+									</a>
+
+									{# ✅ CONFIRMATION AVANT RÉSILIATION #}
+									<a href="#" class="delete-subscription-btn btn-confirm-action" data-confirm-url="{{ path('app_subscribe_cancel') }}" data-confirm-message="Voulez-vous vraiment résilier votre forfait ?" title="Supprimer mon forfait">
+										<img src="{{ asset('images/delete-2-svgrepo-com.svg') }}" alt="Supprimer">
+									</a>
+								</div>
+							{% else %}
+								<h3>AUCUN FORFAIT</h3>
+								<p>INACTIF</p>
+								<a href="{{ path('app_tarifs') }}" class="btn-primary">Choisir un forfait</a>
+							{% endif %}
+						</div>
+					</section>
+
+				</div>
+			</article>
+		</div>
 
 		{# 3. SECTION SÉANCES #}
 		<section class="next-sessions">
@@ -82,8 +84,7 @@
 					{% for reservation in userReservations %}
 						<article class="session-card">
 							<div class="session-img">
-								<img src="{{ asset('images/photo/' ~ reservation.workshop.image) }}"
-								     alt="{{ reservation.workshop.nameClass }}">
+								<img src="{{ asset('images/photo/' ~ reservation.workshop.image) }}" alt="{{ reservation.workshop.nameClass }}">
 							</div>
 
 							<div class="session-info">
@@ -96,10 +97,7 @@
 							</div>
 
 							{# ✅ CONFIRMATION AVANT ANNULATION SÉANCE #}
-							<a href="#"
-							   class="btn-cancel-session btn-confirm-action"
-							   data-confirm-url="{{ path('app_reservation_delete', {'id': reservation.id}) }}"
-							   data-confirm-message="Voulez-vous vraiment annuler la séance {{ reservation.workshop.nameClass }} du {{ reservation.workshop.dayClass }} à {{ reservation.workshop.startTime|date('H:i') }} ?">
+							<a href="#" class="btn-cancel-session btn-confirm-action" data-confirm-url="{{ path('app_reservation_delete', {'id': reservation.id}) }}" data-confirm-message="Voulez-vous vraiment annuler la séance {{ reservation.workshop.nameClass }} du {{ reservation.workshop.dayClass }} à {{ reservation.workshop.startTime|date('H:i') }} ?">
 								ANNULER
 							</a>
 						</article>
@@ -119,7 +117,8 @@
 			<h2 class="promo-title">Vibrance & Puissance</h2>
 			<div class="hero-card">
 				<div class="hero-content">
-					<h2>Dépasse tes <span>limites</span>.</h2>
+					<h2>Dépasse tes
+						<span>limites</span>.</h2>
 					<p>Le succès n'est pas une destination, c'est une discipline. Rejoins la meute.</p>
 				</div>
 			</div>

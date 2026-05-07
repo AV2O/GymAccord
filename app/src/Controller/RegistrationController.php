@@ -36,7 +36,7 @@ class RegistrationController extends AbstractController
             $user->setRoles(['ROLE_USER']);
             $user->setCreatedAt(new \DateTimeImmutable());
 
-            $entityManager->persist($user);
+            $entityManager->persist($user); 
             $entityManager->flush();
 
             $this->addFlash('success', 'Inscription réussie !');

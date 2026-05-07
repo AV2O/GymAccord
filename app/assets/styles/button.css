@@ -63,7 +63,18 @@
 }
 
 @media (min-width: 1024px) {
-    .btn-green{
+    .btn-green {
         width: 250px;
+    }
+
+    .coursCo {
+        .btn-primary {
+            width: 250px;
+            height: 50px;
+            padding: auto;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
     }
 }

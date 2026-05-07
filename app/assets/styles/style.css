@@ -11,10 +11,9 @@ body {
     scroll-behavior: smooth;
 }
 
-
 .app {
     flex: 1;
-    padding-top: 50px; /* Ajuste selon la hauteur de ton header pour pas que le texte soit caché */
+    padding-top: 45px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -73,20 +72,21 @@ body {
         flex-direction: column;
         gap: 3rem;
         align-items: center;
+        justify-content: center;
     }
 
-    .bio{
+    .bio {
         display: grid;
         grid-template-columns: 1fr;
         gap: 3rem;
     }
 
-    .hero-bio{
+    .hero-bio {
         display: grid;
         flex-direction: column;
         gap: 3rem;
         align-items: center;
-        padding: 0 2rem ;
+        padding: 0 2rem;
     }
 
     h2 {
@@ -97,17 +97,16 @@ body {
         font-size: var(--h2);
     }
 
-    .bio-text{
-       display: flex;
-       flex-direction: column;
-       gap: 2rem; 
+    .bio-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
     p {
         font-size: var(--p);
         font-weight: var(--fin);
     }
-
 
     .studio-title {
         font-size: var(--h3);
@@ -217,8 +216,6 @@ body {
         padding-right: 5px;
     }
 
-    
-
     /* ------------ SECTION CONTACT ------------ */
     .form-contact {
         background-color: var(--green);
@@ -244,11 +241,10 @@ body {
         text-align: start;
         margin-bottom: 1rem;
     }
-    
-    .hero-contact{
+
+    .hero-contact {
         display: none;
     }
-    
 
     /* ------------ LE FORMULAIRE ------------ */
     #contact-form {
@@ -378,7 +374,6 @@ body {
     .commentary-text {
         font-weight: var(--p);
         padding: 1rem 0;
-        height: 100%;
         display: flex;
         align-items: center;
     }
@@ -452,6 +447,14 @@ body {
         padding: 1.5rem;
         font-weight: none;
         letter-spacing: -1px;
+    }
+
+    .text-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: space-around;
+        align-items: center;
     }
 
     .card-workshop {
@@ -555,28 +558,6 @@ body {
     p.info-bar.black {
         color: var(--black);
     }
-
-    /* .btn-green {
-        width: 250px;
-        height: 50px;
-        border-radius: 16px;
-        border: none;
-        background: linear-gradient(to right, #576500 0%, #dfff00 100%);
-        color: var(--black);
-        font-size: var(--p);
-        text-transform: uppercase;
-        font-weight: var(--bold);
-        display: block;
-        margin: 0 auto;
-    }
-
-    .btn-green a {
-        color: var(--black);
-        font-size: var(--p);
-        text-transform: uppercase;
-        font-weight: var(--bold);
-        text-decoration: none;
-    } */
 }
 
 /* ================================================== COURS SOLO ====================================================== */
@@ -658,7 +639,7 @@ body {
         gap: 20px;
         width: 100%;
         max-width: 450px;
-        background-color: var(--black);
+        background-color: rgb(26, 26, 26);
         border: 1px solid rgba(128, 128, 128, 0.256);
         border-radius: 16px;
         padding: 20px;
@@ -684,7 +665,11 @@ body {
 
     .objectif {
         padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
     .white-card {
         color: var(--black);
         background: var(--white);
@@ -697,7 +682,7 @@ body {
         padding: 30px;
         border-radius: 16px;
         max-width: 450px;
-        margin: 0 auto;
+        justify-content: center;
     }
 
     .white-card h3 {
@@ -743,13 +728,13 @@ body {
 
     h1 span {
         color: var(--green);
-        font-size: var(--h1);
+        font-size: var(--h2);
         padding: 1rem;
         background: black;
     }
 
     h1 {
-        font-size: var(--h1);
+        font-size: var(--h2);
         padding: 0 10px;
         text-transform: uppercase;
         letter-spacing: -1px;
@@ -946,7 +931,7 @@ body {
         font-size: var(--small);
         cursor: pointer;
         z-index: 10;
-        padding: 0.1rem;
+        padding: 0.3rem;
     }
 
     .lesson h2 {
@@ -1017,8 +1002,9 @@ body {
         gap: 2rem;
         padding: 0.7rem;
         border-radius: 16px;
-        width: 300px;
-        min-height: 500px;
+        min-width: 275px;
+        max-width: 300px;
+        min-height: 400px;
     }
 
     .card-tarifs {
@@ -1067,12 +1053,12 @@ body {
 
     .avantage p,
     .avantage p span {
-        font-size: var(--small);
+        font-size: var(--p);
     }
 
     .avantage p:nth-child(1) {
         font-weight: 900;
-        font-size: var(--h3);
+        font-size: var(--h2);
 
         span {
             font-weight: 400;
@@ -1107,22 +1093,21 @@ body {
         position: relative;
         display: flex;
         align-items: center;
-        gap: 20px;
-        margin-bottom: 50px;
-        justify-content: space-between;
+        gap: 120px;
+        margin-bottom: 30px;
+        justify-content: end;
     }
 
     .profile-container {
-        position: relative; /* Crée un point de repère pour le bouton */
-        width: 100px; /* Ajuste selon la taille de ta photo */
-        height: 100px; /* Garde la même largeur/hauteur */
-        margin: 0 auto; /* Centre le tout si besoin */
+        position: relative;
+        width: 70px;
+        height: 70px;
     }
 
     /* La photo de profil */
     .profile-img-main {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
         border-radius: 50%;
         object-fit: cover;
         border: 3px solid var(--green);
@@ -1137,21 +1122,22 @@ body {
     /* Le bouton stylo (Le secret est ici) */
     .edit-profile-btn {
         position: absolute; /* Il sort du flux pour flotter */
-        right: 20px; /* Il se colle à droite du bloc .portrait */
-        bottom: 0; /* Il se colle en bas */
-        width: 30px;
-        height: 30px;
+        right: 2px;
+        bottom: -2px; /* Il se colle en bas */
+        width: 25px;
+        height: 25px;
         background-color: var(--green);
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 10;
+        border: 2px solid var(--black);
     }
 
     .edit-profile-btn img {
-        width: 18px; /* Taille de l'icône à l'intérieur du petit cercle */
-        height: 18px;
+        width: 13px; /* Taille de l'icône à l'intérieur du petit cercle */
+        height: 13px;
     }
 
     h1 {
@@ -1180,9 +1166,9 @@ body {
         background-color: #1f1f1f;
         flex-direction: column;
         padding: 15px;
-        width: 40%;
+        width: 150px;
         height: 140px;
-        gap: 2rem;
+        justify-content: space-between;
         border-radius: 5px;
 
         h2,
@@ -1203,6 +1189,7 @@ body {
 
         img {
             width: 50px;
+            height: 50px;
         }
     }
 
@@ -1213,7 +1200,6 @@ body {
         justify-content: center;
         align-items: center;
         padding: 10px;
-        width: 40%;
         height: 140px;
         border-radius: 5px;
 
@@ -1300,9 +1286,10 @@ body {
 
     /* 3. CARTES SÉANCES (Liste) */
     .session-list {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
+        justify-items: center;
     }
 
     .session-card {
@@ -1311,8 +1298,13 @@ body {
         border-radius: 4px;
         overflow: hidden;
         align-items: center;
-        gap: 2rem;
+        justify-content: space-between;
         padding-right: 10px;
+        max-width: 300px;
+        min-width: 270px;
+        width: 100%;
+        
+
 
         .btn-cancel-session {
             display: inline-block;
@@ -1830,7 +1822,7 @@ input[type="file"] {
 
 .is-required::after {
     content: " *";
-    color: var(--red)
+    color: var(--red);
 }
 
 .error {
@@ -1855,7 +1847,6 @@ input[type="file"] {
     box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
 }
 
-
 /* ------------ MENTIONS LEGALE ------------ */
 
 /* Style pour la page Confidentialité */
@@ -1864,13 +1855,14 @@ input[type="file"] {
     margin: 4rem 0 0;
     padding: 30px;
     background-color: var(--black); /* Fond noir pour le contraste */
-    color: var(--white);           /* Texte blanc cassé */
+    color: var(--white); /* Texte blanc cassé */
     font-family: var(--mainText);
-    
 }
 
 .cgu h1 {
-    font-size: var(--h3); /* On utilise h2 pour le titre principal pour garder de la marge */
+    font-size: var(
+        --h3
+    ); /* On utilise h2 pour le titre principal pour garder de la marge */
     font-weight: var(--bold);
     color: var(--white);
     margin-bottom: 40px;
@@ -1942,184 +1934,383 @@ input[type="file"] {
     margin-right: 15px;
 }
 
+@media (min-width: 768px) {
+    .dashboard{
+
+        .profil-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 0;
+            gap: 10px;
+        }
+
+        .portrait{
+            gap: 20px;
+        }
 
 
-@media (min-width: 1024px){
+        .session-list{
+            grid-template-columns: 350fr 350fr;
+        }
 
- .app{
-    .hero-banner{
-        height: 70vh;
-
-        p{
-            font-size: var(--h4);
-            line-height: 24px;
+        .session-card{
+            max-width: 100%;
         }
     }
+}
 
-    .bio{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
-        max-width: 1200px;
-        align-items: center;
-        margin: 0 auto;
-    }
+@media (min-width: 1024px) {
+    .app {
+        .hero-banner {
+            height: 70vh;
 
-    .hero-bio{
-        align-items: center;
-        gap: 0;
-    }
-
-    .bio-text{
-        padding: 2rem;
-    }
-
-    .card{
-        width: 60%;
-    }
-
-    /* On augmente la perspective pour un effet 3D plus profond sur grand écran */
-    .galery-img {
-        /* height: 70vh; */
-        perspective: 1000px;
-        /* width: 80vh;  */
-    }
-
-    /* On réduit la largeur de l'image centrale pour mieux voir celles de côté */
-    .galery {
-        width: 350px; /* Taille fixe ou 30vw pour un look plus "pro" */
-        height: 550px;
-    }
-
-    /* --- AJUSTEMENT DES POSITIONS SUR LES CÔTÉS --- */
-
-    /* Image de GAUCHE */
-    .photo-cv:nth-last-child(2) {
-        /* On l'écarte un peu plus et on augmente la rotation */
-        transform: translate3d(-100%, 0, -400px) rotateY(45deg);
-        opacity: 0.6;
-    }
-
-    /* Image de DROITE */
-    .photo-cv:nth-last-child(3) {
-        /* Idem à droite */
-        transform: translate3d(100%, 0, -400px) rotateY(-45deg);
-        opacity: 0.6;
-    }
-
-    /* Optionnel : Agrandir un peu le texte de la légende sur PC */
-    .photo-cv figcaption {
-        font-size: 1.2rem;
-        padding: 20px;
-    }
-
-    .studio-title{
-        margin-top: 2rem;
-        font-weight: 600;
-    }
-
-
-    .card{
-        gap: 3rem;
-    }
-
-    .card p{
-        height: 100px;
-        font-size: var(--h4);
-        line-height: 60px;
-
-    }
-
-    .commentary{
-        gap: 6rem;
-    }
-
-    .commentary-list{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr ;
-        gap: 2rem;
-    }
-    .commentary-form-container{
-        width: 70%;
-        max-width: 1000px;
-
-    }
-
-    #contenu{
-        height: 200px;
-        margin: 0 auto 30px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .commentary-item{
-        width: 320px;
-        height: 220px;
-    }
-
-    .container-form{
-        flex-direction: row;
-        margin: 0;
-        gap: 5rem;
-    }
-
-    .hero-form-contact{
-        display: flex;
-        flex-direction: column;
-        gap: 6rem;
-        justify-content: center;
-        
-        h3{
-            text-align: start;
+            p {
+                font-size: var(--h4);
+                line-height: 24px;
+            }
         }
-    }
 
-    .hero-contact {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        justify-content: center;
-        padding: 0 0 0 1rem;
+        .bio {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            max-width: 1200px;
+            align-items: center;
+            margin: 0 auto;
+        }
 
-        p{
+        .hero-bio {
+            align-items: center;
+            gap: 0;
+        }
+
+        .bio-text {
+            padding: 2rem;
+        }
+
+        .card {
+            width: 60%;
+        }
+
+        /* On augmente la perspective pour un effet 3D plus profond sur grand écran */
+        .galery-img {
+            /* height: 70vh; */
+            perspective: 1000px;
+            /* width: 80vh;  */
+        }
+
+        /* On réduit la largeur de l'image centrale pour mieux voir celles de côté */
+        .galery {
+            width: 350px; /* Taille fixe ou 30vw pour un look plus "pro" */
+            height: 550px;
+        }
+
+        /* --- AJUSTEMENT DES POSITIONS SUR LES CÔTÉS --- */
+
+        /* Image de GAUCHE */
+        .photo-cv:nth-last-child(2) {
+            /* On l'écarte un peu plus et on augmente la rotation */
+            transform: translate3d(-100%, 0, -400px) rotateY(45deg);
+            opacity: 0.6;
+        }
+
+        /* Image de DROITE */
+        .photo-cv:nth-last-child(3) {
+            /* Idem à droite */
+            transform: translate3d(100%, 0, -400px) rotateY(-45deg);
+            opacity: 0.6;
+        }
+
+        /* Optionnel : Agrandir un peu le texte de la légende sur PC */
+        .photo-cv figcaption {
+            font-size: 1.2rem;
+            padding: 20px;
+        }
+
+        .studio-title {
+            margin-top: 2rem;
             font-weight: 600;
-            font-size: var(--p);
         }
 
-        a{
-            text-decoration: none;
-            cursor: pointer;
-            font-weight: 400;
-            font-size: var(--p);
-            color: var(--black);
+        .card {
+            gap: 2rem;
+        }
+
+        .card p {
+            height: 70px;
+            font-size: var(--h4);
+        }
+
+        .commentary {
+            gap: 6rem;
+        }
+
+        .commentary-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+        .commentary-form-container {
+            width: 70%;
+            max-width: 1000px;
+        }
+
+        #contenu {
+            height: 200px;
+            margin: 0 auto 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .commentary-item {
+            width: 320px;
+            height: 150px;
+        }
+
+        .container-form {
+            flex-direction: row;
+            margin: 0;
+            gap: 5rem;
+        }
+
+        .hero-form-contact {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            h3 {
+                text-align: start;
+            }
+        }
+
+        .hero-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            padding: 0 0 0 1rem;
+
+            p {
+                font-weight: 600;
+                font-size: var(--p);
+            }
+
+            a {
+                text-decoration: none;
+                cursor: pointer;
+                font-weight: 400;
+                font-size: var(--p);
+                color: var(--black);
+            }
+        }
+
+        #contact-form {
+            /* width: 70%; */
+            padding: 20px 30px;
+            background-color: var(--white);
+            border-radius: 15px;
+            border: 1px solid var(--grey-police);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+            label {
+                font-size: var(--small);
+            }
+
+            #email,
+            #nom {
+                height: 40px;
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            #message {
+                height: 100px;
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .obligatoire-txt {
+                font-size: var(--small);
+            }
         }
     }
 
-    #contact-form{
-        /* width: 70%; */
-        padding: 20px 30px;
-        background-color: var(--white);
-        border-radius: 15px;
-        border: 1px solid var(--grey-police);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    /* ================================================== COURS CO ====================================================== */
 
-        label{
-            font-size: var(--small);
+    .coursCo {
+        max-width: 1024px;
+        margin: 0 auto;
+        width: 100%;
+
+        .workshop h2 {
+            margin-bottom: 0;
+            font-size: var(--h3);
         }
 
-        #email, #nom{
-            height: 40px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        .card-workshop {
+            gap: 0;
         }
+
+        .workshop-item {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 0;
+        }
+
+        .workshop-item summary::after {
+            font-size: var(--h4);
+        }
+
+        .workshop-item[open] {
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .workshop-item[open] .content-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Image → droite */
+        .workshop-item[open] .workshop-img {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            height: auto;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            display: block;
+        }
+
+        .workshop-item[open] .text-content {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 2.5rem 2.5rem 2.5rem;
+            gap: 10rem;
+        }
+
+        /* Titre synthétique dans le text-content (nom du cours) */
+        .workshop-item[open] .text-content > p:not(.info-bar) {
+            font-size: var(--h3);
+            line-height: 1.6;
+        }
+
+        /* Info-bar cachée pour coller au rendu cible */
+        .workshop-item[open] .text-content > p.info-bar {
+            align-self: center;
+        }
+
+        /* Bouton */
+        .workshop-item[open] .text-content > a {
+            align-self: center;
+            margin-top: 0.5rem;
+            font-size: var(--p);
+        }
+    }
+
+    /* ================================================== COURS CO ====================================================== */
+
+    .solo {
+        .hero-banner {
+            height: 50vh;
+        }
+
+        .obj-card {
+            padding: 40px;
+        }
+
+        .black-card {
+            max-width: 80%;
+            padding: 30px;
+        }
+
+        .objectif {
+            justify-content: center;
+            padding: 30px;
+        }
+    }
+
+    /* ================================================== CALENDRIER ====================================================== */
+
+    .calendar {
+        .container-lesson {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1024px;
+            align-items: center;
+            margin: 50px auto;
+        }
+
+        .lesson {
+            width: none;
+        }
+
+        .lesson p {
+            font-size: var(--p);
+        }
+    }
+
+    /* ================================================== ABONNEMENTS ====================================================== */
+
+    .prix {
+        .parent {
+            justify-content: center;
+            margin: 50px auto;
+        }
+    }
+
+    /* ================================================== DASHBOARD ====================================================== */
+
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+
+        .next-sessions, .promo-banner{
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
         
-        #message{
-            height: 100px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+
+        .portrait {
+            margin-top: 30px;
+            gap: 50px;
+
+            .profile-img-main {
+                width: 100px;
+                height: 100px;
+            }
+
+            .edit-profile-btn {
+                right: -37px;
+                bottom: -37px;
+                width: 35px;
+                height: 35px;
+            }
         }
 
-        .obligatoire-txt{
-            font-size: var(--small);
+        .container-status {
+            margin-bottom: 0;
+            gap: 20px;
         }
+
+        .session-list{
+            grid-template-columns: 1fr 1fr 1fr;
+            margin: 30px auto;
+        }
+
+        .session-card{
+            max-width: 1024px;
+        }
+
     }
-
- }
 }

@@ -39,51 +39,51 @@
 						<figcaption>Nos séances Abdos</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/BBE.jpg') }}" alt="BBE" loading="lazy"/>
+						<img src="{{ asset('images/photo/BBE.jpg') }}" alt="Séance BBE - renforcement musculaire en groupeSéance BBE - renforcement musculaire en groupe" loading="lazy"/>
 						<figcaption>Nos séances BBE</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/bodyPump.jpg') }}" alt="body pump" loading="lazy"/>
+						<img src="{{ asset('images/photo/bodyPump.jpg') }}" alt="Séence de body pump" loading="lazy"/>
 						<figcaption>Nos séances Body Pump</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/boxing.jpg') }}" alt="boxing" loading="lazy"/>
+						<img src="{{ asset('images/photo/boxing.jpg') }}" alt="Séence de boxing" loading="lazy"/>
 						<figcaption>Nos séances Boxing</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/CAF.jpg') }}" alt="CAF" loading="lazy"/>
+						<img src="{{ asset('images/photo/CAF.jpg') }}" alt="Séance CAF - cours collectif cardio abdos fessiers" loading="lazy"/>
 						<figcaption>Nos séances CAF</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/cardioFlash.jpg') }}" alt="cardio flash" loading="lazy"/>
+						<img src="{{ asset('images/photo/cardioFlash.jpg') }}" alt="Séances de cardio flash" loading="lazy"/>
 						<figcaption>Nos séances Cardio Flash</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/crossTraining.jpg') }}" alt="cross - training" loading="lazy"/>
+						<img src="{{ asset('images/photo/crossTraining.jpg') }}" alt="Séances de cross - training" loading="lazy"/>
 						<figcaption>Nos séances Cross - Training</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/pilates.jpg') }}" alt="pilâtes" loading="lazy"/>
+						<img src="{{ asset('images/photo/pilates.jpg') }}" alt="Séances de pilâtes" loading="lazy"/>
 						<figcaption>Nos séances abdos de Pilâtes</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/sportSante.jpg') }}" alt="sport santé" loading="lazy"/>
+						<img src="{{ asset('images/photo/sportSante.jpg') }}" alt="Séances de sport santé" loading="lazy"/>
 						<figcaption>Nos séances Sport Santé</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/step.jpg') }}" alt="step" loading="lazy"/>
+						<img src="{{ asset('images/photo/step.jpg') }}" alt="Séances de step" loading="lazy"/>
 						<figcaption>Nos séances se Step</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/stretching.jpg') }}" alt="stretching" loading="lazy"/>
+						<img src="{{ asset('images/photo/stretching.jpg') }}" alt="Séances de stretching" loading="lazy"/>
 						<figcaption>Nos séances Stretching</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/training.png') }}" alt="training" loading="lazy"/>
+						<img src="{{ asset('images/photo/training.png') }}" alt="Séances de training" loading="lazy"/>
 						<figcaption>Nos séances Training</figcaption>
 					</figure>
 					<figure class="photo-cv">
-						<img src="{{ asset('images/photo/yoga.jpg') }}" alt="yoga" loading="lazy"/>
+						<img src="{{ asset('images/photo/yoga.jpg') }}" alt="Séances de yoga" loading="lazy"/>
 						<figcaption>Nos séances Yogas</figcaption>
 					</figure>
 				</div>
@@ -93,12 +93,11 @@
 
 		<!-- HORAIRES -->
 		<section class="time">
-			<h3 class="studio-title">
-				<div class="text-group">
-					Horaire du
+			<h2 class="studio-title">
+				<div class="text-group">Horaire du
 					<span>studio Gym</span>
 				</div>
-			</h3>
+			</h2>
 			<p>
 				Notre studio s'adapte à votre rythme. Des sessions matinales explosives aux entraînements nocturnes, la discipline n'a pas d'heure.
 			</p>
@@ -114,15 +113,15 @@
 		<!-- COMMENTAIRE -->
 		<section class="commentary" id="commentaires">
 			<div>
-				<h3 class="commentary-title">
+				<h2 class="commentary-title">
 					C'EST VOUS QUI EN PARLEZ LE MIEUX...
-				</h3>
+				</h2>
 			</div>
 
 			<div class="commentary-list">
 				{% for comment in comments %}
 					<div class="commentary-item">
-						<h3 class="commentary-author">{{ comment.authorName }}</h3>
+						{# <h3 class="commentary-author">{{ comment.authorName }}</h3> #}
 						<p class="commentary-text">{{ comment.contenu }}</p>
 						<div class="commentary-info">
 							<p class="commentary-author">{{ comment.authorName }}</p>
@@ -136,7 +135,7 @@
 
 
 			<article class="commentary-form-container">
-				<h3>Laissez votre commentaire ...</h3>
+				<h2>Laissez votre commentaire ...</h2>
 				{% if app.user %}
 					<form action="{{ path('app_comment_add') }}" method="POST" class="form-group">
 						<textarea name="contenu" id="contenu" placeholder="Votre message ... (max 150 caractères)" maxlength="150" required></textarea>
@@ -145,7 +144,6 @@
 				{% else %}
 					<p class="login-msg">
 						<a class="btn-green" href="{{ path('app_login') }}">Connectez-vous</a>
-						pour laisser un commentaire.
 					</p>
 				{% endif %}
 			</article>
@@ -157,7 +155,7 @@
 		<section id="contact" class="form-contact">
 			<div class="container-form">
 				<div class="hero-form-contact">
-					<h3>N'hésitez pas à nous contacter</h3>
+					<h2>N'hésitez pas à nous contacter</h2>
 					<p>
 						Des questions sur nos programmes ? Ecrivez-nous directement.
 					</p>
@@ -165,20 +163,20 @@
 						<div>
 							<p>Téléphone :
 							</p>
-							<a href="#">0123456789</a>
+							<a href="tel:+330123456789" aria-label="Appeler le 01 23 45 67 89">0123456789</a>
 						</div>
 						<div>
 							<p>Adresse :</p>
-							<a href="#">1 rue du capiole 14790 Verson</a>
+							<a href="https://maps.google.com/?q=1+rue+du+capitole+14790+Verson" target="_blank" rel="noopener noreferrer" aria-label="Voir l'adresse sur Google Maps">1 rue du capitole, 14790 Verson</a>
 						</div>
 					</div>
 				</div>
 				<form id="contact-form" action="{{ path('app_contact_send') }}" method="POST" novalidate>
 
 					<div class="form-group">
-						<label for="nom">Prenom</label>
-						<input type="text" id="nom" name="nom" placeholder="Nom">
-						<span class="error-message" id="error-nom"></span>
+						<label for="prenom">Prénom</label>
+						<input type="text" id="prenom" name="prenom" placeholder="Votre prénom">
+						<span class="error-message" id="error-prenom"></span>
 					</div>
 
 					<div class="form-group">
