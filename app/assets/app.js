@@ -11,9 +11,7 @@ import './styles/layout.css';
 import './styles/style.css';
 import './styles/button.css';
 import './styles/galery.css';
+import './styles/mentio-legal.css';
 
 import './js/scripts.js';
-import './js/galery.js';
-
-
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+import './js/galery.js';;

@@ -1,0 +1,86 @@
+/* ------------ MENTIONS LEGALE ------------ */
+
+/* Style pour la page Confidentialité */
+.cgu {
+    max-width: 900px;
+    margin: 4rem 0 0;
+    padding: 30px;
+    background-color: var(--black); /* Fond noir pour le contraste */
+    color: var(--white); /* Texte blanc cassé */
+    font-family: var(--mainText);
+}
+
+.cgu h1 {
+    font-size: var(
+        --h3
+    ); /* On utilise h2 pour le titre principal pour garder de la marge */
+    font-weight: var(--bold);
+    color: var(--white);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.cgu section {
+    margin-bottom: 40px;
+}
+
+.cgu h2 {
+    font-size: var(--h3);
+    font-weight: var(--bold);
+    color: var(--green);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Le petit détail : un trait vertical vert devant les titres */
+.cgu h2::before {
+    content: "";
+    width: 4px;
+    height: 24px;
+    background: var(--green);
+    margin-right: 15px;
+}
+
+.cgu h3 {
+    font-size: var(--h4);
+    font-weight: var(--gras5);
+    color: var(--white);
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.cgu p {
+    font-size: var(--p);
+    font-weight: var(--gras);
+    color: var(--grey-police); /* Texte secondaire en gris pour la hiérarchie */
+    margin-bottom: 15px;
+}
+
+.cgu strong {
+    color: var(--white);
+    font-weight: var(--bold);
+    font-size: var(--p);
+}
+
+.cgu ul {
+    list-style-type: none;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.cgu ul li {
+    font-size: var(--p);
+    color: var(--grey-police);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Flèche en vert pour les listes */
+.cgu ul li::before {
+    content: "❯";
+    color: var(--green);
+    font-size: 1.2rem;
+    margin-right: 15px;
+}

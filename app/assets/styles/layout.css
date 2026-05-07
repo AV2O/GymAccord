@@ -213,10 +213,12 @@ footer div {
     justify-content: center;
 }
 
-img {
-            width: 25px;
-            height: 25px;
-        }
+.social-icons {
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}
 
 /* Structure pour bloquer le footer en bas */
 body {
@@ -365,7 +367,6 @@ body {
         margin: 0;
         padding: 8px;
         border-radius: 5px;
-        
     }
 
     .btn-logout {
@@ -374,8 +375,6 @@ body {
         background-color: var(--red);
         padding: 8px;
         border-radius: 5px;
-
-
     }
 
     .burger-menu {
