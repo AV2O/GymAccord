@@ -11,7 +11,7 @@ import './styles/layout.css';
 import './styles/style.css';
 import './styles/button.css';
 import './styles/galery.css';
-import './styles/mentio-legal.css';
+import './styles/mention-legal.css';
 
 import './js/scripts.js';
 import './js/galery.js';;
