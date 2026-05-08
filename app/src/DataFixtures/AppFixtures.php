@@ -66,19 +66,80 @@ class AppFixtures extends Fixture
 
         // --- 4. LES ACTIVITÉS COLLECTIVES ---
         $activitesCollectives = [
-            ['nom' => 'Sport Santé', 'type' => 'Souplesse et remise en forme', 'desc' => 'Séance adaptée pour reprendre une activité physique en douceur et sécurisée.', 'image' => 'sportSante.jpg'],
-            ['nom' => 'Yoga', 'type' => 'Souplesse et remise en forme', 'desc' => 'Harmonie du corps et de l’esprit à travers des postures et la respiration.', 'image' => 'yoga.jpg'],
-            ['nom' => 'Stretching', 'type' => 'Souplesse et remise en forme', 'desc' => 'Exercices d’étirements pour gagner en souplesse et relâcher les tensions.', 'image' => 'stretching.jpg'],
-            ['nom' => 'Pilates', 'type' => 'Souplesse et remise en forme', 'desc' => 'Renforcement des muscles profonds pour améliorer la posture et l’équilibre.', 'image' => 'pilates.jpg'],
-            ['nom' => 'Body Pump', 'type' => 'Renforcement musculaire', 'desc' => 'Cours de fitness avec haltères pour sculpter l’ensemble de votre corps.', 'image' => 'bodyPump.jpg'],
-            ['nom' => 'CAF', 'type' => 'Renforcement musculaire', 'desc' => 'Ciblage intensif : Cuisses, Abdos et Fessiers pour une silhouette tonique.', 'image' => 'CAF.jpg'],
-            ['nom' => 'Abdos Flash', 'type' => 'Renforcement musculaire', 'desc' => '30 minutes intensives dédiées au gainage et à la sangle abdominale.', 'image' => 'abdosFlash.jpg'],
-            ['nom' => 'BBE', 'type' => 'Renforcement musculaire', 'desc' => 'Bras, Buste et Épaules : un focus sur le haut du corps.', 'image' => 'BBE.jpg'],
-            ['nom' => 'Cross-Training', 'type' => 'Cross-Training', 'desc' => 'Entraînement fonctionnel combinant force, cardio et agilité.', 'image' => 'crossTraining.jpg'],
-            ['nom' => 'Cardio Flash', 'type' => 'Cross-Training', 'desc' => 'Boostez votre rythme cardiaque et brûlez un maximum de calories.', 'image' => 'cardioFlash.jpg'],
-            ['nom' => 'Step', 'type' => 'Cross-Training', 'desc' => 'Chorégraphie dynamique sur marche pour travailler le cardio et la coordination.', 'image' => 'step.jpg'],
-            ['nom' => 'Boxing', 'type' => 'Cross-Training', 'desc' => 'Défoulement garanti avec des techniques de boxe sans contact.', 'image' => 'boxing.jpg'],
+            [
+                'nom' => 'Sport Santé',
+                'type' => 'Souplesse et remise en forme',
+                'desc' => 'Séance douce et progressive adaptée à tous les niveaux, idéale pour reprendre une activité physique après une longue pause. Les exercices sont conçus pour renforcer le corps en toute sécurité, sans impact excessif sur les articulations. Un encadrement bienveillant pour retrouver confiance et bien-être durablement.',
+                'image' => 'sportSante.webp'
+            ],
+            [
+                'nom' => 'Yoga',
+                'type' => 'Souplesse et remise en forme',
+                'desc' => 'Une pratique millénaire alliant postures, respiration et méditation pour harmoniser le corps et l\'esprit. Chaque séance favorise la souplesse, la concentration et la gestion du stress au quotidien. Accessible à tous les niveaux, du débutant au pratiquant confirmé.',
+                'image' => 'yoga.webp'
+            ],
+            [
+                'nom' => 'Stretching',
+                'type' => 'Souplesse et remise en forme',
+                'desc' => 'Des exercices d\'étirements progressifs pour relâcher les tensions musculaires accumulées au fil de la journée. Cette séance améliore l\'amplitude articulaire et prévient les blessures liées à la pratique sportive. Un moment de récupération active, idéal en complément de toute autre activité.',
+                'image' => 'stretching.webp'
+            ],
+            [
+                'nom' => 'Pilates',
+                'type' => 'Souplesse et remise en forme',
+                'desc' => 'Méthode de renforcement des muscles profonds pour améliorer la posture, l\'équilibre et la stabilité du corps. Les mouvements précis et contrôlés travaillent la sangle abdominale, le dos et les membres inférieurs. Une discipline idéale pour corriger les déséquilibres musculaires et retrouver une silhouette harmonieuse.',
+                'image' => 'pilates.webp'
+            ],
+            [
+                'nom' => 'Body Pump',
+                'type' => 'Renforcement musculaire',
+                'desc' => 'Cours de fitness collectif avec haltères pour sculpter et tonifier l\'ensemble du corps en musique. Les séries de répétitions ciblées permettent de travailler chaque groupe musculaire de manière efficace et progressive. Une heure de travail intense qui combine endurance musculaire et dépense calorique.',
+                'image' => 'bodyPump.webp'
+            ],
+            [
+                'nom' => 'CAF',
+                'type' => 'Renforcement musculaire',
+                'desc' => 'Un ciblage intensif des trois zones clés : Cuisses, Abdos et Fessiers pour une silhouette ferme et tonique. Les exercices combinent gainage, squats et travail au sol pour des résultats visibles rapidement. Idéal pour affiner la silhouette et renforcer les zones les plus sollicitées au quotidien.',
+                'image' => 'CAF.webp'
+            ],
+            [
+                'nom' => 'Abdos Flash',
+                'type' => 'Renforcement musculaire',
+                'desc' => 'Une séance express de 30 minutes entièrement dédiée au gainage et à la sangle abdominale. Des exercices variés et progressifs pour renforcer les abdominaux profonds et superficiels efficacement. Un format court et intense, parfait pour s\'intégrer facilement dans un emploi du temps chargé.',
+                'image' => 'abdosFlash.webp'
+            ],
+            [
+                'nom' => 'BBE',
+                'type' => 'Renforcement musculaire',
+                'desc' => 'Un cours focalisé sur le haut du corps : Bras, Buste et Épaules pour un galbe musculaire harmonieux. Les exercices avec ou sans matériel ciblent les triceps, biceps, pectoraux et deltoïdes en profondeur. Une séance incontournable pour ceux qui souhaitent développer leur force et leur tonicité musculaire.',
+                'image' => 'BBE.webp'
+            ],
+            [
+                'nom' => 'Cross-Training',
+                'type' => 'Cross-Training',
+                'desc' => 'Entraînement fonctionnel complet combinant force explosive, cardio-training et exercices d\'agilité. Chaque séance est différente et repousse vos limites grâce à des enchaînements variés et stimulants. Un format exigeant qui développe la condition physique générale et la résistance mentale.',
+                'image' => 'crossTraining.webp'
+            ],
+            [
+                'nom' => 'Cardio Flash',
+                'type' => 'Cross-Training',
+                'desc' => 'Une séance haute intensité pour booster le rythme cardiaque et maximiser la dépense calorique. Les intervalles de travail court et intenses alternent avec de brèves récupérations pour un effet brûle-graisses optimal. Idéal pour améliorer l\'endurance cardiovasculaire et la capacité respiratoire.',
+                'image' => 'cardioFlash.webp'
+            ],
+            [
+                'nom' => 'Step',
+                'type' => 'Cross-Training',
+                'desc' => 'Une chorégraphie dynamique et rythmée sur marche pour travailler simultanément le cardio et la coordination. Les enchaînements progressifs s\'adaptent à tous les niveaux, du débutant au pratiquant avancé. Une séance conviviale et ludique qui développe le sens du rythme et la maîtrise corporelle.',
+                'image' => 'step.webp'
+            ],
+            [
+                'nom' => 'Boxing',
+                'type' => 'Cross-Training',
+                'desc' => 'Défoulement garanti avec des techniques de boxe adaptées, sans contact et accessibles à tous. Cette séance combine travail cardio intense, coordination des mouvements et renforcement musculaire global. Un excellent exutoire pour évacuer le stress tout en développant l\'agilité et la puissance physique.',
+                'image' => 'boxing.webp'
+            ],
         ];
+
 
         // --- 5. LOGIQUE PLANNING (24 cours) ---
         $sacDeCours = array_merge($activitesCollectives, $activitesCollectives);
@@ -98,7 +159,7 @@ class AppFixtures extends Fixture
                 $workshop = new Workshops();
                 $workshop->setNameClass($info['nom'])
                     ->setDescriptionClass($info['desc'])
-                    ->setImage($info['image']) 
+                    ->setImage($info['image'])
                     ->setDayClass($nomJour)
                     ->setStartTime((new \DateTime())->setTime($heure, 0))
                     ->setEndTime((new \DateTime())->setTime($heure + 1, 0))
